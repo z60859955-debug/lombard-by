@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>OWRINEZZ COMPANY · Ломбард BY v15.4</title>
+<title>OWRINEZZ COMPANY · Ломбард BY v15.5</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -135,6 +135,8 @@ input, select, textarea { font-size: 16px !important; }
 .inspect-anim .dots span:nth-child(3) { animation-delay: 0.4s; }
 @keyframes dotBlink { 0%,80%,100% { opacity: 0.2; } 40% { opacity: 1; } }
 .inspect-anim .status { margin-top: 12px; font-size: 14px; opacity: 0.8; min-height: 20px; }
+.log-entry { font-size: 11px; padding: 4px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); opacity: 0.75; }
+.log-time { color: #00d4ff; }
 .auction-timer { background: rgba(212,165,67,0.06); border: 1px solid rgba(212,165,67,0.25); border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; text-align: center; }
 .auction-timer .timer-text { font-size: 13px; color: #d4a543; font-weight: bold; margin-bottom: 6px; }
 .auction-timer .timer-bar { width: 100%; height: 6px; background: #0d1420; border-radius: 6px; overflow: hidden; }
@@ -148,6 +150,7 @@ input, select, textarea { font-size: 16px !important; }
 .tag-bonus  { background: #2a7d5e; color: #fff; }
 .casino-display { display: flex; justify-content: center; gap: 10px; margin: 16px 0; }
 .casino-display .slot { width: 70px; height: 90px; background: linear-gradient(180deg,#0a1220,#050810); border-radius: 12px; border: 3px solid #16202e; display: flex; align-items: center; justify-content: center; font-size: 36px; transition: 0.3s; }
+.casino-display .slot.win { border-color: #5cdb8a; box-shadow: 0 0 40px rgba(92,219,138,0.9); }
 .dice-scene { margin: 20px auto; width: 100px; height: 100px; }
 .dice-display { width: 90px; height: 90px; background: linear-gradient(135deg,#fff,#d0d8e8); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #0a0e17; margin: 5px auto; font-weight: bold; }
 .roulette-result { text-align: center; font-size: 32px; font-weight: bold; color: #00d4ff; margin: 8px 0; min-height: 40px; }
@@ -325,52 +328,18 @@ input, select, textarea { font-size: 16px !important; }
 .stat-box { background: rgba(0,0,0,0.3); border-radius: 10px; padding: 10px; text-align: center; }
 .stat-box .sv { font-size: 18px; font-weight: bold; }
 .stat-box .sl { font-size: 11px; opacity: 0.6; }
-
-/* ===== НОЧНОЙ РЕЖИМ ===== */
 body.night-mode { background: #02040a; }
-body.night-mode .phone {
-  background: radial-gradient(ellipse at top, #0a0d18 0%, #02040a 60%), linear-gradient(180deg, #060810, #02040a);
-}
-body.night-mode .card {
-  border-color: rgba(138,43,226,0.15);
-  background: linear-gradient(180deg, rgba(10,12,24,0.9), rgba(5,7,14,0.9));
-}
-body.night-mode .app-icon {
-  background: linear-gradient(180deg, rgba(15,20,35,0.7), rgba(8,10,20,0.7));
-  border-color: rgba(138,43,226,0.1);
-}
-body.night-mode .app-icon:active {
-  border-color: rgba(138,43,226,0.5);
-}
-body.night-mode .btn-gold {
-  background: linear-gradient(135deg,#6a4a1a,#8a5a20);
-}
-body.night-mode .btn-green {
-  background: linear-gradient(135deg,#0a3a2a,#1a4a3a);
-}
-body.night-mode .btn-blue {
-  background: linear-gradient(135deg,#0a2a4a,#1a3a5a);
-}
-body.night-mode .money-badge {
-  background: linear-gradient(135deg,#032a1e,#063a2a);
-}
-body.night-mode .item-card {
-  background: rgba(0,0,0,0.5);
-}
-body.night-mode .modal-box {
-  background: linear-gradient(180deg, #080d1a, #04070e);
-  border-color: rgba(138,43,226,0.2);
-}
-body.night-mode .status-bar {
-  border-bottom-color: #060a10;
-  color: #4a5a70;
-}
-body.night-mode .pvp-lot {
-  background: linear-gradient(135deg, #0a1020, #040810);
-}
-body.night-mode .admin-panel {
-  background: linear-gradient(135deg, rgba(80,20,140,0.15), rgba(150,40,0,0.1));
-}
+body.night-mode .phone { background: radial-gradient(ellipse at top, #0a0d18 0%, #02040a 60%), linear-gradient(180deg, #060810, #02040a); }
+body.night-mode .card { border-color: rgba(138,43,226,0.15); background: linear-gradient(180deg, rgba(10,12,24,0.9), rgba(5,7,14,0.9)); }
+body.night-mode .app-icon { background: linear-gradient(180deg, rgba(15,20,35,0.7), rgba(8,10,20,0.7)); border-color: rgba(138,43,226,0.1); }
+body.night-mode .btn-gold { background: linear-gradient(135deg,#6a4a1a,#8a5a20); }
+body.night-mode .btn-green { background: linear-gradient(135deg,#0a3a2a,#1a4a3a); }
+body.night-mode .btn-blue { background: linear-gradient(135deg,#0a2a4a,#1a3a5a); }
+body.night-mode .money-badge { background: linear-gradient(135deg,#032a1e,#063a2a); }
+body.night-mode .item-card { background: rgba(0,0,0,0.5); }
+body.night-mode .modal-box { background: linear-gradient(180deg, #080d1a, #04070e); border-color: rgba(138,43,226,0.2); }
+body.night-mode .status-bar { border-bottom-color: #060a10; color: #4a5a70; }
+body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810); }
 </style>
 </head>
 <body>
@@ -384,7 +353,7 @@ body.night-mode .admin-panel {
     <div class="splash-sticker">💼</div>
     <div class="splash-title">OWERINEZZ COMPANY</div>
     <div class="splash-line"></div>
-    <div class="splash-subtitle">ЛОМБАРД BY · v15.4</div>
+    <div class="splash-subtitle">ЛОМБАРД BY · v15.5</div>
     <div class="splash-loading"></div>
   </div>
 
@@ -396,11 +365,10 @@ body.night-mode .admin-panel {
   </div>
   <div class="screen" id="screen">
 
-    <!-- ===== АВТОРИЗАЦИЯ ===== -->
     <div id="authScreen">
       <div class="auth-logo">💰</div>
       <div class="auth-title">Ломбард BY</div>
-      <div class="auth-subtitle">OWERINEZZ COMPANY · v15.4</div>
+      <div class="auth-subtitle">OWERINEZZ COMPANY · v15.5</div>
       <div class="auth-tabs">
         <button class="tab active" id="tabLogin" onclick="switchAuthTab('login')">🔑 Вход</button>
         <button class="tab" id="tabRegister" onclick="switchAuthTab('register')">📝 Регистрация</button>
@@ -459,10 +427,8 @@ body.night-mode .admin-panel {
       </div>
     </div>
 
-    <!-- ===== ИГРОВОЙ ЭКРАН ===== -->
     <div id="gameScreen" class="hidden">
 
-      <!-- ГЛАВНЫЙ -->
       <div id="homeScreen">
         <div class="card">
           <div class="profile-card">
@@ -509,7 +475,6 @@ body.night-mode .admin-panel {
           <div class="app-icon" onclick="openApp('adminCenter')" id="adminCenterBtn" style="display:none;"><span class="emoji">📊</span><span class="label">Админ</span></div>
         </div>
 
-        <!-- АДМИН ПАНЕЛЬ -->
         <div id="adminPanel" class="admin-panel hidden">
           <div class="admin-panel-title">👑 АДМИН ПАНЕЛЬ</div>
           <div id="eventBlock">
@@ -554,24 +519,12 @@ body.night-mode .admin-panel {
         </div>
       </div>
 
-      <!-- КЛИЕНТЫ -->
       <div id="clientsApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🏪 Клиенты</div><div id="clientsList"></div></div>
-
-      <!-- АУКЦИОН КОНТЕЙНЕРОВ -->
       <div id="auctionApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🔨 Аукцион</div><div id="auctionContent"></div></div>
-
-      <!-- СКЛАД -->
       <div id="warehouseApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🛠 Мастерская</div><div id="warehouseList"></div></div>
-
-      <!-- ПРОДАЖА -->
       <div id="adsApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">📈 Продажа</div><div id="adsList"></div></div>
-
-      <!-- PVP -->
       <div id="pvpApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">⚔️ PvP-Аукцион</div><div id="pvpContent"></div></div>
-
-      <!-- ЧАТЫ -->
       <div id="chatsApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">💬 Чаты</div><div id="chatListContainer"></div></div>
-
       <div id="chatDetailApp" class="hidden">
         <button class="back-btn" onclick="closeChatDetail()">← Назад</button>
         <div class="page-title" id="chatDetailTitle">💬 Чат</div>
@@ -586,23 +539,11 @@ body.night-mode .admin-panel {
           <button class="btn btn-green btn-block btn-sm" id="chatDetailAcceptBtn" onclick="acceptOffer()" style="margin-top:10px;display:none;">✅ Продать</button>
         </div>
       </div>
-
-      <!-- ЕЖЕДНЕВКИ -->
       <div id="dailyApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">📋 Ежедневные задания</div><div id="dailyContent"></div></div>
-
-      <!-- ПРОФИЛЬ -->
       <div id="profileApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">👤 Профиль</div><div id="profileContent"></div></div>
-
-      <!-- ОФИС -->
       <div id="officeApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🏢 Офис</div><div id="officeContent"></div></div>
-
-      <!-- БАНК -->
       <div id="bankApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🏦 Банк</div><div id="bankContent"></div></div>
-
-      <!-- КАЗИНО -->
       <div id="casinoApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🎰 Казино <span id="casinoEventBadge" style="font-size:12px;color:#ffd700;"></span></div><div id="casinoContent"></div></div>
-
-      <!-- АДМИН-ЦЕНТР -->
       <div id="adminCenterApp" class="hidden">
         <button class="back-btn" onclick="closeApp()">← Назад</button>
         <div class="page-title">📊 АДМИН-ЦЕНТР</div>
@@ -623,7 +564,6 @@ body.night-mode .admin-panel {
         <div id="adminCenterContent"></div>
       </div>
 
-      <!-- МОДАЛКИ -->
       <div id="logoutModal" class="modal-overlay hidden">
         <div class="modal-box">
           <button class="modal-close" onclick="closeLogout()">✕</button>
@@ -653,7 +593,6 @@ body.night-mode .admin-panel {
       <div id="toast" class="toast hidden"></div>
     </div>
 
-    <!-- ПОЛНОЭКРАННЫЕ ЭКРАНЫ -->
     <div id="eventScreen" class="hidden"></div>
     <div id="updateWaitingScreen" class="hidden"></div>
     <div id="maintenanceScreen" class="hidden"></div>
@@ -665,7 +604,7 @@ body.night-mode .admin-panel {
 <div id="eventParticles"></div>
 <script>
 // ============================================================
-// OWERINEZZ COMPANY · Ломбард BY v15.4
+// OWERINEZZ COMPANY · Ломбард BY v15.5
 // ============================================================
 
 const SUPABASE_URL = 'https://zuwsvwxglxgzkuyfxbpu.supabase.co';
@@ -688,9 +627,6 @@ window._unfreezeScreenActive = false;
 window._updateWaitingScreenActive = false;
 window._updateWaitingScreenClosed = false;
 
-// ============================================================
-// УТИЛИТЫ
-// ============================================================
 async function hashPassSHA256(pass) {
   const enc = new TextEncoder().encode(pass);
   const buf = await crypto.subtle.digest('SHA-256', enc);
@@ -717,9 +653,6 @@ const local = {
   clearSession() { try { localStorage.removeItem('lb15_session'); } catch(e) {} }
 };
 
-// ============================================================
-// ДОСТИЖЕНИЯ
-// ============================================================
 const ACHIEVEMENTS = {
   first_money:  { icon:'💵', name:'Первая тысяча', desc:'Заработай 1000 BYN', target:1000, stat:'total_earned' },
   ten_k:        { icon:'💰', name:'10K', desc:'Заработай 10K', target:10000, stat:'total_earned' },
@@ -735,9 +668,6 @@ const ACHIEVEMENTS = {
   pvp_ten:      { icon:'🥇', name:'Гладиатор', desc:'Выиграй 10 PvP', target:10, stat:'pvp_wins' }
 };
 
-// ============================================================
-// ЕЖЕДНЕВКИ
-// ============================================================
 const DAILY_TEMPLATES = [
   { id:'buy_3', icon:'🛒', title:'Купи 3 предмета у клиентов', target:3, stat:'daily_total_bought', reward:500 },
   { id:'sell_3', icon:'💸', title:'Продай 3 предмета', target:3, stat:'daily_total_sold', reward:700 },
@@ -746,9 +676,6 @@ const DAILY_TEMPLATES = [
   { id:'pvp_bid', icon:'⚔️', title:'Сделай ставку в PvP', target:1, stat:'daily_pvp_bids', reward:800 }
 ];
 
-// ============================================================
-// ОФИСЫ
-// ============================================================
 const OFFICES = [
   { id:0, name:'Ларёк у метро', icon:'🏪', desc:'Стартовое место.', cost:0, tier:1, bonuses:{maxStorage:15,clientBonus:0,itemTierMax:2,auctionTierMax:1,discountBargain:0}, perks:['15 слотов','T1-T2'] },
   { id:1, name:'Точка в ТЦ', icon:'🏬', desc:'Больше клиентов.', cost:15000, tier:2, bonuses:{maxStorage:30,clientBonus:1,itemTierMax:3,auctionTierMax:2,discountBargain:3}, perks:['30 слотов','+1 клиент','T1-T3'] },
@@ -756,9 +683,6 @@ const OFFICES = [
   { id:3, name:'Антикварный салон', icon:'🏛️', desc:'Легендарный.', cost:1000000, tier:4, bonuses:{maxStorage:150,clientBonus:3,itemTierMax:4,auctionTierMax:4,discountBargain:12}, perks:['150 слотов','+3 клиента','Всё'] }
 ];
 
-// ============================================================
-// КОНТЕЙНЕРЫ
-// ============================================================
 const CONTAINER_SVGS = {
   garage:`<svg width="120" height="86" viewBox="0 0 140 100"><rect x="10" y="10" width="120" height="80" rx="4" fill="#0f1620" stroke="#2a3a4a" stroke-width="3"/><line x1="10" y1="30" x2="130" y2="30" stroke="#1a2634" stroke-width="3"/><line x1="10" y1="50" x2="130" y2="50" stroke="#1a2634" stroke-width="3"/><line x1="10" y1="70" x2="130" y2="70" stroke="#1a2634" stroke-width="3"/></svg>`,
   shipping:`<svg width="130" height="86" viewBox="0 0 150 100"><rect x="10" y="15" width="130" height="70" rx="3" fill="#3a1515" stroke="#6a2a2a" stroke-width="3"/><line x1="35" y1="15" x2="35" y2="85" stroke="#2a0d0d" stroke-width="4"/><line x1="60" y1="15" x2="60" y2="85" stroke="#2a0d0d" stroke-width="4"/><line x1="85" y1="15" x2="85" y2="85" stroke="#2a0d0d" stroke-width="4"/></svg>`,
@@ -786,9 +710,6 @@ const ALL_CONTAINERS = [
   { name:'Секретный Лот', svg:'secret', basePrice:330000, tier:4, tag:'БОНУС', tagClass:'tag-bonus', desc:'Самый редкий.' }
 ];
 
-// ============================================================
-// ПРЕДМЕТЫ (55+)
-// ============================================================
 const ITEM_TEMPLATES = [
   { name:'Кнопочный телефон', icon:'📱', tier:1, basePrice:80, cat:'tech', canFix:true, rarity:'common' },
   { name:'Старая дрель', icon:'🔧', tier:1, basePrice:60, cat:'tools', canFix:true, rarity:'common' },
@@ -852,9 +773,6 @@ const CLIENT_NAMES = ['Алексей','Дмитрий','Сергей','Андр
 const CLIENT_AVATARS = ['👨','🧑','👩','👴','👵','🧔','👱','👨‍💼','👩‍💼','🧑‍🎓','👨‍🔧','👩‍🏫','🧑‍🍳','👷','🕵️'];
 const CLIENT_PHRASES = ['Нужны деньги срочно!','Сколько дадите?','Только залог.','Это фамильная ценность','Готов торговаться','Дам скидку за быструю сделку','Только без обмана!','Выкупаю через неделю'];
 
-// ============================================================
-// VIP / МОШЕННИКИ / КОЛЛЕКЦИОНЕРЫ
-// ============================================================
 const VIP_CLIENTS = [
   { name:'Граф Воронцов', avatar:'🎩', phrase:'Раритет из Европы, не торгуюсь', bonus:2.5, tierMin:3, tierMax:4 },
   { name:'Мадам Жозефина', avatar:'👒', phrase:'Только лучшее для моей коллекции', bonus:2.2, tierMin:3, tierMax:4 },
@@ -873,9 +791,6 @@ const COLLECTOR_CLIENTS = [
   { name:'Ювелир', avatar:'💎', phrase:'Покупаю золото дорого', lookFor:'💍', bonus:2.8 }
 ];
 
-// ============================================================
-// СОСТОЯНИЕ
-// ============================================================
 let game = {
   playerName:'', playerAvatar:'💼', money:2000, officeId:0,
   storage:[], clients:[], chats:[], currentChatId:null,
@@ -939,9 +854,6 @@ function showToast(msg, type) {
   el._t = setTimeout(() => el.classList.add('hidden'), 3000);
 }
 
-// ============================================================
-// ВРЕМЯ СУТОК
-// ============================================================
 function getTimeOfDay() {
   const h = new Date().getHours();
   return (h >= 6 && h < 20) ? 'day' : 'night';
@@ -950,7 +862,6 @@ function getTimeOfDay() {
 function applyTimeOfDay(force) {
   const t = getTimeOfDay();
   if (t !== currentTimeOfDay || force) {
-    const wasDay = currentTimeOfDay === 'day';
     currentTimeOfDay = t;
     document.body.classList.toggle('night-mode', t === 'night');
     if (!force && game.playerName) {
@@ -983,9 +894,6 @@ function startTimeOfDayTimer() {
   }, 60000);
 }
 
-// ============================================================
-// АВТОРИЗАЦИЯ
-// ============================================================
 const AVATAR_OPTIONS = ['💼','👨','🧑','👩','🧔','👱','🕵️','😎','🤵','🎩','👷','👨‍💼'];
 
 function renderAvatarPicker() {
@@ -1222,9 +1130,6 @@ function doLogout() {
 function openLogout() { document.getElementById('logoutModal').classList.remove('hidden'); }
 function closeLogout() { document.getElementById('logoutModal').classList.add('hidden'); }
 
-// ============================================================
-// ДОСТИЖЕНИЯ + ЕЖЕДНЕВКИ
-// ============================================================
 function getStat(name) { return Number(game.stats?.[name]) || 0; }
 function incStat(name, amount) {
   game.stats = game.stats || {};
@@ -1274,9 +1179,6 @@ function updateDailyBadge() {
   badge.classList.toggle('hidden', !hasClaimable);
 }
 
-// ============================================================
-// ГЕНЕРАЦИЯ КЛИЕНТОВ (с сюжетом)
-// ============================================================
 function generateClients() {
   game.clients = [];
   const isNight = getTimeOfDay() === 'night';
@@ -1291,7 +1193,6 @@ function generateClients() {
     let client = null;
     const roll = Math.random();
 
-    // 5% — VIP
     if (roll < 0.05) {
       const vip = pick(VIP_CLIENTS);
       const pool2 = ITEM_TEMPLATES.filter(t => t.tier >= vip.tierMin && t.tier <= vip.tierMax);
@@ -1300,15 +1201,9 @@ function generateClients() {
         const condition = rand(70, 100);
         const realPrice = Math.round(item.basePrice * condition/100 * vip.bonus);
         const askPrice = Math.round(realPrice * rand(80,95)/100);
-        client = {
-          id: 'vip_'+Date.now()+'_'+i,
-          name: vip.name, avatar: vip.avatar, phrase: vip.phrase,
-          item: { ...item, isFake:false, condition },
-          askPrice, realPrice, inspected:false, type:'vip'
-        };
+        client = { id:'vip_'+Date.now()+'_'+i, name:vip.name, avatar:vip.avatar, phrase:vip.phrase, item:{ ...item, isFake:false, condition }, askPrice, realPrice, inspected:false, type:'vip' };
       }
     }
-    // Ночью шанс мошенника выше: 25%, днём 10%
     else if (roll < (isNight ? 0.30 : 0.15)) {
       const scam = pick(SCAM_CLIENTS);
       const pool2 = ITEM_TEMPLATES.filter(t => t.tier <= Math.min(tierMax, 3));
@@ -1318,15 +1213,9 @@ function generateClients() {
         const condition = rand(30, 90);
         const realPrice = isFake ? Math.round(item.basePrice * 0.1) : Math.round(item.basePrice * condition/100);
         const askPrice = Math.round(item.basePrice * 0.9);
-        client = {
-          id: 'scam_'+Date.now()+'_'+i,
-          name: scam.name, avatar: scam.avatar, phrase: scam.phrase,
-          item: { ...item, isFake, condition },
-          askPrice, realPrice, inspected:false, type:'scam'
-        };
+        client = { id:'scam_'+Date.now()+'_'+i, name:scam.name, avatar:scam.avatar, phrase:scam.phrase, item:{ ...item, isFake, condition }, askPrice, realPrice, inspected:false, type:'scam' };
       }
     }
-    // 5% — коллекционер
     else if (roll < 0.20) {
       const col = pick(COLLECTOR_CLIENTS);
       const pool2 = ITEM_TEMPLATES.filter(t => t.icon === col.lookFor);
@@ -1335,36 +1224,22 @@ function generateClients() {
         const condition = rand(60, 100);
         const realPrice = Math.round(item.basePrice * condition/100 * col.bonus);
         const askPrice = Math.round(realPrice * rand(85,95)/100);
-        client = {
-          id: 'col_'+Date.now()+'_'+i,
-          name: col.name, avatar: col.avatar, phrase: col.phrase,
-          item: { ...item, isFake:false, condition },
-          askPrice, realPrice, inspected:false, type:'collector'
-        };
+        client = { id:'col_'+Date.now()+'_'+i, name:col.name, avatar:col.avatar, phrase:col.phrase, item:{ ...item, isFake:false, condition }, askPrice, realPrice, inspected:false, type:'collector' };
       }
     }
 
-    // Обычный
     if (!client) {
       const item = pick(pool);
       const isFake = Math.random() < 0.30;
       const condition = rand(20, 100);
       const realPrice = isFake ? Math.round(item.basePrice*0.12) : Math.round(item.basePrice*condition/100);
       const askPrice = Math.round(realPrice * rand(55,95)/100);
-      client = {
-        id: 'c_'+Date.now()+'_'+i,
-        name: pick(CLIENT_NAMES), avatar: pick(CLIENT_AVATARS), phrase: pick(CLIENT_PHRASES),
-        item: { ...item, isFake, condition },
-        askPrice, realPrice, inspected:false, type:'normal'
-      };
+      client = { id:'c_'+Date.now()+'_'+i, name:pick(CLIENT_NAMES), avatar:pick(CLIENT_AVATARS), phrase:pick(CLIENT_PHRASES), item:{ ...item, isFake, condition }, askPrice, realPrice, inspected:false, type:'normal' };
     }
 
     game.clients.push(client);
   }
 }
-// ============================================================
-// ПРОФИЛЬ
-// ============================================================
 function renderProfile() {
   const c = document.getElementById('profileContent');
   if (!c) return;
@@ -1399,43 +1274,24 @@ function renderProfile() {
   Object.entries(ACHIEVEMENTS).forEach(([key, ach]) => {
     const isUnlocked = !!game.achievements[key];
     const current = Math.min(getStat(ach.stat), ach.target);
-    html += `
-      <div class="ach-card ${isUnlocked ? 'unlocked' : ''}">
-        <div class="ach-icon">${ach.icon}</div>
-        <div class="ach-name">${ach.name}</div>
-        <div class="ach-progress">${isUnlocked ? '✅' : current+'/'+ach.target}</div>
-      </div>`;
+    html += `<div class="ach-card ${isUnlocked ? 'unlocked' : ''}"><div class="ach-icon">${ach.icon}</div><div class="ach-name">${ach.name}</div><div class="ach-progress">${isUnlocked ? '✅' : current+'/'+ach.target}</div></div>`;
   });
   html += '</div></div>';
   c.innerHTML = html;
 }
 
-// ============================================================
-// ЕЖЕДНЕВКИ
-// ============================================================
 function renderDaily() {
   const c = document.getElementById('dailyContent');
   if (!c) return;
   const tasks = Object.entries(game.dailyTasks || {});
-  if (tasks.length === 0) {
-    c.innerHTML = '<div class="card" style="text-align:center;opacity:0.6;padding:30px;">📋 Нет активных заданий</div>';
-    return;
-  }
+  if (tasks.length === 0) { c.innerHTML = '<div class="card" style="text-align:center;opacity:0.6;padding:30px;">📋 Нет активных заданий</div>'; return; }
   let html = '<div class="card"><div style="font-size:12px;opacity:0.6;margin-bottom:10px;">📅 Обновление каждый день в 00:00</div>';
   tasks.forEach(([id, state]) => {
     const tpl = DAILY_TEMPLATES.find(t => t.id === id);
     if (!tpl) return;
     const pct = Math.min(100, (state.progress / tpl.target) * 100);
     const isDone = state.progress >= tpl.target;
-    html += `
-      <div class="daily-task ${isDone ? 'done' : ''}">
-        <div class="dt-title">${tpl.icon} ${tpl.title}</div>
-        <div class="dt-progress">${state.progress} / ${tpl.target} ${isDone ? '✅' : ''}</div>
-        <div class="dt-bar"><div class="dt-fill" style="width:${pct}%"></div></div>
-        <div class="dt-reward">💰 Награда: ${tpl.reward} BYN</div>
-        ${isDone && !state.claimed ? `<button class="btn btn-gold btn-block btn-sm" style="margin-top:8px;" onclick="claimDailyReward('${id}')">🎁 Забрать</button>` : ''}
-        ${state.claimed ? `<div style="text-align:center;font-size:12px;color:#5cdb8a;margin-top:6px;">✅ Получено</div>` : ''}
-      </div>`;
+    html += `<div class="daily-task ${isDone ? 'done' : ''}"><div class="dt-title">${tpl.icon} ${tpl.title}</div><div class="dt-progress">${state.progress} / ${tpl.target} ${isDone ? '✅' : ''}</div><div class="dt-bar"><div class="dt-fill" style="width:${pct}%"></div></div><div class="dt-reward">💰 Награда: ${tpl.reward} BYN</div>${isDone && !state.claimed ? `<button class="btn btn-gold btn-block btn-sm" style="margin-top:8px;" onclick="claimDailyReward('${id}')">🎁 Забрать</button>` : ''}${state.claimed ? '<div style="text-align:center;font-size:12px;color:#5cdb8a;margin-top:6px;">✅ Получено</div>' : ''}</div>`;
   });
   html += '</div>';
   c.innerHTML = html;
@@ -1457,9 +1313,6 @@ async function claimDailyReward(id) {
   await saveGame();
 }
 
-// ============================================================
-// КЛИЕНТЫ (рендер с типами)
-// ============================================================
 function renderClients() {
   const c = document.getElementById('clientsList');
   c.innerHTML = '';
@@ -1469,7 +1322,6 @@ function renderClients() {
   }
   const timeLabel = currentTimeOfDay === 'night' ? '🌙 НОЧЬ' : '☀️ ДЕНЬ';
   c.innerHTML = `<div class="card" style="text-align:center;font-size:12px;opacity:0.6;">${timeLabel} • Клиентов: ${game.clients.length}</div>`;
-
   game.clients.forEach((cl, idx) => {
     const div = document.createElement('div');
     let cls = 'client-card';
@@ -1507,13 +1359,7 @@ function startInspect(idx) {
   incStat('total_inspected', 1);
   renderAll();
   updateDailyProgress();
-  document.getElementById('inspectInner').innerHTML = `
-    <div class="inspect-anim">
-      <div class="magnifier">🔍</div>
-      <div style="font-weight:bold;margin-top:12px;">${cl.item.name}</div>
-      <div class="dots"><span>.</span><span>.</span><span>.</span></div>
-      <div class="status" id="inspectStatus">Проверяю...</div>
-    </div>`;
+  document.getElementById('inspectInner').innerHTML = `<div class="inspect-anim"><div class="magnifier">🔍</div><div style="font-weight:bold;margin-top:12px;">${cl.item.name}</div><div class="dots"><span>.</span><span>.</span><span>.</span></div><div class="status" id="inspectStatus">Проверяю...</div></div>`;
   document.getElementById('inspectModal').classList.remove('hidden');
   const stages = ['🔎 Осматриваю...','⚖️ Взвешиваю...','🔬 Проверяю...','📸 Сверяю...','💎 Оцениваю...'];
   let i = 0;
@@ -1562,16 +1408,8 @@ async function buyFromClient(idx) {
   if (game.money < cl.askPrice) { showToast('💰 Не хватает!','error'); return; }
   if (game.storage.length >= getMaxStorage()) { showToast('📦 Склад полон!','error'); return; }
   const itemId = 'item_'+Date.now()+'_'+Math.floor(Math.random()*100000);
-  const newItem = {
-    id:itemId, name:cl.item.name, icon:cl.item.icon, tier:cl.item.tier,
-    basePrice:cl.item.basePrice, cat:cl.item.cat, canFix:cl.item.canFix,
-    rarity:cl.item.rarity, isFake:cl.item.isFake, condition:cl.item.condition,
-    buyPrice:cl.askPrice
-  };
-  const result = await rpc('buy_from_client', {
-    p_nick: game.playerName, p_hash: passwordHashCache,
-    p_price: cl.askPrice, p_item: newItem
-  });
+  const newItem = { id:itemId, name:cl.item.name, icon:cl.item.icon, tier:cl.item.tier, basePrice:cl.item.basePrice, cat:cl.item.cat, canFix:cl.item.canFix, rarity:cl.item.rarity, isFake:cl.item.isFake, condition:cl.item.condition, buyPrice:cl.askPrice };
+  const result = await rpc('buy_from_client', { p_nick:game.playerName, p_hash:passwordHashCache, p_price:cl.askPrice, p_item:newItem });
   if (result && result.ok) game.money = Number(result.money);
   else game.money -= cl.askPrice;
   game.storage.push(newItem);
@@ -1595,9 +1433,6 @@ function declineClient(idx) {
   renderClients();
 }
 
-// ============================================================
-// СКЛАД
-// ============================================================
 function renderWarehouse() {
   const c = document.getElementById('warehouseList');
   c.innerHTML = '';
@@ -1653,9 +1488,6 @@ function removeItem(idx) {
   renderAll(); renderWarehouse(); saveGame();
 }
 
-// ============================================================
-// ПРОДАЖА
-// ============================================================
 function renderAds() {
   const c = document.getElementById('adsList');
   c.innerHTML = '';
@@ -1696,9 +1528,6 @@ async function publishAd(idx) {
   saveGame();
 }
 
-// ============================================================
-// PVP
-// ============================================================
 async function refreshPvpLots() {
   try {
     const { data } = await db.from('pvp_auctions')
@@ -1850,7 +1679,20 @@ async function pvpPlaceBid(lotId) {
 }
 
 async function pvpBuyout(lotId) {
-  if (!confirm('Купить по цене выкупа?')) return;
+  document.getElementById('genericModalBox').innerHTML = `
+    <button class="modal-close" onclick="closeGenericModal()">✕</button>
+    <div style="font-size:64px;margin-bottom:12px;">⚡</div>
+    <div class="modal-title" style="color:#ffd700;">Купить сразу?</div>
+    <div class="modal-desc">Вы уверены, что хотите выкупить лот по цене выкупа?</div>
+    <div class="modal-actions">
+      <button class="btn btn-blue" onclick="closeGenericModal()">❌ Отмена</button>
+      <button class="btn btn-gold" onclick="pvpBuyoutConfirm('${lotId}')">⚡ Купить</button>
+    </div>`;
+  document.getElementById('genericModal').classList.remove('hidden');
+}
+
+async function pvpBuyoutConfirm(lotId) {
+  closeGenericModal();
   const result = await rpc('pvp_buyout', { p_nick:game.playerName, p_hash:passwordHashCache, p_lot_id:lotId });
   if (!result || !result.ok) { showToast('❌ '+(result?.error||''),'error'); return; }
   incStat('pvp_wins', 1);
@@ -1862,7 +1704,6 @@ async function pvpBuyout(lotId) {
   showToast('🎉 Куплено!','info');
 }
 
-// ⚡ ИСПРАВЛЕНО: своё модальное окно вместо confirm()
 async function pvpCancelLot(lotId) {
   const lot = game.pvpLots.find(l => l.id === lotId);
   if (!lot) { showToast('⚠️ Лот не найден', 'error'); return; }
@@ -1903,7 +1744,7 @@ async function reloadMoney() {
 }
 function closeGenericModal() { document.getElementById('genericModal').classList.add('hidden'); }
 // ============================================================
-// ЧАТЫ (продажа через торг с ботом)
+// ЧАТЫ
 // ============================================================
 function renderChatList() {
   const c = document.getElementById('chatListContainer');
@@ -2397,7 +2238,7 @@ function closeAuction() {
   renderAuction(); renderAll(); saveGame();
 }
 // ============================================================
-// ТЕХ.РАБОТЫ + ОЖИДАНИЕ ОБНОВЛЕНИЯ
+// ТЕХ.РАБОТЫ + ОЖИДАНИЕ
 // ============================================================
 async function fetchMaintenance() { try { const {data,error} = await db.from('maintenance').select('*').eq('id',1).single(); return error?null:data; } catch(e){ return null; } }
 async function fetchUpdateWaiting() { try { const {data,error} = await db.from('update_waiting').select('*').eq('id',1).single(); return error?null:data; } catch(e){ return null; } }
@@ -2409,19 +2250,7 @@ function showMaintenanceScreen(d) {
   let parts = '';
   for (let i = 0; i < 20; i++) parts += `<div class="maint-emoji" style="left:${Math.random()*100}%;font-size:${20+Math.random()*20}px;animation-duration:${4+Math.random()*4}s;animation-delay:${Math.random()*5}s;">${emojis[i%emojis.length]}</div>`;
   let timerHtml = d.until && d.until > Date.now() ? `<div class="maint-label">⏱ ОСТАЛОСЬ</div><div class="maint-timer" id="maintTimerText">${Math.floor((d.until-Date.now())/60000)}:00</div>` : '';
-  s.innerHTML = `
-    <div class="maint-particles">${parts}</div>
-    <div class="maint-content">
-      <div class="maint-icon-wrap"><div class="maint-ring"></div><div class="maint-icon">🔧</div></div>
-      <div class="maint-title">ТЕХ. РАБОТЫ</div>
-      <div class="maint-box">
-        <div class="maint-label">📝 ПРИЧИНА</div>
-        <div class="maint-value reason">${escapeHtml(d.reason || 'Обновление')}</div>
-        <div style="border-top:1px solid rgba(255,255,255,0.1);margin:14px 0;"></div>
-        ${timerHtml}
-      </div>
-      <button class="maint-exit-btn" onclick="exitMaintenanceToMenu()">🚪 Выйти в меню</button>
-    </div>`;
+  s.innerHTML = `<div class="maint-particles">${parts}</div><div class="maint-content"><div class="maint-icon-wrap"><div class="maint-ring"></div><div class="maint-icon">🔧</div></div><div class="maint-title">ТЕХ. РАБОТЫ</div><div class="maint-box"><div class="maint-label">📝 ПРИЧИНА</div><div class="maint-value reason">${escapeHtml(d.reason || 'Обновление')}</div><div style="border-top:1px solid rgba(255,255,255,0.1);margin:14px 0;"></div>${timerHtml}</div><button class="maint-exit-btn" onclick="exitMaintenanceToMenu()">🚪 Выйти в меню</button></div>`;
   s.classList.remove('hidden');
   if (window._maintTimer) clearInterval(window._maintTimer);
   window._maintTimer = setInterval(() => {
@@ -2483,20 +2312,7 @@ async function toggleMaintenance() {
   } else openMaintenanceStartModal();
 }
 function openMaintenanceStartModal() {
-  document.getElementById('adminActionModalBox').innerHTML = `
-    <button class="modal-close" onclick="closeAdminActionModal()">✕</button>
-    <div style="font-size:64px;margin-bottom:12px;">🔧</div>
-    <div class="modal-title" style="color:#d4a543;">ТЕХ.РАБОТЫ</div>
-    <div style="text-align:left;margin:16px 0;"><label style="font-size:12px;opacity:0.7;">Причина:</label>
-      <textarea id="maintReason" maxlength="200" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;min-height:60px;"></textarea>
-    </div>
-    <div style="text-align:left;margin-bottom:16px;"><label style="font-size:12px;opacity:0.7;">Минут (0 = без срока):</label>
-      <input type="number" id="maintUntil" value="30" min="0" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;">
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-blue" onclick="closeAdminActionModal()">❌</button>
-      <button class="btn btn-red" onclick="confirmStartMaintenance()">🔧 ВКЛЮЧИТЬ</button>
-    </div>`;
+  document.getElementById('adminActionModalBox').innerHTML = `<button class="modal-close" onclick="closeAdminActionModal()">✕</button><div style="font-size:64px;margin-bottom:12px;">🔧</div><div class="modal-title" style="color:#d4a543;">ТЕХ.РАБОТЫ</div><div style="text-align:left;margin:16px 0;"><label style="font-size:12px;opacity:0.7;">Причина:</label><textarea id="maintReason" maxlength="200" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;min-height:60px;"></textarea></div><div style="text-align:left;margin-bottom:16px;"><label style="font-size:12px;opacity:0.7;">Минут (0 = без срока):</label><input type="number" id="maintUntil" value="30" min="0" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;"></div><div class="modal-actions"><button class="btn btn-blue" onclick="closeAdminActionModal()">❌</button><button class="btn btn-red" onclick="confirmStartMaintenance()">🔧 ВКЛЮЧИТЬ</button></div>`;
   document.getElementById('adminActionModal').classList.remove('hidden');
 }
 async function confirmStartMaintenance() {
@@ -2520,19 +2336,7 @@ function showUpdateWaitingScreen(d) {
   let parts = '';
   for (let i = 0; i < 20; i++) parts += `<div class="maint-emoji" style="left:${Math.random()*100}%;font-size:${20+Math.random()*20}px;animation-duration:${4+Math.random()*4}s;animation-delay:${Math.random()*5}s;">${emojis[i%emojis.length]}</div>`;
   let timerHtml = d.until && d.until > Date.now() ? `<div class="maint-label">⏱ ОСТАЛОСЬ</div><div class="maint-timer" id="updateWaitingTimerText" style="color:#00d4ff;">${Math.floor((d.until-Date.now())/60000)}:00</div>` : '';
-  s.innerHTML = `
-    <div class="maint-particles">${parts}</div>
-    <div class="maint-content">
-      <div class="maint-icon-wrap"><div class="maint-ring" style="border-color:rgba(0,212,255,0.5);"></div><div class="maint-icon">⏳</div></div>
-      <div class="maint-title" style="background:linear-gradient(90deg,#00d4ff,#8a2be2,#00d4ff);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">ОЖИДАНИЕ ОБНОВЛЕНИЯ</div>
-      <div class="maint-box" style="border-color:rgba(0,212,255,0.5);">
-        <div class="maint-label">📢 ЧТО ПРОИСХОДИТ</div>
-        <div class="maint-value" style="color:#5bc0eb;">Скоро выйдет новое обновление игры. Пожалуйста, подождите.</div>
-        <div style="border-top:1px solid rgba(255,255,255,0.1);margin:14px 0;"></div>
-        ${timerHtml}
-      </div>
-      <button class="maint-exit-btn" style="border-color:rgba(0,212,255,0.5);background:rgba(0,212,255,0.15);color:#7dd4f0;" onclick="exitUpdateWaitingToMenu()">🚪 Выйти в меню</button>
-    </div>`;
+  s.innerHTML = `<div class="maint-particles">${parts}</div><div class="maint-content"><div class="maint-icon-wrap"><div class="maint-ring" style="border-color:rgba(0,212,255,0.5);"></div><div class="maint-icon">⏳</div></div><div class="maint-title" style="background:linear-gradient(90deg,#00d4ff,#8a2be2,#00d4ff);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">ОЖИДАНИЕ ОБНОВЛЕНИЯ</div><div class="maint-box" style="border-color:rgba(0,212,255,0.5);"><div class="maint-label">📢 ЧТО ПРОИСХОДИТ</div><div class="maint-value" style="color:#5bc0eb;">Скоро выйдет новое обновление игры. Пожалуйста, подождите.</div><div style="border-top:1px solid rgba(255,255,255,0.1);margin:14px 0;"></div>${timerHtml}</div><button class="maint-exit-btn" style="border-color:rgba(0,212,255,0.5);background:rgba(0,212,255,0.15);color:#7dd4f0;" onclick="exitUpdateWaitingToMenu()">🚪 Выйти в меню</button></div>`;
   s.classList.remove('hidden');
   if (window._updateWaitingTimer) clearInterval(window._updateWaitingTimer);
   window._updateWaitingTimer = setInterval(() => {
@@ -2557,13 +2361,10 @@ function exitUpdateWaitingToMenu() {
   window._updateWaitingScreenClosed = false;
   hideUpdateWaitingScreen();
   local.clearSession();
-  game.playerName = '';
-  game.isAdmin = false;
-  game.adminPerms = {};
+  game.playerName = ''; game.isAdmin = false; game.adminPerms = {};
   document.getElementById('gameScreen').classList.add('hidden');
   document.getElementById('authScreen').classList.remove('hidden');
-  document.getElementById('loginNick').value = '';
-  document.getElementById('loginPass').value = '';
+  document.getElementById('loginNick').value = ''; document.getElementById('loginPass').value = '';
   document.getElementById('loginErr').textContent = '';
 }
 function checkAndApplyUpdateWaiting() {
@@ -2574,9 +2375,8 @@ function checkAndApplyUpdateWaiting() {
     else hideUpdateWaitingBadge();
     return;
   }
-  if (updateWaitingState.active && !window._updateWaitingScreenActive && !window._updateWaitingScreenClosed) {
-    showUpdateWaitingScreen(updateWaitingState);
-  } else hideUpdateWaitingScreen();
+  if (updateWaitingState.active && !window._updateWaitingScreenActive && !window._updateWaitingScreenClosed) showUpdateWaitingScreen(updateWaitingState);
+  else hideUpdateWaitingScreen();
   if (game.isAdmin && updateWaitingState.active) showUpdateWaitingBadge();
   else if (game.isAdmin && !updateWaitingState.active) hideUpdateWaitingBadge();
 }
@@ -2596,8 +2396,7 @@ function updateUpdateWaitingFromCloud(data) {
     window._updateWaitingScreenActive = false;
     window._updateWaitingScreenClosed = false;
   }
-  updateUpdateWaitingToggleUI();
-  checkAndApplyUpdateWaiting();
+  updateUpdateWaitingToggleUI(); checkAndApplyUpdateWaiting();
 }
 function updateUpdateWaitingToggleUI() {
   const row = document.getElementById('uwToggleRow'), status = document.getElementById('uwToggleStatus'), sw = document.getElementById('uwSwitch');
@@ -2629,19 +2428,7 @@ async function toggleUpdateWaiting() {
   openUpdateWaitingStartModal();
 }
 function openUpdateWaitingStartModal() {
-  document.getElementById('adminActionModalBox').innerHTML = `
-    <button class="modal-close" onclick="closeAdminActionModal()">✕</button>
-    <div style="font-size:64px;margin-bottom:12px;">⏳</div>
-    <div class="modal-title" style="color:#00d4ff;">ОЖИДАНИЕ ОБНОВЛЕНИЯ</div>
-    <div style="font-size:13px;opacity:0.7;margin:12px 0;">Все игроки увидят экран ожидания на указанное время.</div>
-    <div style="text-align:left;margin-bottom:16px;">
-      <label style="font-size:12px;opacity:0.7;">Минут:</label>
-      <input type="number" id="uwMinutes" value="30" min="1" max="1440" style="width:100%;padding:12px;border-radius:10px;border:2px solid #2a3a4a;background:#060a12;color:white;margin-top:6px;">
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-blue" onclick="closeAdminActionModal()">❌</button>
-      <button class="btn btn-green" onclick="confirmUpdateWaiting()">⏳ ВКЛЮЧИТЬ</button>
-    </div>`;
+  document.getElementById('adminActionModalBox').innerHTML = `<button class="modal-close" onclick="closeAdminActionModal()">✕</button><div style="font-size:64px;margin-bottom:12px;">⏳</div><div class="modal-title" style="color:#00d4ff;">ОЖИДАНИЕ ОБНОВЛЕНИЯ</div><div style="font-size:13px;opacity:0.7;margin:12px 0;">Все игроки увидят экран ожидания на указанное время.</div><div style="text-align:left;margin-bottom:16px;"><label style="font-size:12px;opacity:0.7;">Минут:</label><input type="number" id="uwMinutes" value="30" min="1" max="1440" style="width:100%;padding:12px;border-radius:10px;border:2px solid #2a3a4a;background:#060a12;color:white;margin-top:6px;"></div><div class="modal-actions"><button class="btn btn-blue" onclick="closeAdminActionModal()">❌</button><button class="btn btn-green" onclick="confirmUpdateWaiting()">⏳ ВКЛЮЧИТЬ</button></div>`;
   document.getElementById('adminActionModal').classList.remove('hidden');
 }
 async function confirmUpdateWaiting() {
@@ -2666,14 +2453,7 @@ function showBanScreen(o) {
   const s = document.getElementById('banScreen');
   s.classList.remove('hidden'); s.classList.add('ban-type');
   const untilText = o.until ? `До: ${new Date(o.until).toLocaleString('ru')}` : 'Бессрочно';
-  s.innerHTML = `
-    <div class="ban-icon-wrap"><div class="ban-rings"></div><div class="ban-rings"></div><div class="ban-rings"></div><div class="ban-icon">🚫</div></div>
-    <div class="ban-title">ВЫ ЗАБАНЕНЫ</div>
-    <div class="ban-subtitle">Доступ заблокирован</div>
-    <div class="ban-reason-box"><div class="ban-reason-label">Причина</div><div class="ban-reason-text">${escapeHtml(o.reason||'Без причины')}</div></div>
-    <div class="ban-until">⏱ <b>${untilText}</b></div>
-    <div class="ban-by">Выдал: ${escapeHtml(o.by||'—')}</div>
-    <button class="ban-exit-btn" onclick="exitFromBan()">🚪 Выйти в меню</button>`;
+  s.innerHTML = `<div class="ban-icon-wrap"><div class="ban-rings"></div><div class="ban-rings"></div><div class="ban-rings"></div><div class="ban-icon">🚫</div></div><div class="ban-title">ВЫ ЗАБАНЕНЫ</div><div class="ban-subtitle">Доступ заблокирован</div><div class="ban-reason-box"><div class="ban-reason-label">Причина</div><div class="ban-reason-text">${escapeHtml(o.reason||'Без причины')}</div></div><div class="ban-until">⏱ <b>${untilText}</b></div><div class="ban-by">Выдал: ${escapeHtml(o.by||'—')}</div><button class="ban-exit-btn" onclick="exitFromBan()">🚪 Выйти в меню</button>`;
 }
 function hideBanScreen() { const s = document.getElementById('banScreen'); if (s) { s.classList.add('hidden'); s.classList.remove('ban-type'); s.innerHTML = ''; } }
 function exitFromBan() { hideBanScreen(); local.clearSession(); document.getElementById('gameScreen').classList.add('hidden'); document.getElementById('authScreen').classList.remove('hidden'); game.playerName=''; }
@@ -2681,13 +2461,7 @@ function showFreezeScreen(o) {
   const s = document.getElementById('freezeScreen');
   s.classList.remove('hidden'); s.classList.remove('hide');
   const untilText = o.until ? `До: ${new Date(o.until).toLocaleString('ru')}` : 'Бессрочно';
-  s.innerHTML = `
-    <div class="ban-icon-wrap"><div class="ban-rings"></div><div class="ban-rings"></div><div class="ban-rings"></div><div class="ban-icon">❄️</div></div>
-    <div class="ban-title">ЗАМОРОЖЕН</div>
-    <div class="ban-subtitle">Аккаунт заморожен</div>
-    <div class="ban-reason-box"><div class="ban-reason-label">Причина</div><div class="ban-reason-text">${escapeHtml(o.reason||'')}</div></div>
-    <div class="ban-until">⏱ <b>${untilText}</b></div>
-    <button class="ban-exit-btn freeze-style" onclick="closeUnfreezeScreen()">❄️ OK</button>`;
+  s.innerHTML = `<div class="ban-icon-wrap"><div class="ban-rings"></div><div class="ban-rings"></div><div class="ban-rings"></div><div class="ban-icon">❄️</div></div><div class="ban-title">ЗАМОРОЖЕН</div><div class="ban-subtitle">Аккаунт заморожен</div><div class="ban-reason-box"><div class="ban-reason-label">Причина</div><div class="ban-reason-text">${escapeHtml(o.reason||'')}</div></div><div class="ban-until">⏱ <b>${untilText}</b></div><button class="ban-exit-btn freeze-style" onclick="closeUnfreezeScreen()">❄️ OK</button>`;
 }
 function hideFreezeScreen() { if (window._unfreezeScreenActive) return; const s = document.getElementById('freezeScreen'); if (s) { s.classList.add('hide'); setTimeout(() => { s.classList.add('hidden'); s.classList.remove('hide'); s.innerHTML=''; }, 500); } }
 function closeUnfreezeScreen() { window._unfreezeScreenActive = false; const s = document.getElementById('freezeScreen'); if (s) { s.classList.add('hide'); setTimeout(() => { s.classList.add('hidden'); s.classList.remove('hide'); s.innerHTML=''; }, 500); } }
@@ -2820,26 +2594,19 @@ function renderUserRow(nick, u, isOnline) {
   if (isBanned) badges += '<span class="status-badge sb-banned">🚫</span>';
   if (isFrozen) badges += '<span class="status-badge sb-frozen">❄️</span>';
   badges += isOnline ? '<span class="status-badge sb-online">🟢</span>' : '<span class="status-badge sb-offline">⚫</span>';
-  return `<div class="${cls}"><div class="u-avatar">${u.avatar||'💼'}</div><div class="u-info"><div class="u-nick">${nick} ${badges}</div><div class="u-sub">💰 ${formatMoney(u.money||0)}</div></div><div class="u-actions">${!isAdmin && !isMain && hasPerm('manageBans') ? `${!isBanned ? `<button class="btn btn-red btn-xs" onclick="openBanModal('${nick}','ban')">🚫</button>` : ''}${!isFrozen ? `<button class="btn btn-blue btn-xs" onclick="openBanModal('${nick}','freeze')">❄️</button>` : `<button class="btn btn-gold btn-xs" onclick="unfreezeUser('${nick}')">🔥</button>`}` : ''}</div></div>`;
+  let actions = '';
+  const canManage = hasPerm('manageBans') && !isAdmin && !isMain;
+  if (canManage) {
+    if (isBanned) actions += `<button class="btn btn-green btn-xs" onclick="openUnbanConfirm('${nick}')" title="Разбанить">🔓 РАЗБАН</button>`;
+    else actions += `<button class="btn btn-red btn-xs" onclick="openBanModal('${nick}','ban')" title="Забанить">🚫 БАН</button>`;
+    if (isFrozen) actions += `<button class="btn btn-gold btn-xs" onclick="openUnfreezeConfirm('${nick}')" title="Разморозить">🔥 РАЗМОРОЗ</button>`;
+    else actions += `<button class="btn btn-blue btn-xs" onclick="openBanModal('${nick}','freeze')" title="Заморозить">❄️ ЗАМОРОЗ</button>`;
+  }
+  return `<div class="${cls}"><div class="u-avatar">${u.avatar||'💼'}</div><div class="u-info"><div class="u-nick">${nick} ${badges}</div><div class="u-sub">💰 ${formatMoney(u.money||0)}</div></div><div class="u-actions">${actions}</div></div>`;
 }
 function openBanModal(nick, type) {
   const isBan = type === 'ban';
-  document.getElementById('adminActionModalBox').innerHTML = `
-    <button class="modal-close" onclick="closeAdminActionModal()">✕</button>
-    <div style="font-size:48px;margin-bottom:12px;">${isBan?'🚫':'❄️'}</div>
-    <div class="modal-title">${isBan?'ЗАБАНИТЬ':'ЗАМОРОЗИТЬ'}: ${nick}</div>
-    <div style="text-align:left;margin:12px 0;"><label style="font-size:12px;opacity:0.7;">Срок:</label>
-      <select id="banDuration" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;">
-        ${isBan?'<option value="-1">Навсегда</option>':''}<option value="1">1 час</option><option value="6">6 часов</option><option value="24" selected>1 день</option><option value="72">3 дня</option><option value="168">7 дней</option>
-      </select>
-    </div>
-    <div style="text-align:left;margin-bottom:16px;"><label style="font-size:12px;opacity:0.7;">Причина:</label>
-      <textarea id="banReason" maxlength="200" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;min-height:60px;"></textarea>
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-blue" onclick="closeAdminActionModal()">❌</button>
-      <button class="btn ${isBan?'btn-red':'btn-blue'}" onclick="confirmAdminAction('${nick}','${type}')">${isBan?'🚫':'❄️'}</button>
-    </div>`;
+  document.getElementById('adminActionModalBox').innerHTML = `<button class="modal-close" onclick="closeAdminActionModal()">✕</button><div style="font-size:48px;margin-bottom:12px;">${isBan?'🚫':'❄️'}</div><div class="modal-title">${isBan?'ЗАБАНИТЬ':'ЗАМОРОЗИТЬ'}: ${nick}</div><div style="text-align:left;margin:12px 0;"><label style="font-size:12px;opacity:0.7;">Срок:</label><select id="banDuration" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;">${isBan?'<option value="-1">Навсегда</option>':''}<option value="1">1 час</option><option value="6">6 часов</option><option value="24" selected>1 день</option><option value="72">3 дня</option><option value="168">7 дней</option></select></div><div style="text-align:left;margin-bottom:16px;"><label style="font-size:12px;opacity:0.7;">Причина:</label><textarea id="banReason" maxlength="200" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;min-height:60px;"></textarea></div><div class="modal-actions"><button class="btn btn-blue" onclick="closeAdminActionModal()">❌</button><button class="btn ${isBan?'btn-red':'btn-blue'}" onclick="confirmAdminAction('${nick}','${type}')">${isBan?'🚫':'❄️'}</button></div>`;
   document.getElementById('adminActionModal').classList.remove('hidden');
 }
 async function confirmAdminAction(nick, type) {
@@ -2853,41 +2620,43 @@ async function confirmAdminAction(nick, type) {
   if (r && r.ok) { showToast(`✅ ${nick}`, 'info'); closeAdminActionModal(); refreshAdminCache(); }
   else showToast('❌ '+(r?.error||''),'error');
 }
-async function unfreezeUser(nick) {
-  if (!confirm(`Разморозить ${nick}?`)) return;
-  const r = await rpc('admin_set_freeze', { p_admin_nick:game.playerName, p_admin_hash:passwordHashCache, p_target_nick:nick, p_frozen:false, p_reason:'Разморозка', p_compensation:0 });
-  if (r && r.ok) { showToast('🔥 Разморожен','info'); refreshAdminCache(); }
+function openUnbanConfirm(nick) {
+  if (!hasPerm('manageBans')) return;
+  document.getElementById('adminActionModalBox').innerHTML = `<button class="modal-close" onclick="closeAdminActionModal()">✕</button><div style="font-size:64px;margin-bottom:12px;">🔓</div><div class="modal-title" style="color:#5cdb8a;font-size:20px;">РАЗБАНИТЬ ИГРОКА?</div><div class="modal-desc" style="margin:12px 0;font-size:15px;">Вы точно хотите разбанить<br><b style="color:#5cdb8a;">${escapeHtml(nick)}</b>?</div><div style="text-align:left;margin:16px 0;"><label style="font-size:12px;opacity:0.7;">📝 Причина разбана:</label><textarea id="unbanReason" maxlength="200" placeholder="Например: разбан по ошибке..." style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:13px;min-height:60px;font-family:inherit;"></textarea></div><div style="text-align:left;margin-bottom:12px;"><label style="font-size:12px;opacity:0.7;">💰 Компенсация (BYN):</label><input type="number" id="unbanCompensation" value="0" min="0" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:16px;"></div><div class="modal-actions"><button class="btn btn-blue" onclick="closeAdminActionModal()">❌ Отмена</button><button class="btn btn-green" onclick="adminUnbanUser('${nick}')">✅ РАЗБАНИТЬ</button></div>`;
+  document.getElementById('adminActionModal').classList.remove('hidden');
+}
+function openUnfreezeConfirm(nick) {
+  if (!hasPerm('manageBans')) return;
+  document.getElementById('adminActionModalBox').innerHTML = `<button class="modal-close" onclick="closeAdminActionModal()">✕</button><div style="font-size:64px;margin-bottom:12px;">🔥</div><div class="modal-title" style="color:#ffd700;font-size:20px;">РАЗМОРОЗИТЬ ИГРОКА?</div><div class="modal-desc" style="margin:12px 0;font-size:15px;">Вы точно хотите разморозить<br><b style="color:#ffd700;">${escapeHtml(nick)}</b>?</div><div style="text-align:left;margin:16px 0;"><label style="font-size:12px;opacity:0.7;">📝 Причина разморозки:</label><textarea id="unfreezeReason" maxlength="200" placeholder="Например: снято по ошибке..." style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:13px;min-height:60px;font-family:inherit;"></textarea></div><div style="text-align:left;margin-bottom:12px;"><label style="font-size:12px;opacity:0.7;">💰 Компенсация (BYN):</label><input type="number" id="unfreezeCompensation" value="0" min="0" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:16px;"></div><div class="modal-actions"><button class="btn btn-blue" onclick="closeAdminActionModal()">❌ Отмена</button><button class="btn btn-gold" onclick="adminUnfreezeUser('${nick}')">🔥 РАЗМОРОЗИТЬ</button></div>`;
+  document.getElementById('adminActionModal').classList.remove('hidden');
+}
+async function adminUnbanUser(nick) {
+  if (!hasPerm('manageBans')) return;
+  const reason = document.getElementById('unbanReason').value.trim();
+  if (!reason || reason.length < 3) { showToast('⚠️ Введите причину (мин. 3 символа)','error'); return; }
+  const compensation = parseInt(document.getElementById('unbanCompensation').value) || 0;
+  const result = await rpc('admin_set_ban', { p_admin_nick:game.playerName, p_admin_hash:passwordHashCache, p_target_nick:nick, p_banned:false, p_reason:reason, p_until:null, p_compensation:compensation });
+  if (result && result.ok) { showToast(`✅ ${nick} разбанен`, 'info'); closeAdminActionModal(); await refreshAdminCache(); }
+  else showToast('❌ ' + (result?.error || 'Ошибка'), 'error');
+}
+async function adminUnfreezeUser(nick) {
+  if (!hasPerm('manageBans')) return;
+  const reason = document.getElementById('unfreezeReason').value.trim();
+  if (!reason || reason.length < 3) { showToast('⚠️ Введите причину (мин. 3 символа)','error'); return; }
+  const compensation = parseInt(document.getElementById('unfreezeCompensation').value) || 0;
+  const result = await rpc('admin_set_freeze', { p_admin_nick:game.playerName, p_admin_hash:passwordHashCache, p_target_nick:nick, p_frozen:false, p_reason:reason, p_until:null, p_compensation:compensation });
+  if (result && result.ok) { showToast(`🔥 ${nick} разморожен`, 'info'); closeAdminActionModal(); await refreshAdminCache(); }
+  else showToast('❌ ' + (result?.error || 'Ошибка'), 'error');
 }
 function openAmnestyStep1() {
   if (!isMainAdmin()) return;
   amnestyState = { passwordOk:false, phraseOk:false, checkboxOk:false };
-  document.getElementById('adminActionModalBox').innerHTML = `
-    <button class="modal-close" onclick="closeAdminActionModal()">✕</button>
-    <div style="font-size:64px;margin-bottom:12px;">🕊️</div>
-    <div class="modal-title" style="color:#5cdb8a;">ШАГ 1 ИЗ 2</div>
-    <div style="text-align:left;margin:16px 0;"><label style="font-size:12px;opacity:0.7;">Пароль босса:</label>
-      <input type="password" id="amnestyPass" style="width:100%;padding:12px;border-radius:10px;border:2px solid #2a3a4a;background:#060a12;color:white;margin-top:6px;">
-    </div>
-    <div id="amnestyStep1Err" style="color:#d9534f;font-size:12px;min-height:16px;"></div>
-    <div class="modal-actions">
-      <button class="btn btn-blue" onclick="closeAdminActionModal()">❌</button>
-      <button class="btn btn-green" onclick="amnestyNext()">➡️ Далее</button>
-    </div>`;
+  document.getElementById('adminActionModalBox').innerHTML = `<button class="modal-close" onclick="closeAdminActionModal()">✕</button><div style="font-size:64px;margin-bottom:12px;">🕊️</div><div class="modal-title" style="color:#5cdb8a;">ШАГ 1 ИЗ 2</div><div style="text-align:left;margin:16px 0;"><label style="font-size:12px;opacity:0.7;">Пароль босса:</label><input type="password" id="amnestyPass" style="width:100%;padding:12px;border-radius:10px;border:2px solid #2a3a4a;background:#060a12;color:white;margin-top:6px;"></div><div id="amnestyStep1Err" style="color:#d9534f;font-size:12px;min-height:16px;"></div><div class="modal-actions"><button class="btn btn-blue" onclick="closeAdminActionModal()">❌</button><button class="btn btn-green" onclick="amnestyNext()">➡️ Далее</button></div>`;
   document.getElementById('adminActionModal').classList.remove('hidden');
 }
 function amnestyNext() {
   if (document.getElementById('amnestyPass').value !== ADMIN_CREDS.password) { document.getElementById('amnestyStep1Err').textContent='❌ Пароль'; return; }
-  document.getElementById('adminActionModalBox').innerHTML = `
-    <button class="modal-close" onclick="closeAdminActionModal()">✕</button>
-    <div style="font-size:64px;margin-bottom:12px;">🕊️</div>
-    <div class="modal-title" style="color:#5cdb8a;">ШАГ 2 ИЗ 2</div>
-    <div class="modal-desc">Напишите: <b>АМНИСТИЯ ВСЕМ</b></div>
-    <input type="text" id="amnestyPhrase" style="width:100%;padding:12px;border-radius:10px;border:2px solid #2a3a4a;background:#060a12;color:white;text-transform:uppercase;">
-    <div id="amnestyStep2Err" style="color:#d9534f;font-size:12px;min-height:16px;margin:8px 0;"></div>
-    <div class="modal-actions">
-      <button class="btn btn-blue" onclick="closeAdminActionModal()">❌</button>
-      <button class="btn btn-green" onclick="amnestyFinal()">🕊️ АМНИСТИЯ</button>
-    </div>`;
+  document.getElementById('adminActionModalBox').innerHTML = `<button class="modal-close" onclick="closeAdminActionModal()">✕</button><div style="font-size:64px;margin-bottom:12px;">🕊️</div><div class="modal-title" style="color:#5cdb8a;">ШАГ 2 ИЗ 2</div><div class="modal-desc">Напишите: <b>АМНИСТИЯ ВСЕМ</b></div><input type="text" id="amnestyPhrase" style="width:100%;padding:12px;border-radius:10px;border:2px solid #2a3a4a;background:#060a12;color:white;text-transform:uppercase;"><div id="amnestyStep2Err" style="color:#d9534f;font-size:12px;min-height:16px;margin:8px 0;"></div><div class="modal-actions"><button class="btn btn-blue" onclick="closeAdminActionModal()">❌</button><button class="btn btn-green" onclick="amnestyFinal()">🕊️ АМНИСТИЯ</button></div>`;
 }
 async function amnestyFinal() {
   if ((document.getElementById('amnestyPhrase').value||'').trim().toUpperCase() !== AMNESTY_PHRASE) { document.getElementById('amnestyStep2Err').textContent='❌ Фраза'; return; }
@@ -2895,11 +2664,7 @@ async function amnestyFinal() {
   const { data: frozen } = await db.from('profiles').select('nick').not('frozen_until','is',null).gt('frozen_until', new Date().toISOString());
   if (banned && banned.length) await db.from('profiles').update({ banned:false, ban_reason:null, ban_until:null }).eq('banned', true);
   if (frozen && frozen.length) await db.from('profiles').update({ frozen_until:null, freeze_reason:null }).not('frozen_until','is',null).gt('frozen_until', new Date().toISOString());
-  document.getElementById('adminActionModalBox').innerHTML = `
-    <div style="font-size:80px;margin-bottom:16px;">🕊️</div>
-    <div class="modal-title" style="color:#5cdb8a;">АМНИСТИЯ!</div>
-    <div class="modal-desc">Разбанено: ${banned?.length||0} • Разморожено: ${frozen?.length||0}</div>
-    <div class="modal-actions" style="margin-top:16px;"><button class="btn btn-gold" onclick="closeAdminActionModal()">ОК</button></div>`;
+  document.getElementById('adminActionModalBox').innerHTML = `<div style="font-size:80px;margin-bottom:16px;">🕊️</div><div class="modal-title" style="color:#5cdb8a;">АМНИСТИЯ!</div><div class="modal-desc">Разбанено: ${banned?.length||0} • Разморожено: ${frozen?.length||0}</div><div class="modal-actions" style="margin-top:16px;"><button class="btn btn-gold" onclick="closeAdminActionModal()">ОК</button></div>`;
   refreshAdminCache();
 }
 
@@ -3059,9 +2824,6 @@ async function claimGifts() {
   return 0;
 }
 
-// ============================================================
-// SPLASH + INIT
-// ============================================================
 function startSplash() {
   const particles = document.getElementById('splashParticles');
   const icons = ['💼','💰','💎','🏪','⭐','👑','🔨','💍'];
@@ -3113,7 +2875,7 @@ async function initGame() {
   setInterval(() => { if (!isAppSuspended) tickEventTimer(); }, 1000);
   setInterval(() => { if (isAppSuspended) return; if (game.clients.length < getClientCount() - 1) { generateClients(); if (!document.getElementById('clientsApp').classList.contains('hidden')) renderClients(); } }, 45000);
   setInterval(() => { if (isAppSuspended) return; const added = processDepositInterest(); if (added > 0) { renderAll(); if (!document.getElementById('bankApp').classList.contains('hidden')) renderBank(); saveGame(); } }, 60000);
-  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v15.4');
+  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v15.5');
 }
 
 document.getElementById('loginNick')?.addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });

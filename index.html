@@ -7,13 +7,13 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>OWRINEZZ COMPANY · Ломбард BY v15.3</title>
+<title>OWRINEZZ COMPANY · Ломбард BY v15.4</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
 html, body { width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; touch-action: manipulation; }
-body { background: #05070c; color: #e0e0e0; display: flex; justify-content: center; align-items: center; user-select: none; -webkit-user-select: none; position: relative; }
-.phone { width: 100%; max-width: 420px; height: 100vh; height: 100dvh; max-height: 900px; padding: 12px; background: radial-gradient(ellipse at top, #0d1220 0%, #05070c 60%), linear-gradient(180deg, #0a0f18, #05070c); position: relative; overflow: hidden; display: flex; flex-direction: column; margin: 0 auto; }
+body { background: #05070c; color: #e0e0e0; display: flex; justify-content: center; align-items: center; user-select: none; -webkit-user-select: none; position: relative; transition: background 1s ease; }
+.phone { width: 100%; max-width: 420px; height: 100vh; height: 100dvh; max-height: 900px; padding: 12px; background: radial-gradient(ellipse at top, #0d1220 0%, #05070c 60%), linear-gradient(180deg, #0a0f18, #05070c); position: relative; overflow: hidden; display: flex; flex-direction: column; margin: 0 auto; transition: background 1s ease; }
 @media (min-width: 500px) and (min-height: 700px) { body { padding: 12px; } .phone { border-radius: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.9), inset 0 0 0 2px #141c2a, 0 0 80px rgba(0,212,255,0.06); } }
 .speaker { display: none; }
 @media (min-width: 500px) { .speaker { display: block; width: 60px; height: 6px; background: #1a2230; border-radius: 10px; margin: 0 auto 8px; } }
@@ -43,7 +43,7 @@ body.has-event .screen { padding-top: 56px; }
 #eventParticles { position: fixed; inset: 0; pointer-events: none; z-index: 450; overflow: hidden; display: none; }
 .event-emoji { position: absolute; top: -60px; font-size: 28px; opacity: 0; animation: eventEmojiFall linear infinite; filter: drop-shadow(0 0 6px rgba(255,215,0,0.6)); }
 @keyframes eventEmojiFall { 0% { opacity: 0; transform: translateY(0) rotate(0deg) scale(0.6); } 10% { opacity: 0.9; } 90% { opacity: 0.85; } 100% { opacity: 0; transform: translateY(115vh) rotate(540deg) scale(1); } }
-.card { background: linear-gradient(180deg, rgba(13,18,30,0.9), rgba(8,12,20,0.9)); border-radius: 18px; padding: 14px 16px; margin-bottom: 12px; border: 1px solid rgba(0,212,255,0.08); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 4px 20px rgba(0,0,0,0.4); position: relative; }
+.card { background: linear-gradient(180deg, rgba(13,18,30,0.9), rgba(8,12,20,0.9)); border-radius: 18px; padding: 14px 16px; margin-bottom: 12px; border: 1px solid rgba(0,212,255,0.08); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 4px 20px rgba(0,0,0,0.4); position: relative; transition: background 1s ease, border-color 1s ease; }
 .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
 .money-badge { background: linear-gradient(135deg,#052a1e,#0a3a2a); padding: 6px 16px; border-radius: 30px; font-weight: bold; color: #5cdb8a; font-size: 18px; border: 1px solid #1a5a3a; }
 .item-badge { background: linear-gradient(135deg,#0a1e2e,#0d2a44); padding: 6px 16px; border-radius: 30px; font-weight: bold; color: #6aafd4; font-size: 18px; border: 1px solid #1a4a6a; }
@@ -70,7 +70,7 @@ body.has-event .screen { padding-top: 56px; }
 .back-btn { background: none; border: none; color: #5a7a9a; font-size: 16px; cursor: pointer; margin-bottom: 8px; padding: 4px 0; }
 .page-title { font-size: 20px; font-weight: bold; margin-bottom: 12px; color: #c0d8ee; }
 .modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 200; padding: 12px; }
-.modal-box { background: linear-gradient(180deg, #0d1626, #080c16); border-radius: 24px; padding: 20px 16px; max-width: 340px; width: 100%; text-align: center; border: 1px solid rgba(0,212,255,0.15); max-height: 85vh; overflow-y: auto; position: relative; }
+.modal-box { background: linear-gradient(180deg, #0d1626, #080c16); border-radius: 24px; padding: 20px 16px; max-width: 340px; width: 100%; text-align: center; border: 1px solid rgba(0,212,255,0.15); max-height: 85vh; overflow-y: auto; position: relative; transition: background 1s ease; }
 .modal-box .modal-icon { font-size: 48px; margin-bottom: 12px; }
 .modal-box .modal-title { font-size: 18px; font-weight: bold; margin-bottom: 6px; }
 .modal-box .modal-desc { font-size: 14px; opacity: 0.7; margin-bottom: 16px; line-height: 1.5; }
@@ -110,7 +110,11 @@ body.has-event .screen { padding-top: 56px; }
 .auth-btn { width: 100%; padding: 14px; font-size: 17px; border-radius: 30px; background: linear-gradient(135deg,#d4a543,#f0c060); color: #05070c; border: none; font-weight: bold; cursor: pointer; margin-top: 4px; min-height: 50px; }
 .auth-switch { font-size: 13px; opacity: 0.5; margin-top: 12px; cursor: pointer; }
 input, select, textarea { font-size: 16px !important; }
-.client-card { background: linear-gradient(135deg, #0f1a2a, #080d18); border-radius: 14px; padding: 14px; margin-bottom: 10px; border-left: 4px solid #d4a543; }
+.client-card { background: linear-gradient(135deg, #0f1a2a, #080d18); border-radius: 14px; padding: 14px; margin-bottom: 10px; border-left: 4px solid #d4a543; transition: background 0.5s ease; }
+.client-card.vip { border-left-color: #ffd700; background: linear-gradient(135deg, #1a1508, #0f0a02); }
+.client-card.scam { border-left-color: #d9534f; background: linear-gradient(135deg, #1a0808, #0f0303); }
+.client-card.collector { border-left-color: #8a2be2; background: linear-gradient(135deg, #1a0a28, #0f0418); }
+.client-badge { text-align: center; font-size: 11px; font-weight: bold; margin-bottom: 6px; }
 .client-avatar { font-size: 48px; text-align: center; margin-bottom: 8px; }
 .client-name { font-weight: bold; font-size: 16px; text-align: center; margin-bottom: 4px; }
 .client-item { font-size: 15px; text-align: center; color: #7fc8f0; margin-bottom: 4px; }
@@ -131,8 +135,6 @@ input, select, textarea { font-size: 16px !important; }
 .inspect-anim .dots span:nth-child(3) { animation-delay: 0.4s; }
 @keyframes dotBlink { 0%,80%,100% { opacity: 0.2; } 40% { opacity: 1; } }
 .inspect-anim .status { margin-top: 12px; font-size: 14px; opacity: 0.8; min-height: 20px; }
-.log-entry { font-size: 11px; padding: 4px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); opacity: 0.75; }
-.log-time { color: #00d4ff; }
 .auction-timer { background: rgba(212,165,67,0.06); border: 1px solid rgba(212,165,67,0.25); border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; text-align: center; }
 .auction-timer .timer-text { font-size: 13px; color: #d4a543; font-weight: bold; margin-bottom: 6px; }
 .auction-timer .timer-bar { width: 100%; height: 6px; background: #0d1420; border-radius: 6px; overflow: hidden; }
@@ -146,13 +148,8 @@ input, select, textarea { font-size: 16px !important; }
 .tag-bonus  { background: #2a7d5e; color: #fff; }
 .casino-display { display: flex; justify-content: center; gap: 10px; margin: 16px 0; }
 .casino-display .slot { width: 70px; height: 90px; background: linear-gradient(180deg,#0a1220,#050810); border-radius: 12px; border: 3px solid #16202e; display: flex; align-items: center; justify-content: center; font-size: 36px; transition: 0.3s; }
-.casino-display .slot.win { border-color: #5cdb8a; box-shadow: 0 0 40px rgba(92,219,138,0.9); }
 .dice-scene { margin: 20px auto; width: 100px; height: 100px; }
 .dice-display { width: 90px; height: 90px; background: linear-gradient(135deg,#fff,#d0d8e8); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #0a0e17; margin: 5px auto; font-weight: bold; }
-.roulette-scene { position: relative; width: 200px; height: 200px; margin: 16px auto; }
-.roulette-wheel { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#d9534f 0deg 10deg,#111 10deg 20deg,#d9534f 20deg 30deg,#111 30deg 40deg,#d9534f 40deg 50deg,#111 50deg 60deg,#d9534f 60deg 70deg,#111 70deg 80deg,#d9534f 80deg 90deg,#111 90deg 100deg,#d9534f 100deg 110deg,#111 110deg 120deg,#d9534f 120deg 130deg,#111 130deg 140deg,#d9534f 140deg 150deg,#111 150deg 160deg,#d9534f 160deg 170deg,#111 170deg 180deg,#0a3a2a 180deg 190deg,#111 190deg 200deg,#d9534f 200deg 210deg,#111 210deg 220deg,#d9534f 220deg 230deg,#111 230deg 240deg,#d9534f 240deg 250deg,#111 250deg 260deg,#d9534f 260deg 270deg,#111 270deg 280deg,#d9534f 280deg 290deg,#111 290deg 300deg,#d9534f 300deg 310deg,#111 310deg 320deg,#d9534f 320deg 330deg,#111 330deg 340deg,#d9534f 340deg 350deg,#111 350deg 360deg); box-shadow: inset 0 0 20px rgba(0,0,0,0.9), 0 0 0 6px #0a1220; transition: transform 4s cubic-bezier(0.15,0.8,0.2,1); position: relative; }
-.roulette-wheel::after { content: ''; position: absolute; inset: 40%; border-radius: 50%; background: radial-gradient(circle,#0a1220,#050810); border: 2px solid #16202e; }
-.roulette-pointer { position: absolute; top: -6px; left: 50%; transform: translateX(-50%); font-size: 28px; color: #ffd700; z-index: 5; }
 .roulette-result { text-align: center; font-size: 32px; font-weight: bold; color: #00d4ff; margin: 8px 0; min-height: 40px; }
 .bet-presets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 8px; }
 .bet-presets .bp { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); color: #7fc8f0; padding: 8px 6px; border-radius: 8px; font-size: 12px; cursor: pointer; text-align: center; font-weight: bold; min-height: 36px; display: flex; align-items: center; justify-content: center; }
@@ -328,6 +325,52 @@ input, select, textarea { font-size: 16px !important; }
 .stat-box { background: rgba(0,0,0,0.3); border-radius: 10px; padding: 10px; text-align: center; }
 .stat-box .sv { font-size: 18px; font-weight: bold; }
 .stat-box .sl { font-size: 11px; opacity: 0.6; }
+
+/* ===== НОЧНОЙ РЕЖИМ ===== */
+body.night-mode { background: #02040a; }
+body.night-mode .phone {
+  background: radial-gradient(ellipse at top, #0a0d18 0%, #02040a 60%), linear-gradient(180deg, #060810, #02040a);
+}
+body.night-mode .card {
+  border-color: rgba(138,43,226,0.15);
+  background: linear-gradient(180deg, rgba(10,12,24,0.9), rgba(5,7,14,0.9));
+}
+body.night-mode .app-icon {
+  background: linear-gradient(180deg, rgba(15,20,35,0.7), rgba(8,10,20,0.7));
+  border-color: rgba(138,43,226,0.1);
+}
+body.night-mode .app-icon:active {
+  border-color: rgba(138,43,226,0.5);
+}
+body.night-mode .btn-gold {
+  background: linear-gradient(135deg,#6a4a1a,#8a5a20);
+}
+body.night-mode .btn-green {
+  background: linear-gradient(135deg,#0a3a2a,#1a4a3a);
+}
+body.night-mode .btn-blue {
+  background: linear-gradient(135deg,#0a2a4a,#1a3a5a);
+}
+body.night-mode .money-badge {
+  background: linear-gradient(135deg,#032a1e,#063a2a);
+}
+body.night-mode .item-card {
+  background: rgba(0,0,0,0.5);
+}
+body.night-mode .modal-box {
+  background: linear-gradient(180deg, #080d1a, #04070e);
+  border-color: rgba(138,43,226,0.2);
+}
+body.night-mode .status-bar {
+  border-bottom-color: #060a10;
+  color: #4a5a70;
+}
+body.night-mode .pvp-lot {
+  background: linear-gradient(135deg, #0a1020, #040810);
+}
+body.night-mode .admin-panel {
+  background: linear-gradient(135deg, rgba(80,20,140,0.15), rgba(150,40,0,0.1));
+}
 </style>
 </head>
 <body>
@@ -341,23 +384,23 @@ input, select, textarea { font-size: 16px !important; }
     <div class="splash-sticker">💼</div>
     <div class="splash-title">OWERINEZZ COMPANY</div>
     <div class="splash-line"></div>
-    <div class="splash-subtitle">ЛОМБАРД BY · v15.3</div>
+    <div class="splash-subtitle">ЛОМБАРД BY · v15.4</div>
     <div class="splash-loading"></div>
   </div>
 
   <div class="scanlines"></div>
   <div class="speaker"></div>
   <div class="status-bar">
-    <span>🇧🇾 09:41</span>
+    <span>🇧🇾 <span id="clockDisplay">09:41</span></span>
     <span id="cloudIndicator">📶 <span class="cloud-status cloud-wait">☁️ ...</span></span>
   </div>
   <div class="screen" id="screen">
 
-    <!-- АВТОРИЗАЦИЯ -->
+    <!-- ===== АВТОРИЗАЦИЯ ===== -->
     <div id="authScreen">
       <div class="auth-logo">💰</div>
       <div class="auth-title">Ломбард BY</div>
-      <div class="auth-subtitle">OWERINEZZ COMPANY · v15.3</div>
+      <div class="auth-subtitle">OWERINEZZ COMPANY · v15.4</div>
       <div class="auth-tabs">
         <button class="tab active" id="tabLogin" onclick="switchAuthTab('login')">🔑 Вход</button>
         <button class="tab" id="tabRegister" onclick="switchAuthTab('register')">📝 Регистрация</button>
@@ -416,9 +459,10 @@ input, select, textarea { font-size: 16px !important; }
       </div>
     </div>
 
-    <!-- ИГРОВОЙ ЭКРАН -->
+    <!-- ===== ИГРОВОЙ ЭКРАН ===== -->
     <div id="gameScreen" class="hidden">
 
+      <!-- ГЛАВНЫЙ -->
       <div id="homeScreen">
         <div class="card">
           <div class="profile-card">
@@ -465,6 +509,7 @@ input, select, textarea { font-size: 16px !important; }
           <div class="app-icon" onclick="openApp('adminCenter')" id="adminCenterBtn" style="display:none;"><span class="emoji">📊</span><span class="label">Админ</span></div>
         </div>
 
+        <!-- АДМИН ПАНЕЛЬ -->
         <div id="adminPanel" class="admin-panel hidden">
           <div class="admin-panel-title">👑 АДМИН ПАНЕЛЬ</div>
           <div id="eventBlock">
@@ -509,12 +554,24 @@ input, select, textarea { font-size: 16px !important; }
         </div>
       </div>
 
+      <!-- КЛИЕНТЫ -->
       <div id="clientsApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🏪 Клиенты</div><div id="clientsList"></div></div>
+
+      <!-- АУКЦИОН КОНТЕЙНЕРОВ -->
       <div id="auctionApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🔨 Аукцион</div><div id="auctionContent"></div></div>
+
+      <!-- СКЛАД -->
       <div id="warehouseApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🛠 Мастерская</div><div id="warehouseList"></div></div>
+
+      <!-- ПРОДАЖА -->
       <div id="adsApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">📈 Продажа</div><div id="adsList"></div></div>
+
+      <!-- PVP -->
       <div id="pvpApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">⚔️ PvP-Аукцион</div><div id="pvpContent"></div></div>
+
+      <!-- ЧАТЫ -->
       <div id="chatsApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">💬 Чаты</div><div id="chatListContainer"></div></div>
+
       <div id="chatDetailApp" class="hidden">
         <button class="back-btn" onclick="closeChatDetail()">← Назад</button>
         <div class="page-title" id="chatDetailTitle">💬 Чат</div>
@@ -529,11 +586,23 @@ input, select, textarea { font-size: 16px !important; }
           <button class="btn btn-green btn-block btn-sm" id="chatDetailAcceptBtn" onclick="acceptOffer()" style="margin-top:10px;display:none;">✅ Продать</button>
         </div>
       </div>
+
+      <!-- ЕЖЕДНЕВКИ -->
       <div id="dailyApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">📋 Ежедневные задания</div><div id="dailyContent"></div></div>
+
+      <!-- ПРОФИЛЬ -->
       <div id="profileApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">👤 Профиль</div><div id="profileContent"></div></div>
+
+      <!-- ОФИС -->
       <div id="officeApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🏢 Офис</div><div id="officeContent"></div></div>
+
+      <!-- БАНК -->
       <div id="bankApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🏦 Банк</div><div id="bankContent"></div></div>
+
+      <!-- КАЗИНО -->
       <div id="casinoApp" class="hidden"><button class="back-btn" onclick="closeApp()">← Назад</button><div class="page-title">🎰 Казино <span id="casinoEventBadge" style="font-size:12px;color:#ffd700;"></span></div><div id="casinoContent"></div></div>
+
+      <!-- АДМИН-ЦЕНТР -->
       <div id="adminCenterApp" class="hidden">
         <button class="back-btn" onclick="closeApp()">← Назад</button>
         <div class="page-title">📊 АДМИН-ЦЕНТР</div>
@@ -554,6 +623,7 @@ input, select, textarea { font-size: 16px !important; }
         <div id="adminCenterContent"></div>
       </div>
 
+      <!-- МОДАЛКИ -->
       <div id="logoutModal" class="modal-overlay hidden">
         <div class="modal-box">
           <button class="modal-close" onclick="closeLogout()">✕</button>
@@ -583,6 +653,7 @@ input, select, textarea { font-size: 16px !important; }
       <div id="toast" class="toast hidden"></div>
     </div>
 
+    <!-- ПОЛНОЭКРАННЫЕ ЭКРАНЫ -->
     <div id="eventScreen" class="hidden"></div>
     <div id="updateWaitingScreen" class="hidden"></div>
     <div id="maintenanceScreen" class="hidden"></div>
@@ -594,7 +665,7 @@ input, select, textarea { font-size: 16px !important; }
 <div id="eventParticles"></div>
 <script>
 // ============================================================
-// OWERINEZZ COMPANY · Ломбард BY v15.3
+// OWERINEZZ COMPANY · Ломбард BY v15.4
 // ============================================================
 
 const SUPABASE_URL = 'https://zuwsvwxglxgzkuyfxbpu.supabase.co';
@@ -612,12 +683,14 @@ let cloudSaveLock = false;
 let isAppSuspended = false;
 let mainTimers = {};
 
-// ===== ФЛАГИ ДЛЯ ЭКРАНОВ (анти-спам) =====
 window._unbanScreenActive = false;
 window._unfreezeScreenActive = false;
 window._updateWaitingScreenActive = false;
 window._updateWaitingScreenClosed = false;
 
+// ============================================================
+// УТИЛИТЫ
+// ============================================================
 async function hashPassSHA256(pass) {
   const enc = new TextEncoder().encode(pass);
   const buf = await crypto.subtle.digest('SHA-256', enc);
@@ -780,6 +853,27 @@ const CLIENT_AVATARS = ['👨','🧑','👩','👴','👵','🧔','👱','👨�
 const CLIENT_PHRASES = ['Нужны деньги срочно!','Сколько дадите?','Только залог.','Это фамильная ценность','Готов торговаться','Дам скидку за быструю сделку','Только без обмана!','Выкупаю через неделю'];
 
 // ============================================================
+// VIP / МОШЕННИКИ / КОЛЛЕКЦИОНЕРЫ
+// ============================================================
+const VIP_CLIENTS = [
+  { name:'Граф Воронцов', avatar:'🎩', phrase:'Раритет из Европы, не торгуюсь', bonus:2.5, tierMin:3, tierMax:4 },
+  { name:'Мадам Жозефина', avatar:'👒', phrase:'Только лучшее для моей коллекции', bonus:2.2, tierMin:3, tierMax:4 },
+  { name:'Олигарх Кирилл', avatar:'🕴️', phrase:'Деньги — не проблема', bonus:2.8, tierMin:3, tierMax:4 }
+];
+
+const SCAM_CLIENTS = [
+  { name:'Хитрый Борис', avatar:'😏', phrase:'Оригинал, зуб даю' },
+  { name:'Подозрительный тип', avatar:'🕵️', phrase:'Быстро, пока никто не видит' },
+  { name:'Мутный Аркадий', avatar:'🎭', phrase:'Даю слово — вещь настоящая' }
+];
+
+const COLLECTOR_CLIENTS = [
+  { name:'Нумизмат', avatar:'🧐', phrase:'Ищу редкие монеты', lookFor:'🪙', bonus:3.0 },
+  { name:'Антиквар', avatar:'📜', phrase:'Интересует антиквариат', lookFor:'🖼️', bonus:2.5 },
+  { name:'Ювелир', avatar:'💎', phrase:'Покупаю золото дорого', lookFor:'💍', bonus:2.8 }
+];
+
+// ============================================================
 // СОСТОЯНИЕ
 // ============================================================
 let game = {
@@ -807,6 +901,8 @@ let adminSearchQuery = '';
 let tempAdminPerms = {}, tempAdminTarget = null;
 let amnestyState = { passwordOk:false, phraseOk:false, checkboxOk:false };
 let chatIdCounter = 0;
+let currentTimeOfDay = 'day';
+let timeOfDayTimer = null;
 
 function isMainAdmin() { return game.playerName === ADMIN_CREDS.nickname; }
 function hasPerm(p) { if (isMainAdmin()) return true; if (!game.isAdmin) return false; return !!game.adminPerms[p]; }
@@ -841,6 +937,50 @@ function showToast(msg, type) {
   el.classList.remove('hidden');
   clearTimeout(el._t);
   el._t = setTimeout(() => el.classList.add('hidden'), 3000);
+}
+
+// ============================================================
+// ВРЕМЯ СУТОК
+// ============================================================
+function getTimeOfDay() {
+  const h = new Date().getHours();
+  return (h >= 6 && h < 20) ? 'day' : 'night';
+}
+
+function applyTimeOfDay(force) {
+  const t = getTimeOfDay();
+  if (t !== currentTimeOfDay || force) {
+    const wasDay = currentTimeOfDay === 'day';
+    currentTimeOfDay = t;
+    document.body.classList.toggle('night-mode', t === 'night');
+    if (!force && game.playerName) {
+      if (t === 'night') showToast('🌙 Ночь. Клиентов меньше, но приходят «странные» личности...', 'info');
+      else showToast('☀️ День. Обычный поток клиентов.', 'info');
+      generateClients();
+      if (!document.getElementById('clientsApp').classList.contains('hidden')) renderClients();
+    }
+  }
+}
+
+function updateClock() {
+  const el = document.getElementById('clockDisplay');
+  if (!el) return;
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,'0');
+  const mm = String(now.getMinutes()).padStart(2,'0');
+  const icon = currentTimeOfDay === 'night' ? '🌙' : '☀️';
+  el.textContent = `${hh}:${mm} ${icon}`;
+}
+
+function startTimeOfDayTimer() {
+  if (timeOfDayTimer) clearInterval(timeOfDayTimer);
+  currentTimeOfDay = getTimeOfDay();
+  document.body.classList.toggle('night-mode', currentTimeOfDay === 'night');
+  updateClock();
+  timeOfDayTimer = setInterval(() => {
+    applyTimeOfDay(false);
+    updateClock();
+  }, 60000);
 }
 
 // ============================================================
@@ -932,6 +1072,7 @@ async function doLogin() {
   local.saveSession(nick);
   local.saveUser({ ...local.getUser(nick), id:user.id, password:hash });
   checkDailyReset();
+  applyTimeOfDay(true);
   enterGameScreen();
 }
 
@@ -1023,6 +1164,7 @@ async function tryAutoLogin() {
     game.isAdmin = nick === ADMIN_CREDS.nickname;
     if (nick === ADMIN_CREDS.nickname) passwordHashCache = await hashPassSHA256(ADMIN_CREDS.password);
     else if (lu.password) passwordHashCache = lu.password;
+    applyTimeOfDay(true);
     enterGameScreen();
     return true;
   }
@@ -1057,6 +1199,7 @@ async function tryAutoLogin() {
     if (lu && lu.password) passwordHashCache = lu.password;
   }
   checkDailyReset();
+  applyTimeOfDay(true);
   enterGameScreen();
   return true;
 }
@@ -1130,6 +1273,95 @@ function updateDailyBadge() {
   });
   badge.classList.toggle('hidden', !hasClaimable);
 }
+
+// ============================================================
+// ГЕНЕРАЦИЯ КЛИЕНТОВ (с сюжетом)
+// ============================================================
+function generateClients() {
+  game.clients = [];
+  const isNight = getTimeOfDay() === 'night';
+  const baseCount = getClientCount();
+  const count = isNight ? rand(1, Math.max(1, baseCount - 1)) : rand(1, baseCount);
+
+  for (let i = 0; i < count; i++) {
+    const tierMax = getItemTierMax();
+    const pool = ITEM_TEMPLATES.filter(t => t.tier <= tierMax);
+    if (pool.length === 0) continue;
+
+    let client = null;
+    const roll = Math.random();
+
+    // 5% — VIP
+    if (roll < 0.05) {
+      const vip = pick(VIP_CLIENTS);
+      const pool2 = ITEM_TEMPLATES.filter(t => t.tier >= vip.tierMin && t.tier <= vip.tierMax);
+      if (pool2.length > 0) {
+        const item = pick(pool2);
+        const condition = rand(70, 100);
+        const realPrice = Math.round(item.basePrice * condition/100 * vip.bonus);
+        const askPrice = Math.round(realPrice * rand(80,95)/100);
+        client = {
+          id: 'vip_'+Date.now()+'_'+i,
+          name: vip.name, avatar: vip.avatar, phrase: vip.phrase,
+          item: { ...item, isFake:false, condition },
+          askPrice, realPrice, inspected:false, type:'vip'
+        };
+      }
+    }
+    // Ночью шанс мошенника выше: 25%, днём 10%
+    else if (roll < (isNight ? 0.30 : 0.15)) {
+      const scam = pick(SCAM_CLIENTS);
+      const pool2 = ITEM_TEMPLATES.filter(t => t.tier <= Math.min(tierMax, 3));
+      if (pool2.length > 0) {
+        const item = pick(pool2);
+        const isFake = Math.random() < (isNight ? 0.95 : 0.85);
+        const condition = rand(30, 90);
+        const realPrice = isFake ? Math.round(item.basePrice * 0.1) : Math.round(item.basePrice * condition/100);
+        const askPrice = Math.round(item.basePrice * 0.9);
+        client = {
+          id: 'scam_'+Date.now()+'_'+i,
+          name: scam.name, avatar: scam.avatar, phrase: scam.phrase,
+          item: { ...item, isFake, condition },
+          askPrice, realPrice, inspected:false, type:'scam'
+        };
+      }
+    }
+    // 5% — коллекционер
+    else if (roll < 0.20) {
+      const col = pick(COLLECTOR_CLIENTS);
+      const pool2 = ITEM_TEMPLATES.filter(t => t.icon === col.lookFor);
+      if (pool2.length > 0) {
+        const item = pick(pool2);
+        const condition = rand(60, 100);
+        const realPrice = Math.round(item.basePrice * condition/100 * col.bonus);
+        const askPrice = Math.round(realPrice * rand(85,95)/100);
+        client = {
+          id: 'col_'+Date.now()+'_'+i,
+          name: col.name, avatar: col.avatar, phrase: col.phrase,
+          item: { ...item, isFake:false, condition },
+          askPrice, realPrice, inspected:false, type:'collector'
+        };
+      }
+    }
+
+    // Обычный
+    if (!client) {
+      const item = pick(pool);
+      const isFake = Math.random() < 0.30;
+      const condition = rand(20, 100);
+      const realPrice = isFake ? Math.round(item.basePrice*0.12) : Math.round(item.basePrice*condition/100);
+      const askPrice = Math.round(realPrice * rand(55,95)/100);
+      client = {
+        id: 'c_'+Date.now()+'_'+i,
+        name: pick(CLIENT_NAMES), avatar: pick(CLIENT_AVATARS), phrase: pick(CLIENT_PHRASES),
+        item: { ...item, isFake, condition },
+        askPrice, realPrice, inspected:false, type:'normal'
+      };
+    }
+
+    game.clients.push(client);
+  }
+}
 // ============================================================
 // ПРОФИЛЬ
 // ============================================================
@@ -1142,6 +1374,7 @@ function renderProfile() {
   const totalBought = getStat('total_bought');
   const totalSold = getStat('total_sold');
   const pvpWins = getStat('pvp_wins');
+  const timeIcon = currentTimeOfDay === 'night' ? '🌙 Ночь' : '☀️ День';
 
   let html = `
     <div class="card" style="text-align:center;">
@@ -1149,7 +1382,7 @@ function renderProfile() {
       <div style="font-size:20px;font-weight:bold;">${escapeHtml(game.playerName)}</div>
       ${isMainAdmin() ? '<div style="color:#ffd700;font-size:12px;">👑 ГЛАВНЫЙ АДМИН</div>' : ''}
       ${game.isAdmin && !isMainAdmin() ? '<div style="color:#ffd700;font-size:12px;">👑 Админ</div>' : ''}
-      <div style="font-size:13px;opacity:0.6;margin-top:8px;">${getCurrentOffice().icon} ${getCurrentOffice().name}</div>
+      <div style="font-size:13px;opacity:0.6;margin-top:8px;">${getCurrentOffice().icon} ${getCurrentOffice().name} • ${timeIcon}</div>
     </div>
     <div class="card">
       <div style="font-weight:bold;margin-bottom:10px;">📊 Статистика</div>
@@ -1225,24 +1458,8 @@ async function claimDailyReward(id) {
 }
 
 // ============================================================
-// КЛИЕНТЫ
+// КЛИЕНТЫ (рендер с типами)
 // ============================================================
-function generateClients() {
-  game.clients = [];
-  const count = rand(1, getClientCount());
-  for (let i=0;i<count;i++) {
-    const tierMax = getItemTierMax();
-    const pool = ITEM_TEMPLATES.filter(t => t.tier <= tierMax);
-    if (pool.length === 0) continue;
-    const item = pick(pool);
-    const isFake = Math.random() < 0.30;
-    const condition = rand(20, 100);
-    const realPrice = isFake ? Math.round(item.basePrice*0.12) : Math.round(item.basePrice*condition/100);
-    const askPrice = Math.round(realPrice * rand(55,95)/100);
-    game.clients.push({ id:'c_'+Date.now()+'_'+i, name:pick(CLIENT_NAMES), avatar:pick(CLIENT_AVATARS), phrase:pick(CLIENT_PHRASES), item:{ ...item, isFake, condition }, askPrice, realPrice, inspected:false });
-  }
-}
-
 function renderClients() {
   const c = document.getElementById('clientsList');
   c.innerHTML = '';
@@ -1250,10 +1467,19 @@ function renderClients() {
     c.innerHTML = `<div class="card" style="text-align:center;opacity:0.5;padding:30px;">😴 Нет клиентов<br><button class="btn btn-gold" style="margin-top:12px;" onclick="generateClients();renderClients();">🔄 Новые</button></div>`;
     return;
   }
+  const timeLabel = currentTimeOfDay === 'night' ? '🌙 НОЧЬ' : '☀️ ДЕНЬ';
+  c.innerHTML = `<div class="card" style="text-align:center;font-size:12px;opacity:0.6;">${timeLabel} • Клиентов: ${game.clients.length}</div>`;
+
   game.clients.forEach((cl, idx) => {
     const div = document.createElement('div');
-    div.className = 'client-card';
+    let cls = 'client-card';
+    let badgeHtml = '';
+    if (cl.type === 'vip') { cls += ' vip'; badgeHtml = '<div class="client-badge" style="color:#ffd700;">👑 VIP-КЛИЕНТ</div>'; }
+    else if (cl.type === 'scam') { cls += ' scam'; badgeHtml = '<div class="client-badge" style="color:#d9534f;">⚠️ ПОДОЗРИТЕЛЬНЫЙ</div>'; }
+    else if (cl.type === 'collector') { cls += ' collector'; badgeHtml = '<div class="client-badge" style="color:#8a2be2;">🧐 КОЛЛЕКЦИОНЕР</div>'; }
+    div.className = cls;
     div.innerHTML = `
+      ${badgeHtml}
       <div class="client-avatar">${cl.avatar}</div>
       <div class="client-name">${cl.name}</div>
       <div class="client-item">${cl.item.icon} ${cl.item.name}</div>
@@ -1636,14 +1862,28 @@ async function pvpBuyout(lotId) {
   showToast('🎉 Куплено!','info');
 }
 
+// ⚡ ИСПРАВЛЕНО: своё модальное окно вместо confirm()
 async function pvpCancelLot(lotId) {
   const lot = game.pvpLots.find(l => l.id === lotId);
   if (!lot) { showToast('⚠️ Лот не найден', 'error'); return; }
   const hasBid = lot.current_bid > 0;
-  const confirmText = hasBid
-    ? `Снять лот "${lot.item_name}"?\n\n⚠️ У ${lot.current_bidder} будет возвращено ${lot.current_bid} BYN.\nПредмет вернётся на склад.`
-    : `Снять лот "${lot.item_name}"?\nПредмет вернётся на склад.`;
-  if (!confirm(confirmText)) return;
+  const text = hasBid
+    ? `У <b>${escapeHtml(lot.current_bidder)}</b> вернётся <b>${lot.current_bid} BYN</b>.<br>Предмет «${escapeHtml(lot.item_name)}» вернётся на склад.`
+    : `Предмет «${escapeHtml(lot.item_name)}» вернётся на склад.`;
+  document.getElementById('genericModalBox').innerHTML = `
+    <button class="modal-close" onclick="closeGenericModal()">✕</button>
+    <div style="font-size:64px;margin-bottom:12px;">❌</div>
+    <div class="modal-title" style="color:#d9534f;">Снять лот?</div>
+    <div class="modal-desc">${text}</div>
+    <div class="modal-actions">
+      <button class="btn btn-blue" onclick="closeGenericModal()">Отмена</button>
+      <button class="btn btn-red" onclick="pvpCancelConfirm('${lotId}')">Снять</button>
+    </div>`;
+  document.getElementById('genericModal').classList.remove('hidden');
+}
+
+async function pvpCancelConfirm(lotId) {
+  closeGenericModal();
   const result = await rpc('pvp_cancel_lot', { p_nick:game.playerName, p_hash:passwordHashCache, p_lot_id:lotId });
   if (!result || !result.ok) { showToast('❌ ' + (result?.error || 'Ошибка'), 'error'); return; }
   showToast('✅ Лот снят, предмет возвращён', 'info');
@@ -1662,9 +1902,8 @@ async function reloadMoney() {
   } catch(e) {}
 }
 function closeGenericModal() { document.getElementById('genericModal').classList.add('hidden'); }
-
 // ============================================================
-// ЧАТЫ
+// ЧАТЫ (продажа через торг с ботом)
 // ============================================================
 function renderChatList() {
   const c = document.getElementById('chatListContainer');
@@ -2157,9 +2396,8 @@ function closeAuction() {
   currentAuction = null;
   renderAuction(); renderAll(); saveGame();
 }
-
 // ============================================================
-// ТЕХ.РАБОТЫ + ОЖИДАНИЕ ОБНОВЛЕНИЯ (С ФИКСОМ)
+// ТЕХ.РАБОТЫ + ОЖИДАНИЕ ОБНОВЛЕНИЯ
 // ============================================================
 async function fetchMaintenance() { try { const {data,error} = await db.from('maintenance').select('*').eq('id',1).single(); return error?null:data; } catch(e){ return null; } }
 async function fetchUpdateWaiting() { try { const {data,error} = await db.from('update_waiting').select('*').eq('id',1).single(); return error?null:data; } catch(e){ return null; } }
@@ -2241,10 +2479,8 @@ async function toggleMaintenance() {
       try { localStorage.removeItem('lb14_exited_maint'); } catch(e) {}
       updateMaintToggleUI(); hideMaintAdminBadge(); hideMaintenanceScreen();
       showToast('🟢 Тех.работы отключены','info');
-    } else {
-      showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
-    }
-  } else { openMaintenanceStartModal(); }
+    } else showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
+  } else openMaintenanceStartModal();
 }
 function openMaintenanceStartModal() {
   document.getElementById('adminActionModalBox').innerHTML = `
@@ -2273,12 +2509,10 @@ async function confirmStartMaintenance() {
     maintenanceState = { active:true, reason, until: untilISO?new Date(untilISO).getTime():0, startedBy:game.playerName, startedAt:Date.now() };
     showToast('🔴 Тех.работы включены','error');
     closeAdminActionModal(); updateMaintToggleUI(); showMaintAdminBadge();
-  } else {
-    showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
-  }
+  } else showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
 }
 
-// ============= ОЖИДАНИЕ ОБНОВЛЕНИЯ =============
+// ===== ОЖИДАНИЕ ОБНОВЛЕНИЯ =====
 function showUpdateWaitingScreen(d) {
   const s = document.getElementById('updateWaitingScreen');
   if (!s) return;
@@ -2332,7 +2566,6 @@ function exitUpdateWaitingToMenu() {
   document.getElementById('loginPass').value = '';
   document.getElementById('loginErr').textContent = '';
 }
-
 function checkAndApplyUpdateWaiting() {
   if (maintenanceState.active) { hideUpdateWaitingScreen(); return; }
   if (game.isAdmin || isMainAdmin()) {
@@ -2343,13 +2576,10 @@ function checkAndApplyUpdateWaiting() {
   }
   if (updateWaitingState.active && !window._updateWaitingScreenActive && !window._updateWaitingScreenClosed) {
     showUpdateWaitingScreen(updateWaitingState);
-  } else {
-    hideUpdateWaitingScreen();
-  }
+  } else hideUpdateWaitingScreen();
   if (game.isAdmin && updateWaitingState.active) showUpdateWaitingBadge();
   else if (game.isAdmin && !updateWaitingState.active) hideUpdateWaitingBadge();
 }
-
 function updateUpdateWaitingFromCloud(data) {
   const uw = data.update_waiting;
   const now = Date.now();
@@ -2357,9 +2587,7 @@ function updateUpdateWaitingFromCloud(data) {
     updateWaitingState = { active:false, until:0, startedBy:'', startedAt:0 };
     window._updateWaitingScreenActive = false;
     window._updateWaitingScreenClosed = false;
-    updateUpdateWaitingToggleUI();
-    checkAndApplyUpdateWaiting();
-    return;
+    updateUpdateWaitingToggleUI(); checkAndApplyUpdateWaiting(); return;
   }
   if (uw && uw.active) {
     updateWaitingState = { active:true, until:uw.until?new Date(uw.until).getTime():0, startedBy:uw.started_by||'', startedAt:uw.started_at?new Date(uw.started_at).getTime():0 };
@@ -2371,7 +2599,6 @@ function updateUpdateWaitingFromCloud(data) {
   updateUpdateWaitingToggleUI();
   checkAndApplyUpdateWaiting();
 }
-
 function updateUpdateWaitingToggleUI() {
   const row = document.getElementById('uwToggleRow'), status = document.getElementById('uwToggleStatus'), sw = document.getElementById('uwSwitch');
   if (!row || !status || !sw) return;
@@ -2394,18 +2621,13 @@ async function toggleUpdateWaiting() {
       updateWaitingState = { active:false, until:0, startedBy:'', startedAt:0 };
       window._updateWaitingScreenActive = false;
       window._updateWaitingScreenClosed = false;
-      updateUpdateWaitingToggleUI();
-      hideUpdateWaitingBadge();
-      hideUpdateWaitingScreen();
-      showToast('🟢 Ожидание отключено', 'info');
-    } else {
-      showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
-    }
+      updateUpdateWaitingToggleUI(); hideUpdateWaitingBadge(); hideUpdateWaitingScreen();
+      showToast('🟢 Ожидание отключено','info');
+    } else showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
     return;
   }
   openUpdateWaitingStartModal();
 }
-
 function openUpdateWaitingStartModal() {
   document.getElementById('adminActionModalBox').innerHTML = `
     <button class="modal-close" onclick="closeAdminActionModal()">✕</button>
@@ -2422,23 +2644,18 @@ function openUpdateWaitingStartModal() {
     </div>`;
   document.getElementById('adminActionModal').classList.remove('hidden');
 }
-
 async function confirmUpdateWaiting() {
   const minutes = parseInt(document.getElementById('uwMinutes').value) || 0;
   if (minutes < 1 || minutes > 1440) { showToast('⚠️ 1-1440', 'error'); return; }
   const untilISO = new Date(Date.now() + minutes * 60 * 1000).toISOString();
   const r = await rpc('admin_set_update_waiting', { p_admin_nick:game.playerName, p_admin_hash:passwordHashCache, p_active:true, p_until:untilISO });
   if (r && r.ok) {
-    updateWaitingState = { active:true, until: new Date(untilISO).getTime(), startedBy: game.playerName, startedAt: Date.now() };
+    updateWaitingState = { active:true, until:new Date(untilISO).getTime(), startedBy:game.playerName, startedAt:Date.now() };
     window._updateWaitingScreenActive = false;
     window._updateWaitingScreenClosed = false;
     showToast(`⏳ Ожидание ${minutes} мин`, 'info');
-    closeAdminActionModal();
-    updateUpdateWaitingToggleUI();
-    showUpdateWaitingBadge();
-  } else {
-    showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
-  }
+    closeAdminActionModal(); updateUpdateWaitingToggleUI(); showUpdateWaitingBadge();
+  } else showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
 }
 function closeAdminActionModal() { document.getElementById('adminActionModal').classList.add('hidden'); }
 
@@ -2799,7 +3016,7 @@ function updateCloudIndicator() {
 }
 
 // ============================================================
-// POLLING + GIFTS
+// POLLING
 // ============================================================
 function startPolling() {
   if (mainTimers.poll) clearInterval(mainTimers.poll);
@@ -2876,6 +3093,7 @@ window.addEventListener('error', (e) => { console.warn('Global error:', e.messag
 async function initGame() {
   renderAvatarPicker();
   generateAuctionRotation();
+  startTimeOfDayTimer();
   try { if (localStorage.getItem('lb14_exited_maint') === '1') userExitedMaintenance = true; } catch(e) {}
   try {
     const maint = await fetchMaintenance();
@@ -2895,7 +3113,7 @@ async function initGame() {
   setInterval(() => { if (!isAppSuspended) tickEventTimer(); }, 1000);
   setInterval(() => { if (isAppSuspended) return; if (game.clients.length < getClientCount() - 1) { generateClients(); if (!document.getElementById('clientsApp').classList.contains('hidden')) renderClients(); } }, 45000);
   setInterval(() => { if (isAppSuspended) return; const added = processDepositInterest(); if (added > 0) { renderAll(); if (!document.getElementById('bankApp').classList.contains('hidden')) renderBank(); saveGame(); } }, 60000);
-  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v15.3');
+  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v15.4');
 }
 
 document.getElementById('loginNick')?.addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });

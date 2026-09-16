@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>OWRINEZZ COMPANY · Ломбард BY v15.5</title>
+<title>OWERINEZZ COMPANY · Ломбард BY v15.7</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -70,8 +70,7 @@ body.has-event .screen { padding-top: 56px; }
 .back-btn { background: none; border: none; color: #5a7a9a; font-size: 16px; cursor: pointer; margin-bottom: 8px; padding: 4px 0; }
 .page-title { font-size: 20px; font-weight: bold; margin-bottom: 12px; color: #c0d8ee; }
 .modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 200; padding: 12px; }
-.modal-box { background: linear-gradient(180deg, #0d1626, #080c16); border-radius: 24px; padding: 20px 16px; max-width: 340px; width: 100%; text-align: center; border: 1px solid rgba(0,212,255,0.15); max-height: 85vh; overflow-y: auto; position: relative; transition: background 1s ease; }
-.modal-box .modal-icon { font-size: 48px; margin-bottom: 12px; }
+.modal-box { background: linear-gradient(180deg, #0d1626, #080c16); border-radius: 24px; padding: 20px 16px; max-width: 340px; width: 100%; text-align: center; border: 1px solid rgba(0,212,255,0.15); max-height: 85vh; overflow-y: auto; position: relative; }
 .modal-box .modal-title { font-size: 18px; font-weight: bold; margin-bottom: 6px; }
 .modal-box .modal-desc { font-size: 14px; opacity: 0.7; margin-bottom: 16px; line-height: 1.5; }
 .modal-box .modal-actions { display: flex; gap: 12px; justify-content: center; }
@@ -150,7 +149,6 @@ input, select, textarea { font-size: 16px !important; }
 .tag-bonus  { background: #2a7d5e; color: #fff; }
 .casino-display { display: flex; justify-content: center; gap: 10px; margin: 16px 0; }
 .casino-display .slot { width: 70px; height: 90px; background: linear-gradient(180deg,#0a1220,#050810); border-radius: 12px; border: 3px solid #16202e; display: flex; align-items: center; justify-content: center; font-size: 36px; transition: 0.3s; }
-.casino-display .slot.win { border-color: #5cdb8a; box-shadow: 0 0 40px rgba(92,219,138,0.9); }
 .dice-scene { margin: 20px auto; width: 100px; height: 100px; }
 .dice-display { width: 90px; height: 90px; background: linear-gradient(135deg,#fff,#d0d8e8); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #0a0e17; margin: 5px auto; font-weight: bold; }
 .roulette-result { text-align: center; font-size: 32px; font-weight: bold; color: #00d4ff; margin: 8px 0; min-height: 40px; }
@@ -340,9 +338,22 @@ body.night-mode .item-card { background: rgba(0,0,0,0.5); }
 body.night-mode .modal-box { background: linear-gradient(180deg, #080d1a, #04070e); border-color: rgba(138,43,226,0.2); }
 body.night-mode .status-bar { border-bottom-color: #060a10; color: #4a5a70; }
 body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810); }
+.newbie-badge { display: inline-block; background: linear-gradient(135deg,#5cdb8a,#00d4ff); color: #05070c; font-size: 10px; font-weight: 900; padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+.newbie-card { background: linear-gradient(135deg, rgba(92,219,138,0.15), rgba(0,212,255,0.1)); border: 2px solid rgba(92,219,138,0.5); border-radius: 14px; padding: 12px; margin-bottom: 10px; }
+.newbie-card .nb-title { font-weight: bold; color: #5cdb8a; font-size: 14px; margin-bottom: 4px; }
+.newbie-card .nb-desc { font-size: 12px; opacity: 0.8; line-height: 1.4; }
+.newbie-card .nb-timer { font-size: 11px; color: #00d4ff; margin-top: 6px; font-weight: bold; }
+.world-event-toast { position: absolute; top: 60px; left: 20px; right: 20px; background: linear-gradient(135deg, rgba(138,43,226,0.95), rgba(255,69,0,0.9)); padding: 14px 18px; border-radius: 16px; z-index: 800; animation: eventSlideDown 0.5s ease; box-shadow: 0 8px 30px rgba(0,0,0,0.6); border: 2px solid rgba(255,215,0,0.5); }
+@keyframes eventSlideDown { from { transform: translateY(-120%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.world-event-toast .we-icon { font-size: 32px; display: inline-block; margin-right: 10px; vertical-align: middle; animation: eventIconPulse 1s ease-in-out infinite; }
+@keyframes eventIconPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+.world-event-toast .we-title { font-weight: bold; font-size: 15px; color: #ffd700; display: inline-block; vertical-align: middle; }
+.world-event-toast .we-desc { font-size: 13px; color: #fff; margin-top: 6px; line-height: 1.4; }
+.world-event-toast .we-timer { font-size: 11px; color: #ffd700; margin-top: 6px; font-weight: bold; opacity: 0.9; }
+.world-event-badge { position: absolute; top: 78px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg,#8a2be2,#ff4500); color: white; font-size: 11px; font-weight: bold; padding: 5px 14px; border-radius: 20px; z-index: 600; cursor: pointer; white-space: nowrap; display: none; border: 2px solid rgba(255,215,0,0.6); animation: eventBadgePulse 1.5s ease-in-out infinite; }
+@keyframes eventBadgePulse { 0%,100% { box-shadow: 0 0 0 rgba(255,215,0,0); } 50% { box-shadow: 0 0 20px rgba(255,215,0,0.8); } }
 </style>
-</head>
-<body>
+</head><body>
 <div class="phone">
 
   <div id="splashScreen">
@@ -353,7 +364,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
     <div class="splash-sticker">💼</div>
     <div class="splash-title">OWERINEZZ COMPANY</div>
     <div class="splash-line"></div>
-    <div class="splash-subtitle">ЛОМБАРД BY · v15.5</div>
+    <div class="splash-subtitle">ЛОМБАРД BY · v15.7</div>
     <div class="splash-loading"></div>
   </div>
 
@@ -368,7 +379,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
     <div id="authScreen">
       <div class="auth-logo">💰</div>
       <div class="auth-title">Ломбард BY</div>
-      <div class="auth-subtitle">OWERINEZZ COMPANY · v15.5</div>
+      <div class="auth-subtitle">OWERINEZZ COMPANY · v15.7</div>
       <div class="auth-tabs">
         <button class="tab active" id="tabLogin" onclick="switchAuthTab('login')">🔑 Вход</button>
         <button class="tab" id="tabRegister" onclick="switchAuthTab('register')">📝 Регистрация</button>
@@ -604,7 +615,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
 <div id="eventParticles"></div>
 <script>
 // ============================================================
-// OWERINEZZ COMPANY · Ломбард BY v15.5
+// OWERINEZZ COMPANY · Ломбард BY v15.7
 // ============================================================
 
 const SUPABASE_URL = 'https://zuwsvwxglxgzkuyfxbpu.supabase.co';
@@ -797,7 +808,9 @@ let game = {
   totalPurchases:0, totalSales:0, logs:[],
   isAdmin:false, adminPerms:{}, frozen:false, frozenUntil:0, banned:false,
   achievements:{}, dailyTasks:{}, dailyTasksDate:'', stats:{},
-  pvpLots:[], pvpMyLots:[]
+  pvpLots:[], pvpMyLots:[],
+  isNewbie:false, newbieUntil:0, newbieDaysLeft:0,
+  worldEvent:null
 };
 let bank = { deposit:0, credit:0, creditHistory:50, depositLastUpdate:Date.now(), depositPeriodMs:DEPOSIT.PERIOD_MS, depositCountToday:0, depositLastResetDay:new Date().toISOString().slice(0,10) };
 let casino = { wins:0, losses:0 };
@@ -1001,12 +1014,15 @@ function applyLoadedSave(result) {
   game.stats = s.stats || {};
   game.isAdmin = !!p.is_admin;
   game.adminPerms = p.admin_perms || {};
+  game.isNewbie = !!p.is_newbie;
+  game.newbieUntil = p.newbie_until ? new Date(p.newbie_until).getTime() : 0;
   bank = s.bank || { deposit:0, credit:0, creditHistory:50, depositLastUpdate:Date.now(), depositPeriodMs:DEPOSIT.PERIOD_MS, depositCountToday:0, depositLastResetDay:new Date().toISOString().slice(0,10) };
   casino = s.casino || { wins:0, losses:0 };
   processDepositInterest();
 }
 
 async function enterGameScreen() {
+  await checkNewbieStatus();
   document.getElementById('authScreen').classList.add('hidden');
   document.getElementById('gameScreen').classList.remove('hidden');
   document.getElementById('mainAvatar').textContent = game.playerAvatar;
@@ -1025,6 +1041,7 @@ async function enterGameScreen() {
   checkAndApplyMaintenance();
   checkAndApplyUpdateWaiting();
   if (isEventActive()) { startEventParticles(); document.body.classList.add('has-event'); showEventBanner(); }
+  if (game.worldEvent) updateWorldEventBadge();
   if (game.clients.length === 0) generateClients();
   if (!auctionRotation.currentContainers.length) generateAuctionRotation();
   renderAll();
@@ -1122,6 +1139,7 @@ function doLogout() {
   stopEventParticles();
   document.body.classList.remove('has-event');
   if (mainTimers.poll) { clearInterval(mainTimers.poll); mainTimers.poll = null; }
+  if (mainTimers.newbie) { clearInterval(mainTimers.newbie); mainTimers.newbie = null; }
   userExitedMaintenance = false;
   try { localStorage.removeItem('lb14_exited_maint'); } catch(e) {}
   game.playerName = ''; game.isAdmin = false; passwordHashCache = null;
@@ -1182,7 +1200,12 @@ function updateDailyBadge() {
 function generateClients() {
   game.clients = [];
   const isNight = getTimeOfDay() === 'night';
-  const baseCount = getClientCount();
+  let baseCount = getClientCount();
+  if (game.isNewbie) baseCount = Math.round(baseCount * 1.3);
+  if (game.worldEvent && game.worldEvent.effects && game.worldEvent.effects.clientBoost) {
+    baseCount = Math.round(baseCount * (1 + game.worldEvent.effects.clientBoost));
+    if (baseCount < 1) baseCount = 1;
+  }
   const count = isNight ? rand(1, Math.max(1, baseCount - 1)) : rand(1, baseCount);
 
   for (let i = 0; i < count; i++) {
@@ -1250,15 +1273,27 @@ function renderProfile() {
   const totalSold = getStat('total_sold');
   const pvpWins = getStat('pvp_wins');
   const timeIcon = currentTimeOfDay === 'night' ? '🌙 Ночь' : '☀️ День';
+  const isNewbie = game.isNewbie;
+  const daysLeft = game.newbieDaysLeft || 0;
 
   let html = `
     <div class="card" style="text-align:center;">
       <div style="font-size:64px;margin-bottom:8px;">${game.playerAvatar}</div>
-      <div style="font-size:20px;font-weight:bold;">${escapeHtml(game.playerName)}</div>
+      <div style="font-size:20px;font-weight:bold;">${escapeHtml(game.playerName)}${isNewbie ? '<span class="newbie-badge">🌱 НОВИЧОК</span>' : ''}</div>
       ${isMainAdmin() ? '<div style="color:#ffd700;font-size:12px;">👑 ГЛАВНЫЙ АДМИН</div>' : ''}
       ${game.isAdmin && !isMainAdmin() ? '<div style="color:#ffd700;font-size:12px;">👑 Админ</div>' : ''}
       <div style="font-size:13px;opacity:0.6;margin-top:8px;">${getCurrentOffice().icon} ${getCurrentOffice().name} • ${timeIcon}</div>
     </div>
+    ${isNewbie ? `
+    <div class="newbie-card">
+      <div class="nb-title">🌱 БОНУС НОВИЧКА</div>
+      <div class="nb-desc">
+        • +50% к цене продажи<br>
+        • +30% клиентов<br>
+        • Бонус активен 7 дней с момента регистрации
+      </div>
+      <div class="nb-timer" id="newbieTimerDisplay">⏳ Осталось: ${daysLeft} дн.</div>
+    </div>` : ''}
     <div class="card">
       <div style="font-weight:bold;margin-bottom:10px;">📊 Статистика</div>
       <div class="stats-grid">
@@ -1511,7 +1546,11 @@ async function publishAd(idx) {
   const it = game.storage[idx];
   const price = parseInt(document.getElementById('price_'+idx).value);
   if (!price || price < 50) { showToast('⚠️ Мин 50','error'); return; }
-  const finalPrice = Math.round(price * 0.85);
+  let finalPrice = Math.round(price * 0.85);
+  if (game.isNewbie) finalPrice = Math.round(finalPrice * 1.5);
+  if (game.worldEvent && game.worldEvent.effects && game.worldEvent.effects.priceBoost) {
+    finalPrice = Math.round(finalPrice * (1 + game.worldEvent.effects.priceBoost));
+  }
   const result = await rpc('sell_to_bot', { p_nick:game.playerName, p_hash:passwordHashCache, p_price:finalPrice, p_item_id:it.id });
   if (result && result.ok) game.money = Number(result.money);
   else game.money += finalPrice;
@@ -1834,9 +1873,14 @@ function acceptOffer() {
   if (blockIfMaintenance() || isFrozen()) return;
   const chat = game.chats.find(x => x.id === game.currentChatId);
   if (!chat || chat.sold) return;
-  game.money += chat.offerPrice;
-  incStat('total_earned', chat.offerPrice);
-  incStat('daily_total_earned', chat.offerPrice);
+  let finalPrice = chat.offerPrice;
+  if (game.isNewbie) finalPrice = Math.round(finalPrice * 1.5);
+  if (game.worldEvent && game.worldEvent.effects && game.worldEvent.effects.priceBoost) {
+    finalPrice = Math.round(finalPrice * (1 + game.worldEvent.effects.priceBoost));
+  }
+  game.money += finalPrice;
+  incStat('total_earned', finalPrice);
+  incStat('daily_total_earned', finalPrice);
   incStat('total_sold', 1);
   incStat('daily_total_sold', 1);
   game.totalSales++;
@@ -1844,7 +1888,7 @@ function acceptOffer() {
   game.chats = game.chats.filter(x => x.id !== chat.id);
   checkAchievements();
   updateDailyProgress();
-  showToast(`💰 +${chat.offerPrice} BYN!`,'info');
+  showToast(`💰 +${finalPrice} BYN!`,'info');
   game.currentChatId = null;
   closeApp(); saveGame();
 }
@@ -2669,6 +2713,98 @@ async function amnestyFinal() {
 }
 
 // ============================================================
+// СОБЫТИЯ МИРА
+// ============================================================
+async function fetchActiveWorldEvent() {
+  try {
+    const { data, error } = await db.from('world_events')
+      .select('*').eq('active', true).gt('ends_at', new Date().toISOString())
+      .order('ends_at', { ascending: false }).limit(1);
+    if (error) return null;
+    return data && data[0] ? data[0] : null;
+  } catch(e) { return null; }
+}
+
+function showWorldEventToast(ev) {
+  const old = document.getElementById('worldEventToast');
+  if (old) old.remove();
+  const div = document.createElement('div');
+  div.id = 'worldEventToast';
+  div.className = 'world-event-toast';
+  const secLeft = Math.max(0, Math.floor((new Date(ev.ends_at).getTime() - Date.now()) / 1000));
+  const m = Math.floor(secLeft/60), s = secLeft%60;
+  div.innerHTML = `<div><span class="we-icon">${ev.icon}</span><span class="we-title">${ev.title}</span></div><div class="we-desc">${ev.description}</div><div class="we-timer" id="worldEventToastTimer">⏳ Осталось: ${m}:${String(s).padStart(2,'0')}</div>`;
+  document.querySelector('.phone').appendChild(div);
+  setTimeout(() => { if (div.parentNode) div.remove(); }, 12000);
+}
+
+function applyWorldEventEffects(ev) {
+  game.worldEvent = ev ? {
+    id: ev.id, type: ev.type, title: ev.title, icon: ev.icon,
+    endsAt: new Date(ev.ends_at).getTime(),
+    effects: ev.effects || {}
+  } : null;
+  if (game.playerName) {
+    generateClients();
+    if (!document.getElementById('clientsApp').classList.contains('hidden')) renderClients();
+  }
+}
+
+function updateWorldEventBadge() {
+  let b = document.getElementById('worldEventBadge');
+  if (!game.worldEvent) { if (b) b.style.display = 'none'; return; }
+  if (!b) { b = document.createElement('div'); b.id = 'worldEventBadge'; document.querySelector('.phone').appendChild(b); }
+  b.className = 'world-event-badge';
+  b.textContent = `${game.worldEvent.icon} ${game.worldEvent.title}`;
+  b.style.display = 'block';
+  b.onclick = () => {
+    const ev = game.worldEvent;
+    if (!ev) return;
+    const secLeft = Math.max(0, Math.floor((ev.endsAt - Date.now())/1000));
+    const m = Math.floor(secLeft/60), s = secLeft%60;
+    document.getElementById('genericModalBox').innerHTML = `<button class="modal-close" onclick="closeGenericModal()">✕</button><div style="font-size:64px;margin-bottom:12px;">${ev.icon}</div><div class="modal-title" style="color:#ffd700;">${ev.title}</div><div class="modal-desc">Активно до: ${new Date(ev.endsAt).toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'})}<br>⏳ Осталось: ${m}:${String(s).padStart(2,'0')}</div><div class="modal-actions"><button class="btn btn-gold" onclick="closeGenericModal()">Понятно</button></div>`;
+    document.getElementById('genericModal').classList.remove('hidden');
+  };
+}
+
+function tickWorldEventTimer() {
+  if (isAppSuspended) return;
+  if (!game.worldEvent) return;
+  const secLeft = Math.max(0, Math.floor((game.worldEvent.endsAt - Date.now())/1000));
+  const t = document.getElementById('worldEventToastTimer');
+  if (t) t.textContent = `⏳ Осталось: ${Math.floor(secLeft/60)}:${String(secLeft%60).padStart(2,'0')}`;
+  if (secLeft <= 0) {
+    game.worldEvent = null;
+    const toast = document.getElementById('worldEventToast');
+    if (toast) toast.remove();
+    const b = document.getElementById('worldEventBadge');
+    if (b) b.style.display = 'none';
+    generateClients();
+    if (!document.getElementById('clientsApp').classList.contains('hidden')) renderClients();
+  }
+}
+
+// ============================================================
+// НОВИЧОК
+// ============================================================
+async function checkNewbieStatus() {
+  if (!game.playerName) return;
+  const r = await rpc('check_newbie_status', { p_nick: game.playerName });
+  if (r && r.ok) {
+    game.isNewbie = !!r.is_newbie;
+    game.newbieUntil = r.newbie_until ? new Date(r.newbie_until).getTime() : 0;
+    game.newbieDaysLeft = r.days_left || 0;
+    if (r.expired && !game.isNewbie) showToast('🌱 Бонус новичка закончился', 'info');
+  }
+}
+
+function startNewbieCheck() {
+  if (mainTimers.newbie) clearInterval(mainTimers.newbie);
+  checkNewbieStatus();
+  mainTimers.newbie = setInterval(checkNewbieStatus, 3600000);
+}
+
+// ============================================================
 // ГЛАВНЫЕ РЕНДЕРЫ
 // ============================================================
 function renderAll() {
@@ -2788,6 +2924,19 @@ function startPolling() {
   mainTimers.poll = setInterval(async () => {
     if (isAppSuspended || !game.playerName) return;
     try {
+      const we = await fetchActiveWorldEvent();
+      const currentWeId = game.worldEvent ? game.worldEvent.id : null;
+      if (we && we.id !== currentWeId) {
+        applyWorldEventEffects(we);
+        showWorldEventToast(we);
+        updateWorldEventBadge();
+      } else if (!we && game.worldEvent) {
+        game.worldEvent = null;
+        updateWorldEventBadge();
+        generateClients();
+        if (!document.getElementById('clientsApp').classList.contains('hidden')) renderClients();
+      }
+
       const maint = await fetchMaintenance();
       if (maint) updateMaintenanceFromCloud({ maintenance:{ active:maint.active, reason:maint.reason, until:maint.until?new Date(maint.until).getTime():0, startedBy:maint.started_by, startedAt:maint.started_at?new Date(maint.started_at).getTime():0 }});
       const uw = await fetchUpdateWaiting();
@@ -2856,6 +3005,7 @@ async function initGame() {
   renderAvatarPicker();
   generateAuctionRotation();
   startTimeOfDayTimer();
+  startNewbieCheck();
   try { if (localStorage.getItem('lb14_exited_maint') === '1') userExitedMaintenance = true; } catch(e) {}
   try {
     const maint = await fetchMaintenance();
@@ -2873,9 +3023,10 @@ async function initGame() {
   try { await tryAutoLogin(); } catch(e) { console.warn('Auto-login failed', e); }
   setInterval(() => { if (!isAppSuspended) tickAuctionTimer(); }, 1000);
   setInterval(() => { if (!isAppSuspended) tickEventTimer(); }, 1000);
+  setInterval(() => { if (!isAppSuspended) tickWorldEventTimer(); }, 1000);
   setInterval(() => { if (isAppSuspended) return; if (game.clients.length < getClientCount() - 1) { generateClients(); if (!document.getElementById('clientsApp').classList.contains('hidden')) renderClients(); } }, 45000);
   setInterval(() => { if (isAppSuspended) return; const added = processDepositInterest(); if (added > 0) { renderAll(); if (!document.getElementById('bankApp').classList.contains('hidden')) renderBank(); saveGame(); } }, 60000);
-  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v15.5');
+  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v15.7');
 }
 
 document.getElementById('loginNick')?.addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });

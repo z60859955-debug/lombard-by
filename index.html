@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>OWERINEZZ COMPANY · Ломбард BY v16.0</title>
+<title>OWERINEZZ COMPANY · Ломбард BY v16.1</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -79,6 +79,7 @@ body.has-event .screen { padding-top: 56px; }
 @keyframes slideUp { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 .toast.error { border-left-color: #d9534f; background: linear-gradient(135deg,#1a0808,#2a0e0e); }
 .toast.info { border-left-color: #00d4ff; background: linear-gradient(135deg,#0a0a1a,#0d0d2a); }
+.toast.gold { border-left-color: #ffd700; background: linear-gradient(135deg,#1a1408,#2a2008); color: #ffe680; }
 .profile-card { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
 .profile-card .avatar { font-size: 40px; background: radial-gradient(circle, rgba(0,212,255,0.1), transparent); border-radius: 50%; padding: 6px; border: 2px solid rgba(0,212,255,0.2); }
 .profile-card .info { flex: 1; }
@@ -149,12 +150,31 @@ input, select, textarea { font-size: 16px !important; }
 .tag-bonus  { background: #2a7d5e; color: #fff; }
 .casino-display { display: flex; justify-content: center; gap: 10px; margin: 16px 0; }
 .casino-display .slot { width: 70px; height: 90px; background: linear-gradient(180deg,#0a1220,#050810); border-radius: 12px; border: 3px solid #16202e; display: flex; align-items: center; justify-content: center; font-size: 36px; transition: 0.3s; }
-.dice-scene { margin: 20px auto; width: 100px; height: 100px; }
-.dice-display { width: 90px; height: 90px; background: linear-gradient(135deg,#fff,#d0d8e8); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #0a0e17; margin: 5px auto; font-weight: bold; }
+/* === НОВАЯ АНИМАЦИЯ КУБИКА === */
+.dice-scene { margin: 20px auto; width: 100px; height: 100px; perspective: 600px; }
+.dice-cube { width: 90px; height: 90px; position: relative; margin: 5px auto; transform-style: preserve-3d; transition: transform 0.4s ease; }
+.dice-face { position: absolute; width: 90px; height: 90px; background: linear-gradient(135deg,#fff,#d0d8e8); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #0a0e17; font-weight: bold; backface-visibility: hidden; box-shadow: inset 0 0 12px rgba(0,0,0,0.15), 0 6px 18px rgba(0,0,0,0.4); }
+.dice-face.front  { transform: rotateY(0deg) translateZ(45px); }
+.dice-face.back   { transform: rotateY(180deg) translateZ(45px); }
+.dice-face.right  { transform: rotateY(90deg) translateZ(45px); }
+.dice-face.left   { transform: rotateY(-90deg) translateZ(45px); }
+.dice-face.top    { transform: rotateX(90deg) translateZ(45px); }
+.dice-face.bottom { transform: rotateX(-90deg) translateZ(45px); }
+.dice-cube.rolling { animation: diceRoll 0.8s ease-in-out; }
+@keyframes diceRoll {
+  0%   { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); }
+  25%  { transform: rotateX(180deg) rotateY(90deg) rotateZ(180deg) scale(1.05); }
+  50%  { transform: rotateX(360deg) rotateY(180deg) rotateZ(90deg) scale(1.1); }
+  75%  { transform: rotateX(540deg) rotateY(270deg) rotateZ(270deg) scale(1.05); }
+  100% { transform: rotateX(720deg) rotateY(360deg) rotateZ(360deg) scale(1); }
+}
+.dice-result-badge { display: none; text-align: center; font-size: 26px; font-weight: bold; color: #00d4ff; margin-top: 8px; animation: badgePop 0.4s ease; }
+.dice-result-badge.show { display: block; }
+@keyframes badgePop { 0% { transform: scale(0.5); opacity: 0; } 70% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+.dice-num-btn { background: linear-gradient(135deg,#1a4a6a,#2a6b8a); color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; width: 100%; height: 44px; cursor: pointer; }
 .roulette-result { text-align: center; font-size: 32px; font-weight: bold; color: #00d4ff; margin: 8px 0; min-height: 40px; }
 .bet-presets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 8px; }
 .bet-presets .bp { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); color: #7fc8f0; padding: 8px 6px; border-radius: 8px; font-size: 12px; cursor: pointer; text-align: center; font-weight: bold; min-height: 36px; display: flex; align-items: center; justify-content: center; }
-.dice-num-btn { background: linear-gradient(135deg,#1a4a6a,#2a6b8a); color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; width: 100%; height: 44px; cursor: pointer; }
 .office-header { text-align: center; padding: 20px; background: linear-gradient(135deg,#0f1a2a,#080d18); border-radius: 18px; margin-bottom: 12px; }
 .office-big-icon { font-size: 80px; margin-bottom: 8px; display: inline-block; }
 .office-name { font-size: 22px; font-weight: bold; color: #d4a543; }
@@ -167,6 +187,7 @@ input, select, textarea { font-size: 16px !important; }
 .office-slot.current { border-left-color: #5cdb8a; background: rgba(92,219,138,0.04); }
 .office-slot.available { border-left-color: #d4a543; }
 .office-slot.locked { border-left-color: #2a3a4a; opacity: 0.6; }
+.office-slot.level-locked { border-left-color: #8a2be2; opacity: 0.75; }
 .office-slot .office-row { display: flex; align-items: center; gap: 12px; }
 .office-slot .office-icon { font-size: 40px; }
 .office-slot .office-info { flex: 1; }
@@ -178,6 +199,7 @@ input, select, textarea { font-size: 16px !important; }
 .badge-current { background: rgba(92,219,138,0.12); color: #5cdb8a; }
 .badge-available { background: rgba(212,165,67,0.12); color: #d4a543; }
 .badge-locked { background: rgba(255,255,255,0.04); color: #5a6a80; }
+.badge-level { background: rgba(138,43,226,0.18); color: #b57cff; }
 .upgrade-preview { background: rgba(0,0,0,0.35); border-radius: 12px; padding: 12px; margin: 12px 0; text-align: left; font-size: 13px; }
 .upgrade-preview .row { display: flex; justify-content: space-between; padding: 4px 0; }
 .chat-messages { max-height: 280px; overflow-y: auto; padding: 4px 0; margin-bottom: 8px; }
@@ -359,6 +381,31 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
 .status-badge-item.locked { filter: grayscale(1); opacity: 0.35; border-color: rgba(255,255,255,0.1); color: #7a8a9a; }
 .status-toast { position: absolute; top: 100px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #8a2be2, #ffd700); color: #05070c; padding: 10px 20px; border-radius: 20px; font-weight: bold; font-size: 14px; z-index: 950; box-shadow: 0 8px 30px rgba(0,0,0,0.6); animation: statusToastAnim 4s ease forwards; pointer-events: none; white-space: nowrap; }
 @keyframes statusToastAnim { 0% { transform: translate(-50%, -40px) scale(0.7); opacity: 0; } 15% { transform: translate(-50%, 0) scale(1); opacity: 1; } 85% { transform: translate(-50%, 0) scale(1); opacity: 1; } 100% { transform: translate(-50%, -40px) scale(0.7); opacity: 0; } }
+
+/* === УРОВНИ И XP === */
+.level-card { background: linear-gradient(135deg, rgba(138,43,226,0.15), rgba(0,212,255,0.08)); border: 1px solid rgba(138,43,226,0.35); border-radius: 18px; padding: 12px 14px; margin-bottom: 12px; }
+.level-top { display: flex; align-items: center; gap: 12px; }
+.level-badge { font-size: 38px; filter: drop-shadow(0 0 12px rgba(255,215,0,0.6)); }
+.level-info { flex: 1; }
+.level-name { font-weight: 900; font-size: 15px; color: #ffd700; letter-spacing: 1px; }
+.level-num { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+.level-bar { width: 100%; height: 10px; background: #0d1420; border-radius: 8px; overflow: hidden; margin-top: 8px; position: relative; }
+.level-fill { height: 100%; background: linear-gradient(90deg, #8a2be2, #00d4ff, #ffd700); border-radius: 8px; transition: width 0.5s ease; }
+.level-xp-text { font-size: 10px; opacity: 0.7; margin-top: 4px; text-align: right; }
+.xp-toast { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: linear-gradient(135deg,#8a2be2,#00d4ff); color: white; padding: 12px 24px; border-radius: 20px; font-weight: 900; font-size: 18px; z-index: 999; pointer-events: none; animation: xpPop 1.4s ease forwards; box-shadow: 0 0 30px rgba(0,212,255,0.7); }
+@keyframes xpPop { 0% { transform: translate(-50%,-50%) scale(0.4); opacity: 0; } 20% { transform: translate(-50%,-50%) scale(1.15); opacity: 1; } 70% { transform: translate(-50%,-50%) scale(1); opacity: 1; } 100% { transform: translate(-50%,-100%) scale(0.8); opacity: 0; } }
+.levelup-toast { position: absolute; top: 30%; left: 50%; transform: translate(-50%,-50%); background: linear-gradient(135deg,#ffd700,#ff8c00,#ffd700); background-size: 200% 100%; color: #05070c; padding: 18px 32px; border-radius: 24px; font-weight: 900; font-size: 22px; z-index: 1000; pointer-events: none; animation: levelUpAnim 2.6s ease forwards; box-shadow: 0 0 60px rgba(255,215,0,0.9); text-align: center; }
+@keyframes levelUpAnim { 0% { transform: translate(-50%,-50%) scale(0.2) rotate(-15deg); opacity: 0; } 20% { transform: translate(-50%,-50%) scale(1.2) rotate(5deg); opacity: 1; } 40% { transform: translate(-50%,-50%) scale(1) rotate(0deg); } 80% { transform: translate(-50%,-50%) scale(1); opacity: 1; } 100% { transform: translate(-50%,-80%) scale(0.8); opacity: 0; } }
+
+/* === ГЛОБАЛЬНЫЙ ИНФО-БАННЕР === */
+.global-info-banner { position: absolute; left: 20px; right: 20px; bottom: 20px; background: linear-gradient(135deg, #1a6a4a, #2a8a5e); color: #fff; padding: 14px 18px; border-radius: 16px; z-index: 700; font-weight: bold; font-size: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.7); border-left: 5px solid #5cdb8a; animation: bannerSlideUp 0.5s ease; display: flex; align-items: center; gap: 10px; }
+.global-info-banner.update { background: linear-gradient(135deg, #0a3a5a, #00d4ff); border-left-color: #00d4ff; }
+.global-info-banner.maint-end { background: linear-gradient(135deg, #4a3a0a, #d4a543); border-left-color: #ffd700; color: #05070c; }
+.global-info-banner .gi-icon { font-size: 24px; flex-shrink: 0; }
+.global-info-banner .gi-text { flex: 1; line-height: 1.3; }
+@keyframes bannerSlideUp { from { transform: translateY(80px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.global-info-banner.hide { animation: bannerSlideDown 0.5s ease forwards; }
+@keyframes bannerSlideDown { to { transform: translateY(80px); opacity: 0; } }
 </style>
 </head><body>
 <div class="phone">
@@ -371,7 +418,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
     <div class="splash-sticker">💼</div>
     <div class="splash-title">OWERINEZZ COMPANY</div>
     <div class="splash-line"></div>
-    <div class="splash-subtitle">ЛОМБАРД BY · v16.0</div>
+    <div class="splash-subtitle">ЛОМБАРД BY · v16.1</div>
     <div class="splash-loading"></div>
   </div>
 
@@ -386,7 +433,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
     <div id="authScreen">
       <div class="auth-logo">💰</div>
       <div class="auth-title">Ломбард BY</div>
-      <div class="auth-subtitle">OWERINEZZ COMPANY · v16.0</div>
+      <div class="auth-subtitle">OWERINEZZ COMPANY · v16.1</div>
       <div class="auth-tabs">
         <button class="tab active" id="tabLogin" onclick="switchAuthTab('login')">🔑 Вход</button>
         <button class="tab" id="tabRegister" onclick="switchAuthTab('register')">📝 Регистрация</button>
@@ -463,6 +510,20 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
           </div>
           <div class="statuses-row" id="mainStatusesRow"></div>
         </div>
+
+        <!-- [УРОВНИ] Карточка уровня -->
+        <div class="level-card" id="levelCard">
+          <div class="level-top">
+            <div class="level-badge" id="levelBadge">🥉</div>
+            <div class="level-info">
+              <div class="level-name" id="levelName">Новичок</div>
+              <div class="level-num">Уровень <b id="levelNum">1</b> • XP <span id="levelXp">0</span>/<span id="levelXpNext">100</span></div>
+            </div>
+          </div>
+          <div class="level-bar"><div class="level-fill" id="levelFill" style="width:0%"></div></div>
+          <div class="level-xp-text" id="levelXpHint">До следующего уровня: 100 XP</div>
+        </div>
+
         <div class="card">
           <div class="header-row">
             <span class="money-badge">💰 <span id="moneyDisplay">2000</span> BYN</span>
@@ -623,7 +684,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
 <div id="eventParticles"></div>
 <script>
 // ============================================================
-// OWERINEZZ COMPANY · Ломбард BY v16.0
+// OWERINEZZ COMPANY · Ломбард BY v16.1
 // ============================================================
 
 const SUPABASE_URL = 'https://zuwsvwxglxgzkuyfxbpu.supabase.co';
@@ -635,17 +696,48 @@ const DEPOSIT = { PERIOD_MS: 25 * 60 * 1000, MULTIPLIER: 1.1, MAX_PERIODS: 3, MA
 const EVENT_EMOJIS = ['🎰','🍋','🍒','🍉','🍇','💎','🎲','⭐','7️⃣','💰'];
 const AMNESTY_PHRASE = 'АМНИСТИЯ ВСЕМ';
 
-let cloudOnline = false;
-let passwordHashCache = null;
-let cloudSaveLock = false;
-let isAppSuspended = false;
-let mainTimers = {};
+// === СИСТЕМА УРОВНЕЙ ===
+// xpNeeded(n) — сколько XP нужно для перехода с уровня n на n+1
+function xpNeeded(level) { return Math.round(100 * Math.pow(1.35, level - 1)); }
+function xpToLevel(xp) {
+  let lvl = 1, need = xpNeeded(1), acc = 0;
+  while (xp >= acc + need && lvl < 100) {
+    acc += need;
+    lvl++;
+    need = xpNeeded(lvl);
+  }
+  return { level: lvl, xpInLevel: xp - acc, xpForNext: need };
+}
+const LEVEL_TITLES = [
+  { min: 1, name: 'Новичок',      icon: '🥉' },
+  { min: 3, name: 'Стажёр',       icon: '🥈' },
+  { min: 5, name: 'Торговец',     icon: '🥇' },
+  { min: 8, name: 'Делец',        icon: '💼' },
+  { min: 12, name: 'Коммерсант',  icon: '📈' },
+  { min: 16, name: 'Магнат',      icon: '💎' },
+  { min: 22, name: 'Олигарх',     icon: '👑' },
+  { min: 30, name: 'Легенда',     icon: '🏆' }
+];
+function getLevelTitle(level) {
+  let t = LEVEL_TITLES[0];
+  for (const x of LEVEL_TITLES) if (level >= x.min) t = x;
+  return t;
+}
+// XP за действия
+const XP_REWARDS = {
+  buy_item: 5,
+  sell_item: 8,
+  inspect: 2,
+  pvp_win: 25,
+  pvp_bid: 3,
+  daily_claim: 15,
+  open_container: 10,
+  clean_item: 3,
+  fix_item: 5,
+  earn_1000: 1 // дополнительно за 1000 BYN заработка
+};
 
-window._unbanScreenActive = false;
-window._unfreezeScreenActive = false;
-window._updateWaitingScreenActive = false;
-window._updateWaitingScreenClosed = false;
-
+// === СТАТУСЫ ===
 const STATUSES = {
   newbie:     { icon:'🌱', name:'Новичок',     desc:'Первые 7 дней в игре',           order:1 },
   first_sale: { icon:'🎯', name:'Первый шаг',  desc:'Сделал первую продажу',          order:2 },
@@ -658,6 +750,21 @@ const STATUSES = {
   veteran:    { icon:'⭐', name:'Ветеран',     desc:'14 дней в игре',                 order:9 },
   legend:     { icon:'💎', name:'Легенда',     desc:'30 дней в игре',                 order:10 }
 };
+
+let cloudOnline = false;
+let passwordHashCache = null;
+let cloudSaveLock = false;
+let isAppSuspended = false;
+let mainTimers = {};
+
+window._unbanScreenActive = false;
+window._unfreezeScreenActive = false;
+window._updateWaitingScreenActive = false;
+window._updateWaitingScreenClosed = false;
+
+// Флаг состояния экранов ТО
+let wasMaintenanceActive = false;
+let wasUpdateWaitingActive = false;
 
 async function hashPassSHA256(pass) {
   const enc = new TextEncoder().encode(pass);
@@ -675,14 +782,14 @@ async function rpc(fn, params) {
 }
 
 const local = {
-  saveUser(u) { try { const a = this._users(); a[u.nick] = u; localStorage.setItem('lb16_users', JSON.stringify(a)); } catch(e) {} },
+  saveUser(u) { try { const a = this._users(); a[u.nick] = u; localStorage.setItem('lb161_users', JSON.stringify(a)); } catch(e) {} },
   getUser(n) { return this._users()[n] || null; },
-  _users() { try { return JSON.parse(localStorage.getItem('lb16_users') || '{}'); } catch(e) { return {}; } },
-  saveGame(n,d) { try { localStorage.setItem('lb16_save_' + n, JSON.stringify(d)); } catch(e) {} },
-  getGame(n) { try { return JSON.parse(localStorage.getItem('lb16_save_' + n)); } catch(e) { return null; } },
-  saveSession(n) { try { localStorage.setItem('lb16_session', n); } catch(e) {} },
-  getSession() { try { return localStorage.getItem('lb16_session'); } catch(e) { return null; } },
-  clearSession() { try { localStorage.removeItem('lb16_session'); } catch(e) {} }
+  _users() { try { return JSON.parse(localStorage.getItem('lb161_users') || '{}'); } catch(e) { return {}; } },
+  saveGame(n,d) { try { localStorage.setItem('lb161_save_' + n, JSON.stringify(d)); } catch(e) {} },
+  getGame(n) { try { return JSON.parse(localStorage.getItem('lb161_save_' + n)); } catch(e) { return null; } },
+  saveSession(n) { try { localStorage.setItem('lb161_session', n); } catch(e) {} },
+  getSession() { try { return localStorage.getItem('lb161_session'); } catch(e) { return null; } },
+  clearSession() { try { localStorage.removeItem('lb161_session'); } catch(e) {} }
 };
 
 const ACHIEVEMENTS = {
@@ -708,11 +815,12 @@ const DAILY_TEMPLATES = [
   { id:'pvp_bid', icon:'⚔️', title:'Сделай ставку в PvP', target:1, stat:'daily_pvp_bids', reward:800 }
 ];
 
+// === ОФИСЫ С ТРЕБОВАНИЕМ УРОВНЯ ===
 const OFFICES = [
-  { id:0, name:'Ларёк у метро', icon:'🏪', desc:'Стартовое место.', cost:0, tier:1, bonuses:{maxStorage:15,clientBonus:0,itemTierMax:2,auctionTierMax:1,discountBargain:0}, perks:['15 слотов','T1-T2'] },
-  { id:1, name:'Точка в ТЦ', icon:'🏬', desc:'Больше клиентов.', cost:15000, tier:2, bonuses:{maxStorage:30,clientBonus:1,itemTierMax:3,auctionTierMax:2,discountBargain:3}, perks:['30 слотов','+1 клиент','T1-T3'] },
-  { id:2, name:'Сеть ломбардов', icon:'🏢', desc:'Крупные сделки.', cost:120000, tier:3, bonuses:{maxStorage:60,clientBonus:2,itemTierMax:4,auctionTierMax:3,discountBargain:6}, perks:['60 слотов','+2 клиента','T1-T4'] },
-  { id:3, name:'Антикварный салон', icon:'🏛️', desc:'Легендарный.', cost:1000000, tier:4, bonuses:{maxStorage:150,clientBonus:3,itemTierMax:4,auctionTierMax:4,discountBargain:12}, perks:['150 слотов','+3 клиента','Всё'] }
+  { id:0, name:'Ларёк у метро',      icon:'🏪', desc:'Стартовое место.',       cost:0,        tier:1, reqLevel:1,  bonuses:{maxStorage:15,clientBonus:0,itemTierMax:2,auctionTierMax:1,discountBargain:0}, perks:['15 слотов','T1-T2'] },
+  { id:1, name:'Точка в ТЦ',         icon:'🏬', desc:'Больше клиентов.',       cost:15000,    tier:2, reqLevel:5,  bonuses:{maxStorage:30,clientBonus:1,itemTierMax:3,auctionTierMax:2,discountBargain:3}, perks:['30 слотов','+1 клиент','T1-T3'] },
+  { id:2, name:'Сеть ломбардов',     icon:'🏢', desc:'Крупные сделки.',        cost:120000,   tier:3, reqLevel:12, bonuses:{maxStorage:60,clientBonus:2,itemTierMax:4,auctionTierMax:3,discountBargain:6}, perks:['60 слотов','+2 клиента','T1-T4'] },
+  { id:3, name:'Антикварный салон',  icon:'🏛️', desc:'Легендарный.',           cost:1000000,  tier:4, reqLevel:22, bonuses:{maxStorage:150,clientBonus:3,itemTierMax:4,auctionTierMax:4,discountBargain:12}, perks:['150 слотов','+3 клиента','Всё'] }
 ];
 
 const CONTAINER_SVGS = {
@@ -810,13 +918,11 @@ const VIP_CLIENTS = [
   { name:'Мадам Жозефина', avatar:'👒', phrase:'Только лучшее для моей коллекции', bonus:2.2, tierMin:3, tierMax:4 },
   { name:'Олигарх Кирилл', avatar:'🕴️', phrase:'Деньги — не проблема', bonus:2.8, tierMin:3, tierMax:4 }
 ];
-
 const SCAM_CLIENTS = [
   { name:'Хитрый Борис', avatar:'😏', phrase:'Оригинал, зуб даю' },
   { name:'Подозрительный тип', avatar:'🕵️', phrase:'Быстро, пока никто не видит' },
   { name:'Мутный Аркадий', avatar:'🎭', phrase:'Даю слово — вещь настоящая' }
 ];
-
 const COLLECTOR_CLIENTS = [
   { name:'Нумизмат', avatar:'🧐', phrase:'Ищу редкие монеты', lookFor:'🪙', bonus:3.0 },
   { name:'Антиквар', avatar:'📜', phrase:'Интересует антиквариат', lookFor:'🖼️', bonus:2.5 },
@@ -832,7 +938,11 @@ let game = {
   pvpLots:[], pvpMyLots:[],
   isNewbie:false, newbieUntil:0, newbieDaysLeft:0,
   worldEvent:null,
-  statuses: []
+  statuses: [],
+  xp: 0,                // [УРОВНИ]
+  level: 1,             // [УРОВНИ]
+  levelXpInLevel: 0,
+  levelXpForNext: 100
 };
 let bank = { deposit:0, credit:0, creditHistory:50, depositLastUpdate:Date.now(), depositPeriodMs:DEPOSIT.PERIOD_MS, depositCountToday:0, depositLastResetDay:new Date().toISOString().slice(0,10) };
 let casino = { wins:0, losses:0 };
@@ -887,6 +997,99 @@ function showToast(msg, type) {
   el.classList.remove('hidden');
   clearTimeout(el._t);
   el._t = setTimeout(() => el.classList.add('hidden'), 3000);
+}
+
+// ============================================================
+// ГЛОБАЛЬНЫЙ ИНФО-БАННЕР (снизу)
+// ============================================================
+function showGlobalBanner(text, type, icon, duration) {
+  const old = document.getElementById('globalInfoBanner');
+  if (old) old.remove();
+  const b = document.createElement('div');
+  b.id = 'globalInfoBanner';
+  b.className = 'global-info-banner' + (type ? ' ' + type : '');
+  b.innerHTML = `<span class="gi-icon">${icon || 'ℹ️'}</span><span class="gi-text">${text}</span>`;
+  document.querySelector('.phone').appendChild(b);
+  const ttl = duration || 6000;
+  setTimeout(() => { b.classList.add('hide'); setTimeout(() => b.remove(), 600); }, ttl);
+}
+
+// ============================================================
+// СИСТЕМА УРОВНЕЙ
+// ============================================================
+function addXP(amount, reason) {
+  if (!amount || amount <= 0) return;
+  game.xp = (game.xp || 0) + amount;
+  const oldLevel = game.level || 1;
+  const info = xpToLevel(game.xp);
+  game.level = info.level;
+  game.levelXpInLevel = info.xpInLevel;
+  game.levelXpForNext = info.xpForNext;
+
+  // Показать всплывашку XP
+  showXPToast(amount);
+
+  // Проверка на повышение уровня
+  if (info.level > oldLevel) {
+    onLevelUp(info.level);
+  }
+  renderLevelCard();
+  saveGame();
+}
+
+function showXPToast(amount) {
+  const div = document.createElement('div');
+  div.className = 'xp-toast';
+  div.textContent = `+${amount} XP`;
+  document.querySelector('.phone').appendChild(div);
+  setTimeout(() => div.remove(), 1500);
+}
+
+function onLevelUp(newLevel) {
+  const title = getLevelTitle(newLevel);
+  const div = document.createElement('div');
+  div.className = 'levelup-toast';
+  div.innerHTML = `${title.icon} НОВЫЙ УРОВЕНЬ!<br><span style="font-size:16px;">Ур. ${newLevel} — ${title.name}</span>`;
+  document.querySelector('.phone').appendChild(div);
+  setTimeout(() => div.remove(), 2800);
+  // Проверить доступность новых офисов
+  const officeToUnlock = OFFICES.find(o => o.reqLevel === newLevel);
+  if (officeToUnlock) {
+    setTimeout(() => showGlobalBanner(`🏢 Открыт офис: <b>${officeToUnlock.name}</b>!`, 'update', '🔓', 7000), 3000);
+  }
+}
+
+function renderLevelCard() {
+  const info = xpToLevel(game.xp || 0);
+  game.level = info.level;
+  game.levelXpInLevel = info.xpInLevel;
+  game.levelXpForNext = info.xpForNext;
+  const t = getLevelTitle(info.level);
+  const badge = document.getElementById('levelBadge');
+  const name = document.getElementById('levelName');
+  const num = document.getElementById('levelNum');
+  const xpEl = document.getElementById('levelXp');
+  const xpNext = document.getElementById('levelXpNext');
+  const fill = document.getElementById('levelFill');
+  const hint = document.getElementById('levelXpHint');
+  if (!badge) return;
+  badge.textContent = t.icon;
+  name.textContent = t.name;
+  num.textContent = info.level;
+  xpEl.textContent = info.xpInLevel;
+  xpNext.textContent = info.xpForNext;
+  const pct = Math.min(100, (info.xpInLevel / info.xpForNext) * 100);
+  fill.style.width = pct + '%';
+  hint.textContent = `До следующего уровня: ${info.xpForNext - info.xpInLevel} XP`;
+}
+
+function canBuyOffice(idx) {
+  const office = OFFICES[idx];
+  if (!office) return { ok:false, reason:'Нет офиса' };
+  const lvl = game.level || 1;
+  if (lvl < office.reqLevel) return { ok:false, reason:`Нужен уровень ${office.reqLevel}` };
+  if (game.money < office.cost) return { ok:false, reason:`Нужно ${office.cost} BYN` };
+  return { ok:true };
 }
 
 function getTimeOfDay() {
@@ -1039,6 +1242,12 @@ function applyLoadedSave(result) {
   game.isNewbie = !!p.is_newbie;
   game.newbieUntil = p.newbie_until ? new Date(p.newbie_until).getTime() : 0;
   game.statuses = Array.isArray(p.statuses) ? p.statuses : [];
+  // [УРОВНИ]
+  game.xp = Number(s.xp) || 0;
+  const lvlInfo = xpToLevel(game.xp);
+  game.level = lvlInfo.level;
+  game.levelXpInLevel = lvlInfo.xpInLevel;
+  game.levelXpForNext = lvlInfo.xpForNext;
   bank = s.bank || { deposit:0, credit:0, creditHistory:50, depositLastUpdate:Date.now(), depositPeriodMs:DEPOSIT.PERIOD_MS, depositCountToday:0, depositLastResetDay:new Date().toISOString().slice(0,10) };
   casino = s.casino || { wins:0, losses:0 };
   processDepositInterest();
@@ -1048,9 +1257,7 @@ async function safeUpdateStatuses(showNewToast) {
   try {
     const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 4000));
     await Promise.race([updatePlayerStatuses(showNewToast), timeout]);
-  } catch(e) {
-    console.warn('Status update skipped:', e.message);
-  }
+  } catch(e) { console.warn('Status update skipped:', e.message); }
 }
 
 async function enterGameScreen() {
@@ -1076,6 +1283,7 @@ async function enterGameScreen() {
   if (game.clients.length === 0) generateClients();
   if (!auctionRotation.currentContainers.length) generateAuctionRotation();
   renderAll();
+  renderLevelCard();
   updateCasinoIconState();
   startPolling();
   refreshPvpLots().catch(()=>{});
@@ -1104,7 +1312,8 @@ async function saveGame() {
           achievements: game.achievements,
           daily_tasks: game.dailyTasks,
           daily_tasks_date: game.dailyTasksDate,
-          stats: game.stats
+          stats: game.stats,
+          xp: game.xp
         }).eq('user_id', prof.id);
       }
     } catch(e) {}
@@ -1174,7 +1383,7 @@ function doLogout() {
   if (mainTimers.poll) { clearInterval(mainTimers.poll); mainTimers.poll = null; }
   if (mainTimers.newbie) { clearInterval(mainTimers.newbie); mainTimers.newbie = null; }
   userExitedMaintenance = false;
-  try { localStorage.removeItem('lb16_exited_maint'); } catch(e) {}
+  try { localStorage.removeItem('lb161_exited_maint'); } catch(e) {}
   game.playerName = ''; game.isAdmin = false; passwordHashCache = null;
   showToast('👋 До встречи!','info');
 }
@@ -1280,6 +1489,8 @@ function renderProfile() {
   const daysLeft = game.newbieDaysLeft || 0;
   const allStatuses = Object.entries(STATUSES).sort((a,b) => a[1].order - b[1].order);
   const myIds = (game.statuses || []).map(s => s.id);
+  const lvl = xpToLevel(game.xp || 0);
+  const title = getLevelTitle(lvl.level);
 
   let html = `
     <div class="card" style="text-align:center;">
@@ -1293,6 +1504,18 @@ function renderProfile() {
         ${myIds.map(id => { const st = STATUSES[id]; if (!st) return ''; return `<span class="status-badge-item" title="${st.desc}"><span class="sb-emoji">${st.icon}</span>${st.name}</span>`; }).join('')}
       </div>
     </div>
+
+    <div class="level-card">
+      <div class="level-top">
+        <div class="level-badge">${title.icon}</div>
+        <div class="level-info">
+          <div class="level-name">${title.name}</div>
+          <div class="level-num">Уровень <b>${lvl.level}</b> • XP ${lvl.xpInLevel}/${lvl.xpForNext}</div>
+        </div>
+      </div>
+      <div class="level-bar"><div class="level-fill" style="width:${Math.min(100,(lvl.xpInLevel/lvl.xpForNext)*100)}%"></div></div>
+    </div>
+
     ${isNewbie ? `
     <div class="newbie-card">
       <div class="nb-title">🌱 БОНУС НОВИЧКА</div>
@@ -1366,6 +1589,7 @@ async function claimDailyReward(id) {
   state.claimed = true;
   game.money += tpl.reward;
   incStat('total_earned', tpl.reward);
+  addXP(XP_REWARDS.daily_claim, 'daily');
   showToast(`🎁 +${tpl.reward} BYN!`, 'info');
   playGiftAnimation(tpl.reward);
   checkAchievements();
@@ -1418,6 +1642,7 @@ function startInspect(idx) {
   game.money -= 100;
   incStat('daily_total_inspected', 1);
   incStat('total_inspected', 1);
+  addXP(XP_REWARDS.inspect, 'inspect');
   renderAll();
   updateDailyProgress();
   document.getElementById('inspectInner').innerHTML = `<div class="inspect-anim"><div class="magnifier">🔍</div><div style="font-weight:bold;margin-top:12px;">${cl.item.name}</div><div class="dots"><span>.</span><span>.</span><span>.</span></div><div class="status" id="inspectStatus">Проверяю...</div></div>`;
@@ -1479,6 +1704,7 @@ async function buyFromClient(idx) {
   incStat('daily_total_bought', 1);
   incStat('total_spent', cl.askPrice);
   incStat('daily_total_spent', cl.askPrice);
+  addXP(XP_REWARDS.buy_item, 'buy');
   game.clients.splice(idx,1);
   if (game.clients.length === 0) generateClients();
   checkAchievements();
@@ -1528,6 +1754,7 @@ async function cleanItem(idx) {
   if (result && result.ok) game.money = Number(result.money);
   else game.money -= 150;
   it.condition = Math.min(100, it.condition + boost);
+  addXP(XP_REWARDS.clean_item, 'clean');
   renderAll(); renderWarehouse(); saveGame();
 }
 
@@ -1540,6 +1767,7 @@ async function fixItem(idx) {
   if (result && result.ok) game.money = Number(result.money);
   else game.money -= 400;
   it.condition = Math.min(100, it.condition + boost);
+  addXP(XP_REWARDS.fix_item, 'fix');
   renderAll(); renderWarehouse(); saveGame();
 }
 
@@ -1587,6 +1815,7 @@ async function publishAd(idx) {
   incStat('daily_total_sold', 1);
   incStat('total_earned', finalPrice);
   incStat('daily_total_earned', finalPrice);
+  addXP(XP_REWARDS.sell_item, 'sell');
   checkAchievements();
   updateDailyProgress();
   safeUpdateStatuses(true);
@@ -1737,6 +1966,7 @@ async function pvpPlaceBid(lotId) {
   if (!result || !result.ok) { showToast('❌ '+(result?.error||''),'error'); return; }
   incStat('pvp_bids', 1);
   incStat('daily_pvp_bids', 1);
+  addXP(XP_REWARDS.pvp_bid, 'pvp_bid');
   closeGenericModal();
   await refreshPvpLots();
   await reloadMoney();
@@ -1764,6 +1994,7 @@ async function pvpBuyoutConfirm(lotId) {
   if (!result || !result.ok) { showToast('❌ '+(result?.error||''),'error'); return; }
   incStat('pvp_wins', 1);
   incStat('daily_pvp_wins', 1);
+  addXP(XP_REWARDS.pvp_win, 'pvp_win');
   await refreshPvpLots();
   await reloadMoney();
   checkAchievements();
@@ -1811,6 +2042,7 @@ async function reloadMoney() {
   } catch(e) {}
 }
 function closeGenericModal() { document.getElementById('genericModal').classList.add('hidden'); }
+
 // ============================================================
 // ЧАТЫ
 // ============================================================
@@ -1915,6 +2147,7 @@ function acceptOffer() {
   game.totalSales++;
   chat.sold = true;
   game.chats = game.chats.filter(x => x.id !== chat.id);
+  addXP(XP_REWARDS.sell_item, 'sell');
   checkAchievements();
   updateDailyProgress();
   safeUpdateStatuses(true);
@@ -1926,11 +2159,12 @@ function acceptOffer() {
 function closeChatDetail() { game.currentChatId = null; openApp('chats'); }
 
 // ============================================================
-// ОФИС
+// ОФИС (с учётом уровней)
 // ============================================================
 function renderOffice() {
   const c = document.getElementById('officeContent');
   const current = getCurrentOffice();
+  const myLevel = game.level || 1;
   let html = `
     <div class="office-header">
       <div class="office-big-icon">${current.icon}</div>
@@ -1941,19 +2175,30 @@ function renderOffice() {
         <div class="office-stat"><div class="stat-value">+${current.bonuses.clientBonus}</div><div class="stat-label">👥 Клиенты</div></div>
       </div>
     </div>
-    <div class="card"><div style="font-weight:bold;margin-bottom:10px;">🏢 Офисы</div>`;
+    <div class="card"><div style="font-weight:bold;margin-bottom:10px;">🏢 Офисы <span style="font-size:12px;opacity:0.6;">(твой уровень: ${myLevel})</span></div>`;
   OFFICES.forEach((office, idx) => {
     const isCurrent = game.officeId === idx;
     const isOwned = game.officeId >= idx;
     const isNext = idx === game.officeId + 1;
-    const canBuy = isNext && game.money >= office.cost;
+    const levelOk = myLevel >= office.reqLevel;
+    const moneyOk = game.money >= office.cost;
+    const canBuy = isNext && levelOk && moneyOk;
+
     let cls = 'office-slot', badge = '', action = '';
     if (isCurrent) { cls += ' current'; badge = '<span class="office-badge badge-current">✅</span>'; }
     else if (isOwned) { cls += ' current'; badge = '<span class="office-badge badge-current">✔️</span>'; }
-    else if (isNext) { cls += ' available'; badge = '<span class="office-badge badge-available">🔓</span>';
+    else if (!levelOk) {
+      cls += ' level-locked';
+      badge = `<span class="office-badge badge-level">🔒 Ур. ${office.reqLevel}</span>`;
+      action = `<button class="btn btn-block" style="margin-top:10px;opacity:0.4;background:#2a1a4a;" disabled>🔒 Ур. ${office.reqLevel}</button>`;
+    } else if (isNext) {
+      cls += ' available'; badge = '<span class="office-badge badge-available">🔓</span>';
       action = canBuy ? `<button class="btn btn-green btn-block" style="margin-top:10px;" onclick="openUpgradeModal(${idx})">💰 ${office.cost} BYN</button>` : `<button class="btn btn-block" style="margin-top:10px;opacity:0.4;background:#1a2634;" disabled>🔒 ${office.cost} BYN</button>`;
-    } else { cls += ' locked'; badge = '<span class="office-badge badge-locked">🔒</span>'; }
-    html += `<div class="${cls}"><div class="office-row"><div class="office-icon">${office.icon}</div><div class="office-info"><div class="office-title">${office.name} ${badge}</div><div class="office-sub">${office.desc}</div><div class="office-price">${office.cost===0?'Стартовая':office.cost+' BYN'}</div><div class="office-bonus">${office.perks.join(' • ')}</div></div></div>${action}</div>`;
+    } else {
+      cls += ' locked'; badge = '<span class="office-badge badge-locked">🔒</span>';
+    }
+
+    html += `<div class="${cls}"><div class="office-row"><div class="office-icon">${office.icon}</div><div class="office-info"><div class="office-title">${office.name} ${badge}</div><div class="office-sub">${office.desc}</div><div class="office-price">${office.cost===0?'Стартовая':office.cost+' BYN'} • Треб. ур. ${office.reqLevel}</div><div class="office-bonus">${office.perks.join(' • ')}</div></div></div>${action}</div>`;
   });
   html += '</div>';
   c.innerHTML = html;
@@ -1962,13 +2207,15 @@ function renderOffice() {
 function openUpgradeModal(idx) {
   if (blockIfMaintenance()) return;
   const office = OFFICES[idx];
+  const myLevel = game.level || 1;
+  if (myLevel < office.reqLevel) { showToast(`🔒 Нужен уровень ${office.reqLevel}`,'error'); return; }
   if (game.money < office.cost) { showToast('💰','error'); return; }
   const cur = getCurrentOffice();
   document.getElementById('upgradeModalBox').innerHTML = `
     <button class="modal-close" onclick="closeUpgradeModal()">✕</button>
     <div style="font-size:48px;margin-bottom:8px;">${office.icon}</div>
     <div class="modal-title">"${office.name}"?</div>
-    <div class="modal-desc">Цена: <b style="color:#d4a543;">${office.cost} BYN</b></div>
+    <div class="modal-desc">Цена: <b style="color:#d4a543;">${office.cost} BYN</b> • Треб. ур. <b>${office.reqLevel}</b></div>
     <div class="upgrade-preview">
       <div class="row"><span>📦 Склад:</span><span>${cur.bonuses.maxStorage} → ${office.bonuses.maxStorage}</span></div>
       <div class="row"><span>👥 Клиенты:</span><span>+${cur.bonuses.clientBonus} → +${office.bonuses.clientBonus}</span></div>
@@ -1985,6 +2232,8 @@ function closeUpgradeModal() { document.getElementById('upgradeModal').classList
 function confirmUpgrade(idx) {
   if (blockIfMaintenance() || isFrozen()) return;
   const office = OFFICES[idx];
+  const myLevel = game.level || 1;
+  if (myLevel < office.reqLevel) { showToast(`🔒 Нужен ур. ${office.reqLevel}`,'error'); return; }
   if (game.money < office.cost) { showToast('💰','error'); return; }
   game.money -= office.cost;
   game.officeId = idx;
@@ -2101,7 +2350,7 @@ function repayCredit() {
 }
 
 // ============================================================
-// КАЗИНО
+// КАЗИНО (С НОВОЙ АНИМАЦИЕЙ КУБИКА)
 // ============================================================
 function renderCasino() {
   const c = document.getElementById('casinoContent');
@@ -2124,7 +2373,17 @@ function renderCasino() {
     </div>
     <div class="card">
       <div style="font-weight:bold;text-align:center;">🎲 Кубики</div>
-      <div class="dice-scene"><div class="dice-display" id="diceDisplay">?</div></div>
+      <div class="dice-scene">
+        <div class="dice-cube" id="diceCube">
+          <div class="dice-face front" id="dfront">1</div>
+          <div class="dice-face back" id="dback">6</div>
+          <div class="dice-face right" id="dright">3</div>
+          <div class="dice-face left" id="dleft">4</div>
+          <div class="dice-face top" id="dtop">5</div>
+          <div class="dice-face bottom" id="dbottom">2</div>
+        </div>
+      </div>
+      <div class="dice-result-badge" id="diceResultBadge"></div>
       <div style="font-size:12px;opacity:0.6;text-align:center;">Угадал = ×5</div>
       <input type="number" id="diceBet" value="100" style="width:100%;padding:10px;border-radius:12px;border:1px solid #1a2634;background:#060a12;color:white;text-align:center;margin:6px 0;">
       <div class="bet-presets"><div class="bp" onclick="setBet('diceBet',100)">100</div><div class="bp" onclick="setBet('diceBet',500)">500</div><div class="bp" onclick="setBet('diceBet',1000)">1K</div><div class="bp" onclick="setBet('diceBet',5000)">5K</div></div>
@@ -2168,18 +2427,55 @@ async function spinSlots() {
   }, 900);
 }
 
+// === НОВАЯ ФУНКЦИЯ rollDice С АНИМАЦИЕЙ ВРАЩЕНИЯ ===
 async function rollDice(number) {
   if (blockIfMaintenance() || isFrozen() || !isEventActive()) return;
   const bet = parseInt(document.getElementById('diceBet').value);
   if (!bet || bet < 50 || bet > 50000) { showToast('⚠️','error'); return; }
   if (game.money < bet) { showToast('💰','error'); return; }
+  const cube = document.getElementById('diceCube');
+  const badge = document.getElementById('diceResultBadge');
+  badge.classList.remove('show');
+  badge.textContent = '';
+  // Запускаем анимацию вращения
+  cube.classList.remove('rolling');
+  void cube.offsetWidth;
+  cube.classList.add('rolling');
+  // Запрос на сервер параллельно с анимацией
   const result = await rpc('casino_spin', { p_nick:game.playerName, p_hash:passwordHashCache, p_bet:bet, p_game:'dice', p_choice:number });
-  if (!result || !result.ok) { showToast('❌','error'); return; }
-  document.getElementById('diceDisplay').textContent = result.result.dice;
+  if (!result || !result.ok) {
+    setTimeout(() => cube.classList.remove('rolling'), 800);
+    showToast('❌','error');
+    return;
+  }
+  const dice = result.result.dice;
   const win = Number(result.win);
-  game.money = game.money - bet + win;
-  if (win > 0) { showToast(`🎲 +${win}!`,'info'); playGiftAnimation(win); } else showToast(`🎲 -${bet}`,'error');
-  renderAll();
+  // После анимации (0.8s) — устанавливаем грань и показываем бейдж
+  setTimeout(() => {
+    cube.classList.remove('rolling');
+    // Устанавливаем куб так, чтобы сверху была выпавшая грань
+    const rotations = {
+      1: { x: 0,   y: 0   },
+      2: { x: -90, y: 0   },
+      3: { x: 0,   y: -90 },
+      4: { x: 0,   y: 90  },
+      5: { x: 90,  y: 0   },
+      6: { x: 0,   y: 180 }
+    };
+    const r = rotations[dice] || rotations[1];
+    cube.style.transform = `rotateX(${r.x}deg) rotateY(${r.y}deg)`;
+    // Показываем результат
+    badge.textContent = `🎲 Выпало: ${dice}`;
+    badge.classList.add('show');
+    game.money = game.money - bet + win;
+    if (win > 0) { showToast(`🎲 +${win}!`,'info'); playGiftAnimation(win); } else showToast(`🎲 -${bet}`,'error');
+    renderAll();
+    // Сброс трансформации через 3 сек
+    setTimeout(() => {
+      cube.style.transform = '';
+      badge.classList.remove('show');
+    }, 3000);
+  }, 820);
 }
 
 async function playRoulette(choice) {
@@ -2296,6 +2592,7 @@ function openContainer() {
   }
   const total = a.loot.reduce((s,it) => s + Math.round(it.basePrice * it.condition/100), 0);
   const profit = total - a.currentBid;
+  addXP(XP_REWARDS.open_container, 'container');
   showToast(profit>=0 ? `📦 +${profit} BYN` : `📦 ${profit} BYN`, profit>=0?'info':'error');
   renderAuction(); saveGame();
 }
@@ -2311,53 +2608,144 @@ function closeAuction() {
   currentAuction = null;
   renderAuction(); renderAll(); saveGame();
 }
+
 // ============================================================
-// ТЕХ.РАБОТЫ + ОЖИДАНИЕ
+// ТЕХ.РАБОТЫ + ОЖИДАНИЕ (со стабильным таймером и анимацией)
 // ============================================================
 async function fetchMaintenance() { try { const {data,error} = await db.from('maintenance').select('*').eq('id',1).single(); return error?null:data; } catch(e){ return null; } }
 async function fetchUpdateWaiting() { try { const {data,error} = await db.from('update_waiting').select('*').eq('id',1).single(); return error?null:data; } catch(e){ return null; } }
+
+// Стабильный таймер без пересоздания DOM
+let _maintTimerInterval = null;
+let _uwTimerInterval = null;
+
+function formatTimer(msLeft) {
+  if (msLeft <= 0) return '0:00';
+  const totalSec = Math.floor(msLeft / 1000);
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+  if (h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
 
 function showMaintenanceScreen(d) {
   const s = document.getElementById('maintenanceScreen');
   if (!s) return;
   const emojis = ['🔧','⚙️','🛠️','🔩','⛏️'];
   let parts = '';
-  for (let i = 0; i < 20; i++) parts += `<div class="maint-emoji" style="left:${Math.random()*100}%;font-size:${20+Math.random()*20}px;animation-duration:${4+Math.random()*4}s;animation-delay:${Math.random()*5}s;">${emojis[i%emojis.length]}</div>`;
-  let timerHtml = d.until && d.until > Date.now() ? `<div class="maint-label">⏱ ОСТАЛОСЬ</div><div class="maint-timer" id="maintTimerText">${Math.floor((d.until-Date.now())/60000)}:00</div>` : '';
+  // Фиксированные позиции и задержки — чтобы анимация НЕ сбрасывалась
+  for (let i = 0; i < 20; i++) {
+    const left = (i * 5) % 100;
+    const dur = 5 + (i % 4);
+    const delay = (i * 0.4) % 5;
+    const size = 22 + (i % 14);
+    parts += `<div class="maint-emoji" style="left:${left}%;font-size:${size}px;animation-duration:${dur}s;animation-delay:-${delay}s;">${emojis[i%emojis.length]}</div>`;
+  }
+  let timerHtml = '';
+  if (d.until && d.until > Date.now()) {
+    timerHtml = `<div class="maint-label">⏱ ОСТАЛОСЬ</div><div class="maint-timer" id="maintTimerText">${formatTimer(d.until-Date.now())}</div>`;
+  } else if (d.until === 0) {
+    timerHtml = `<div class="maint-label">⏱ СРОК</div><div class="maint-timer">Бессрочно</div>`;
+  }
   s.innerHTML = `<div class="maint-particles">${parts}</div><div class="maint-content"><div class="maint-icon-wrap"><div class="maint-ring"></div><div class="maint-icon">🔧</div></div><div class="maint-title">ТЕХ. РАБОТЫ</div><div class="maint-box"><div class="maint-label">📝 ПРИЧИНА</div><div class="maint-value reason">${escapeHtml(d.reason || 'Обновление')}</div><div style="border-top:1px solid rgba(255,255,255,0.1);margin:14px 0;"></div>${timerHtml}</div><button class="maint-exit-btn" onclick="exitMaintenanceToMenu()">🚪 Выйти в меню</button></div>`;
   s.classList.remove('hidden');
-  if (window._maintTimer) clearInterval(window._maintTimer);
-  window._maintTimer = setInterval(() => {
+  startMaintenanceTimer();
+}
+
+function startMaintenanceTimer() {
+  if (_maintTimerInterval) clearInterval(_maintTimerInterval);
+  _maintTimerInterval = setInterval(() => {
     const el = document.getElementById('maintTimerText');
-    if (!el || !maintenanceState.until) return;
+    if (!el) return;
+    if (!maintenanceState.until) return;
     const msLeft = maintenanceState.until - Date.now();
-    if (msLeft <= 0) { el.textContent = '0:00'; return; }
-    el.textContent = `${Math.floor(msLeft/60000)}:${String(Math.floor((msLeft%60000)/1000)).padStart(2,'0')}`;
+    el.textContent = formatTimer(msLeft);
+    if (msLeft <= 0 && maintenanceState.active) {
+      // Время вышло
+      endMaintenanceAuto();
+    }
   }, 1000);
 }
-function hideMaintenanceScreen() { const s = document.getElementById('maintenanceScreen'); if (s) { s.classList.add('hidden'); s.innerHTML = ''; } if (window._maintTimer) { clearInterval(window._maintTimer); window._maintTimer = null; } }
-function exitMaintenanceToMenu() { userExitedMaintenance = true; try{localStorage.setItem('lb16_exited_maint','1');}catch(e){} hideMaintenanceScreen(); local.clearSession(); document.getElementById('gameScreen').classList.add('hidden'); document.getElementById('authScreen').classList.remove('hidden'); }
-function shouldShowMaintenance() { if (game.isAdmin || isMainAdmin()) return false; if (!maintenanceState.active) return false; if (userExitedMaintenance) return false; return true; }
-function checkAndApplyMaintenance() {
-  if (shouldShowMaintenance()) showMaintenanceScreen(maintenanceState);
-  else { hideMaintenanceScreen(); if (!maintenanceState.active) { userExitedMaintenance = false; try { localStorage.removeItem('lb16_exited_maint'); } catch(e) {} } }
-  if (game.isAdmin && maintenanceState.active) showMaintAdminBadge(); else if (game.isAdmin && !maintenanceState.active) hideMaintAdminBadge();
+
+function endMaintenanceAuto() {
+  if (!maintenanceState.active) return;
+  maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
+  hideMaintenanceScreen();
+  userExitedMaintenance = false;
+  try { localStorage.removeItem('lb161_exited_maint'); } catch(e) {}
+  showGlobalBanner('🟢 Тех.работы закончились! Можно играть!', 'maint-end', '🟢', 8000);
+  // Если игрок был на экране ТО — вернуть в игру
+  if (game.playerName && document.getElementById('gameScreen')) {
+    document.getElementById('gameScreen').classList.remove('hidden');
+    document.getElementById('authScreen').classList.add('hidden');
+    renderAll();
+  }
+  updateMaintToggleUI();
 }
+
+function hideMaintenanceScreen() {
+  const s = document.getElementById('maintenanceScreen');
+  if (s) { s.classList.add('hidden'); s.innerHTML = ''; }
+  if (_maintTimerInterval) { clearInterval(_maintTimerInterval); _maintTimerInterval = null; }
+}
+
+function exitMaintenanceToMenu() {
+  userExitedMaintenance = true;
+  try { localStorage.setItem('lb161_exited_maint','1'); } catch(e) {}
+  hideMaintenanceScreen();
+  local.clearSession();
+  document.getElementById('gameScreen').classList.add('hidden');
+  document.getElementById('authScreen').classList.remove('hidden');
+}
+
+function shouldShowMaintenance() {
+  if (game.isAdmin || isMainAdmin()) return false;
+  if (!maintenanceState.active) return false;
+  if (userExitedMaintenance) return false;
+  return true;
+}
+
+function checkAndApplyMaintenance() {
+  if (shouldShowMaintenance()) {
+    if (document.getElementById('maintenanceScreen').classList.contains('hidden')) showMaintenanceScreen(maintenanceState);
+  } else {
+    hideMaintenanceScreen();
+    if (!maintenanceState.active) {
+      userExitedMaintenance = false;
+      try { localStorage.removeItem('lb161_exited_maint'); } catch(e) {}
+    }
+  }
+  if (game.isAdmin && maintenanceState.active) showMaintAdminBadge();
+  else if (game.isAdmin && !maintenanceState.active) hideMaintAdminBadge();
+}
+
 function updateMaintenanceFromCloud(data) {
   const maint = data.maintenance;
   const now = Date.now();
+  const wasActive = maintenanceState.active;
   if (maint && maint.active && maint.until && new Date(maint.until).getTime() <= now) {
+    if (wasActive) {
+      // Только что закончились — показать баннер
+      showGlobalBanner('🟢 Тех.работы закончились! Можно играть!', 'maint-end', '🟢', 8000);
+    }
     maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
     userExitedMaintenance = false;
-    try { localStorage.removeItem('lb16_exited_maint'); } catch(e) {}
+    try { localStorage.removeItem('lb161_exited_maint'); } catch(e) {}
     checkAndApplyMaintenance(); updateMaintToggleUI(); return;
   }
   if (maint && maint.active) {
     maintenanceState = { active:true, reason:maint.reason||'', until:maint.until?new Date(maint.until).getTime():0, startedBy:maint.started_by||'', startedAt:maint.started_at?new Date(maint.started_at).getTime():0 };
-  } else { maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 }; }
+  } else {
+    if (wasActive) {
+      showGlobalBanner('🟢 Тех.работы закончились! Можно играть!', 'maint-end', '🟢', 8000);
+    }
+    maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
+  }
   updateMaintToggleUI();
   checkAndApplyMaintenance();
 }
+
 function updateMaintToggleUI() {
   const row = document.getElementById('maintToggleRow'), status = document.getElementById('maintToggleStatus'), sw = document.getElementById('maintSwitch');
   if (!row || !status || !sw) return;
@@ -2379,9 +2767,10 @@ async function toggleMaintenance() {
     if (r && r.ok) {
       maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
       userExitedMaintenance = false;
-      try { localStorage.removeItem('lb16_exited_maint'); } catch(e) {}
+      try { localStorage.removeItem('lb161_exited_maint'); } catch(e) {}
       updateMaintToggleUI(); hideMaintAdminBadge(); hideMaintenanceScreen();
       showToast('🟢 Тех.работы отключены','info');
+      showGlobalBanner('🟢 Тех.работы закончились! Можно играть!', 'maint-end', '🟢', 8000);
     } else showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
   } else openMaintenanceStartModal();
 }
@@ -2408,28 +2797,58 @@ function showUpdateWaitingScreen(d) {
   if (!s) return;
   const emojis = ['⏳','🔄','✨','🎁','🚀','💫'];
   let parts = '';
-  for (let i = 0; i < 20; i++) parts += `<div class="maint-emoji" style="left:${Math.random()*100}%;font-size:${20+Math.random()*20}px;animation-duration:${4+Math.random()*4}s;animation-delay:${Math.random()*5}s;">${emojis[i%emojis.length]}</div>`;
-  let timerHtml = d.until && d.until > Date.now() ? `<div class="maint-label">⏱ ОСТАЛОСЬ</div><div class="maint-timer" id="updateWaitingTimerText" style="color:#00d4ff;">${Math.floor((d.until-Date.now())/60000)}:00</div>` : '';
+  for (let i = 0; i < 20; i++) {
+    const left = (i * 5) % 100;
+    const dur = 5 + (i % 4);
+    const delay = (i * 0.4) % 5;
+    const size = 22 + (i % 14);
+    parts += `<div class="maint-emoji" style="left:${left}%;font-size:${size}px;animation-duration:${dur}s;animation-delay:-${delay}s;">${emojis[i%emojis.length]}</div>`;
+  }
+  let timerHtml = '';
+  if (d.until && d.until > Date.now()) {
+    timerHtml = `<div class="maint-label">⏱ ОСТАЛОСЬ</div><div class="maint-timer" id="updateWaitingTimerText" style="color:#00d4ff;">${formatTimer(d.until-Date.now())}</div>`;
+  }
   s.innerHTML = `<div class="maint-particles">${parts}</div><div class="maint-content"><div class="maint-icon-wrap"><div class="maint-ring" style="border-color:rgba(0,212,255,0.5);"></div><div class="maint-icon">⏳</div></div><div class="maint-title" style="background:linear-gradient(90deg,#00d4ff,#8a2be2,#00d4ff);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">ОЖИДАНИЕ ОБНОВЛЕНИЯ</div><div class="maint-box" style="border-color:rgba(0,212,255,0.5);"><div class="maint-label">📢 ЧТО ПРОИСХОДИТ</div><div class="maint-value" style="color:#5bc0eb;">Скоро выйдет новое обновление игры. Пожалуйста, подождите.</div><div style="border-top:1px solid rgba(255,255,255,0.1);margin:14px 0;"></div>${timerHtml}</div><button class="maint-exit-btn" style="border-color:rgba(0,212,255,0.5);background:rgba(0,212,255,0.15);color:#7dd4f0;" onclick="exitUpdateWaitingToMenu()">🚪 Выйти в меню</button></div>`;
   s.classList.remove('hidden');
-  if (window._updateWaitingTimer) clearInterval(window._updateWaitingTimer);
-  window._updateWaitingTimer = setInterval(() => {
+  startUpdateWaitingTimer();
+}
+
+function startUpdateWaitingTimer() {
+  if (_uwTimerInterval) clearInterval(_uwTimerInterval);
+  _uwTimerInterval = setInterval(() => {
     if (game.isAdmin || isMainAdmin()) { hideUpdateWaitingScreen(); return; }
     const el = document.getElementById('updateWaitingTimerText');
-    if (!el || !updateWaitingState.until) return;
+    if (!el) return;
+    if (!updateWaitingState.until) return;
     const msLeft = updateWaitingState.until - Date.now();
+    el.textContent = formatTimer(msLeft);
     if (msLeft <= 0) {
-      el.textContent = '0:00';
-      hideUpdateWaitingScreen();
-      updateWaitingState.active = false;
-      window._updateWaitingScreenActive = false;
-      window._updateWaitingScreenClosed = false;
-      return;
+      endUpdateWaitingAuto();
     }
-    el.textContent = `${Math.floor(msLeft/60000)}:${String(Math.floor((msLeft%60000)/1000)).padStart(2,'0')}`;
   }, 1000);
 }
-function hideUpdateWaitingScreen() { const s = document.getElementById('updateWaitingScreen'); if (s) { s.classList.add('hidden'); s.innerHTML = ''; } if (window._updateWaitingTimer) { clearInterval(window._updateWaitingTimer); window._updateWaitingTimer = null; } }
+
+function endUpdateWaitingAuto() {
+  if (!updateWaitingState.active) return;
+  updateWaitingState = { active:false, until:0, startedBy:'', startedAt:0 };
+  window._updateWaitingScreenActive = false;
+  window._updateWaitingScreenClosed = false;
+  hideUpdateWaitingScreen();
+  showGlobalBanner('🎉 Новое обновление вышло! Заходи и играй!', 'update', '🎉', 9000);
+  if (game.playerName && document.getElementById('gameScreen')) {
+    document.getElementById('gameScreen').classList.remove('hidden');
+    document.getElementById('authScreen').classList.add('hidden');
+    renderAll();
+  }
+  updateUpdateWaitingToggleUI();
+}
+
+function hideUpdateWaitingScreen() {
+  const s = document.getElementById('updateWaitingScreen');
+  if (s) { s.classList.add('hidden'); s.innerHTML = ''; }
+  if (_uwTimerInterval) { clearInterval(_uwTimerInterval); _uwTimerInterval = null; }
+}
+
 function exitUpdateWaitingToMenu() {
   window._updateWaitingScreenActive = true;
   window._updateWaitingScreenClosed = false;
@@ -2441,6 +2860,7 @@ function exitUpdateWaitingToMenu() {
   document.getElementById('loginNick').value = ''; document.getElementById('loginPass').value = '';
   document.getElementById('loginErr').textContent = '';
 }
+
 function checkAndApplyUpdateWaiting() {
   if (maintenanceState.active) { hideUpdateWaitingScreen(); return; }
   if (game.isAdmin || isMainAdmin()) {
@@ -2449,15 +2869,21 @@ function checkAndApplyUpdateWaiting() {
     else hideUpdateWaitingBadge();
     return;
   }
-  if (updateWaitingState.active && !window._updateWaitingScreenActive && !window._updateWaitingScreenClosed) showUpdateWaitingScreen(updateWaitingState);
-  else hideUpdateWaitingScreen();
+  if (updateWaitingState.active && !window._updateWaitingScreenActive && !window._updateWaitingScreenClosed) {
+    if (document.getElementById('updateWaitingScreen').classList.contains('hidden')) showUpdateWaitingScreen(updateWaitingState);
+  } else hideUpdateWaitingScreen();
   if (game.isAdmin && updateWaitingState.active) showUpdateWaitingBadge();
   else if (game.isAdmin && !updateWaitingState.active) hideUpdateWaitingBadge();
 }
+
 function updateUpdateWaitingFromCloud(data) {
   const uw = data.update_waiting;
   const now = Date.now();
+  const wasActive = updateWaitingState.active;
   if (uw && uw.active && uw.until && new Date(uw.until).getTime() <= now) {
+    if (wasActive) {
+      showGlobalBanner('🎉 Новое обновление вышло! Заходи и играй!', 'update', '🎉', 9000);
+    }
     updateWaitingState = { active:false, until:0, startedBy:'', startedAt:0 };
     window._updateWaitingScreenActive = false;
     window._updateWaitingScreenClosed = false;
@@ -2466,12 +2892,16 @@ function updateUpdateWaitingFromCloud(data) {
   if (uw && uw.active) {
     updateWaitingState = { active:true, until:uw.until?new Date(uw.until).getTime():0, startedBy:uw.started_by||'', startedAt:uw.started_at?new Date(uw.started_at).getTime():0 };
   } else {
+    if (wasActive) {
+      showGlobalBanner('🎉 Новое обновление вышло! Заходи и играй!', 'update', '🎉', 9000);
+    }
     updateWaitingState = { active:false, until:0, startedBy:'', startedAt:0 };
     window._updateWaitingScreenActive = false;
     window._updateWaitingScreenClosed = false;
   }
   updateUpdateWaitingToggleUI(); checkAndApplyUpdateWaiting();
 }
+
 function updateUpdateWaitingToggleUI() {
   const row = document.getElementById('uwToggleRow'), status = document.getElementById('uwToggleStatus'), sw = document.getElementById('uwSwitch');
   if (!row || !status || !sw) return;
@@ -2496,6 +2926,7 @@ async function toggleUpdateWaiting() {
       window._updateWaitingScreenClosed = false;
       updateUpdateWaitingToggleUI(); hideUpdateWaitingBadge(); hideUpdateWaitingScreen();
       showToast('🟢 Ожидание отключено','info');
+      showGlobalBanner('🎉 Новое обновление вышло! Заходи и играй!', 'update', '🎉', 9000);
     } else showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
     return;
   }
@@ -2853,6 +3284,7 @@ function renderAll() {
   document.getElementById('profileAchCount').textContent = Object.keys(game.achievements || {}).filter(k => game.achievements[k]).length;
   updateDailyBadge();
   renderMainStatuses();
+  renderLevelCard();
 }
 
 function playGiftAnimation(amount) {
@@ -3047,7 +3479,7 @@ async function initGame() {
   generateAuctionRotation();
   startTimeOfDayTimer();
   startNewbieCheck();
-  try { if (localStorage.getItem('lb16_exited_maint') === '1') userExitedMaintenance = true; } catch(e) {}
+  try { if (localStorage.getItem('lb161_exited_maint') === '1') userExitedMaintenance = true; } catch(e) {}
   try {
     const maint = await fetchMaintenance();
     if (maint?.active) maintenanceState = { active:true, reason:maint.reason, until:maint.until?new Date(maint.until).getTime():0, startedBy:maint.started_by, startedAt:maint.started_at?new Date(maint.started_at).getTime():0 };
@@ -3067,7 +3499,7 @@ async function initGame() {
   setInterval(() => { if (!isAppSuspended) tickWorldEventTimer(); }, 1000);
   setInterval(() => { if (isAppSuspended) return; if (game.clients.length < getClientCount() - 1) { generateClients(); if (!document.getElementById('clientsApp').classList.contains('hidden')) renderClients(); } }, 45000);
   setInterval(() => { if (isAppSuspended) return; const added = processDepositInterest(); if (added > 0) { renderAll(); if (!document.getElementById('bankApp').classList.contains('hidden')) renderBank(); saveGame(); } }, 60000);
-  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v16.0');
+  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v16.1');
 }
 
 document.getElementById('loginNick')?.addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });

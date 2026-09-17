@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>OWERINEZZ COMPANY · Ломбард BY v15.7</title>
+<title>OWERINEZZ COMPANY · Ломбард BY v15.9</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -352,6 +352,14 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
 .world-event-toast .we-timer { font-size: 11px; color: #ffd700; margin-top: 6px; font-weight: bold; opacity: 0.9; }
 .world-event-badge { position: absolute; top: 78px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg,#8a2be2,#ff4500); color: white; font-size: 11px; font-weight: bold; padding: 5px 14px; border-radius: 20px; z-index: 600; cursor: pointer; white-space: nowrap; display: none; border: 2px solid rgba(255,215,0,0.6); animation: eventBadgePulse 1.5s ease-in-out infinite; }
 @keyframes eventBadgePulse { 0%,100% { box-shadow: 0 0 0 rgba(255,215,0,0); } 50% { box-shadow: 0 0 20px rgba(255,215,0,0.8); } }
+/* [STATUS] стили для бейджей статусов в профиле */
+.statuses-row { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 10px; }
+.status-badge-item { display: inline-flex; align-items: center; gap: 4px; background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(138,43,226,0.12)); border: 1px solid rgba(255,215,0,0.35); border-radius: 14px; padding: 3px 10px; font-size: 11px; font-weight: bold; color: #ffd700; white-space: nowrap; animation: statusPop 0.5s ease; }
+.status-badge-item .sb-emoji { font-size: 13px; }
+@keyframes statusPop { 0% { transform: scale(0); opacity: 0; } 70% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+.status-badge-item.locked { filter: grayscale(1); opacity: 0.35; border-color: rgba(255,255,255,0.1); color: #7a8a9a; }
+.status-toast { position: absolute; top: 100px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #8a2be2, #ffd700); color: #05070c; padding: 10px 20px; border-radius: 20px; font-weight: bold; font-size: 14px; z-index: 950; box-shadow: 0 8px 30px rgba(0,0,0,0.6); animation: statusToastAnim 4s ease forwards; pointer-events: none; white-space: nowrap; }
+@keyframes statusToastAnim { 0% { transform: translate(-50%, -40px) scale(0.7); opacity: 0; } 15% { transform: translate(-50%, 0) scale(1); opacity: 1; } 85% { transform: translate(-50%, 0) scale(1); opacity: 1; } 100% { transform: translate(-50%, -40px) scale(0.7); opacity: 0; } }
 </style>
 </head><body>
 <div class="phone">
@@ -364,7 +372,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
     <div class="splash-sticker">💼</div>
     <div class="splash-title">OWERINEZZ COMPANY</div>
     <div class="splash-line"></div>
-    <div class="splash-subtitle">ЛОМБАРД BY · v15.7</div>
+    <div class="splash-subtitle">ЛОМБАРД BY · v15.9</div>
     <div class="splash-loading"></div>
   </div>
 
@@ -379,7 +387,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
     <div id="authScreen">
       <div class="auth-logo">💰</div>
       <div class="auth-title">Ломбард BY</div>
-      <div class="auth-subtitle">OWERINEZZ COMPANY · v15.7</div>
+      <div class="auth-subtitle">OWERINEZZ COMPANY · v15.9</div>
       <div class="auth-tabs">
         <button class="tab active" id="tabLogin" onclick="switchAuthTab('login')">🔑 Вход</button>
         <button class="tab" id="tabRegister" onclick="switchAuthTab('register')">📝 Регистрация</button>
@@ -454,6 +462,8 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
             </div>
             <button class="logout-btn" onclick="openLogout()">🚪</button>
           </div>
+          <!-- [STATUS] ряд бейджей в шапке главного экрана -->
+          <div class="statuses-row" id="mainStatusesRow"></div>
         </div>
         <div class="card">
           <div class="header-row">
@@ -615,7 +625,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
 <div id="eventParticles"></div>
 <script>
 // ============================================================
-// OWERINEZZ COMPANY · Ломбард BY v15.7
+// OWERINEZZ COMPANY · Ломбард BY v15.9
 // ============================================================
 
 const SUPABASE_URL = 'https://zuwsvwxglxgzkuyfxbpu.supabase.co';
@@ -637,6 +647,24 @@ window._unbanScreenActive = false;
 window._unfreezeScreenActive = false;
 window._updateWaitingScreenActive = false;
 window._updateWaitingScreenClosed = false;
+
+// [STATUS] Справочник статусов
+const STATUSES = {
+  newbie:     { icon:'🌱', name:'Новичок',     desc:'Первые 7 дней в игре',           order:1 },
+  first_sale: { icon:'🎯', name:'Первый шаг',  desc:'Сделал первую продажу',          order:2 },
+  buyer:      { icon:'🛒', name:'Покупатель',  desc:'Купил 10 предметов',             order:3 },
+  dealer:     { icon:'💼', name:'Делец',       desc:'Сделал 25 продаж',               order:4 },
+  merchant:   { icon:'📈', name:'Коммерсант',  desc:'Сделал 100 продаж',              order:5 },
+  duelist:    { icon:'⚔️', name:'Дуэлянт',     desc:'Победил в 3 PvP-аукционах',      order:6 },
+  rich:       { icon:'💰', name:'Богач',       desc:'Накопил 100 000 BYN',            order:7 },
+  oligarch:   { icon:'👑', name:'Олигарх',     desc:'Накопил 1 000 000 BYN',          order:8 },
+  veteran:    { icon:'⭐', name:'Ветеран',     desc:'14 дней в игре',                 order:9 },
+  legend:     { icon:'💎', name:'Легенда',     desc:'30 дней в игре',                 order:10 }
+};
+
+// Храним статусы игрока в game
+game = game || {};
+game.statuses = []; // массив объектов { id, date }
 
 async function hashPassSHA256(pass) {
   const enc = new TextEncoder().encode(pass);
@@ -810,7 +838,8 @@ let game = {
   achievements:{}, dailyTasks:{}, dailyTasksDate:'', stats:{},
   pvpLots:[], pvpMyLots:[],
   isNewbie:false, newbieUntil:0, newbieDaysLeft:0,
-  worldEvent:null
+  worldEvent:null,
+  statuses: [] // [STATUS]
 };
 let bank = { deposit:0, credit:0, creditHistory:50, depositLastUpdate:Date.now(), depositPeriodMs:DEPOSIT.PERIOD_MS, depositCountToday:0, depositLastResetDay:new Date().toISOString().slice(0,10) };
 let casino = { wins:0, losses:0 };
@@ -1016,13 +1045,19 @@ function applyLoadedSave(result) {
   game.adminPerms = p.admin_perms || {};
   game.isNewbie = !!p.is_newbie;
   game.newbieUntil = p.newbie_until ? new Date(p.newbie_until).getTime() : 0;
+  // [STATUS] подгружаем статусы
+  game.statuses = Array.isArray(p.statuses) ? p.statuses : [];
   bank = s.bank || { deposit:0, credit:0, creditHistory:50, depositLastUpdate:Date.now(), depositPeriodMs:DEPOSIT.PERIOD_MS, depositCountToday:0, depositLastResetDay:new Date().toISOString().slice(0,10) };
   casino = s.casino || { wins:0, losses:0 };
   processDepositInterest();
+  // [STATUS] сразу обновляем статусы
+  updatePlayerStatuses(true);
 }
 
 async function enterGameScreen() {
   await checkNewbieStatus();
+  // [STATUS] обновляем статусы при входе
+  await updatePlayerStatuses(true);
   document.getElementById('authScreen').classList.add('hidden');
   document.getElementById('gameScreen').classList.remove('hidden');
   document.getElementById('mainAvatar').textContent = game.playerAvatar;
@@ -1197,72 +1232,51 @@ function updateDailyBadge() {
   badge.classList.toggle('hidden', !hasClaimable);
 }
 
-function generateClients() {
-  game.clients = [];
-  const isNight = getTimeOfDay() === 'night';
-  let baseCount = getClientCount();
-  if (game.isNewbie) baseCount = Math.round(baseCount * 1.3);
-  if (game.worldEvent && game.worldEvent.effects && game.worldEvent.effects.clientBoost) {
-    baseCount = Math.round(baseCount * (1 + game.worldEvent.effects.clientBoost));
-    if (baseCount < 1) baseCount = 1;
-  }
-  const count = isNight ? rand(1, Math.max(1, baseCount - 1)) : rand(1, baseCount);
-
-  for (let i = 0; i < count; i++) {
-    const tierMax = getItemTierMax();
-    const pool = ITEM_TEMPLATES.filter(t => t.tier <= tierMax);
-    if (pool.length === 0) continue;
-
-    let client = null;
-    const roll = Math.random();
-
-    if (roll < 0.05) {
-      const vip = pick(VIP_CLIENTS);
-      const pool2 = ITEM_TEMPLATES.filter(t => t.tier >= vip.tierMin && t.tier <= vip.tierMax);
-      if (pool2.length > 0) {
-        const item = pick(pool2);
-        const condition = rand(70, 100);
-        const realPrice = Math.round(item.basePrice * condition/100 * vip.bonus);
-        const askPrice = Math.round(realPrice * rand(80,95)/100);
-        client = { id:'vip_'+Date.now()+'_'+i, name:vip.name, avatar:vip.avatar, phrase:vip.phrase, item:{ ...item, isFake:false, condition }, askPrice, realPrice, inspected:false, type:'vip' };
-      }
+// [STATUS] Запрос обновления статусов на сервере
+async function updatePlayerStatuses(showNewToast) {
+  if (!game.playerName) return;
+  const r = await rpc('update_player_statuses', { p_nick: game.playerName });
+  if (!r || !r.ok) return;
+  const oldIds = (game.statuses || []).map(s => s.id);
+  game.statuses = Array.isArray(r.statuses) ? r.statuses : [];
+  if (r.changed && Array.isArray(r.newly_added)) {
+    if (showNewToast) {
+      r.newly_added.forEach((id, i) => {
+        const st = STATUSES[id];
+        if (!st) return;
+        setTimeout(() => showStatusToast(st), i * 800);
+      });
     }
-    else if (roll < (isNight ? 0.30 : 0.15)) {
-      const scam = pick(SCAM_CLIENTS);
-      const pool2 = ITEM_TEMPLATES.filter(t => t.tier <= Math.min(tierMax, 3));
-      if (pool2.length > 0) {
-        const item = pick(pool2);
-        const isFake = Math.random() < (isNight ? 0.95 : 0.85);
-        const condition = rand(30, 90);
-        const realPrice = isFake ? Math.round(item.basePrice * 0.1) : Math.round(item.basePrice * condition/100);
-        const askPrice = Math.round(item.basePrice * 0.9);
-        client = { id:'scam_'+Date.now()+'_'+i, name:scam.name, avatar:scam.avatar, phrase:scam.phrase, item:{ ...item, isFake, condition }, askPrice, realPrice, inspected:false, type:'scam' };
-      }
-    }
-    else if (roll < 0.20) {
-      const col = pick(COLLECTOR_CLIENTS);
-      const pool2 = ITEM_TEMPLATES.filter(t => t.icon === col.lookFor);
-      if (pool2.length > 0) {
-        const item = pick(pool2);
-        const condition = rand(60, 100);
-        const realPrice = Math.round(item.basePrice * condition/100 * col.bonus);
-        const askPrice = Math.round(realPrice * rand(85,95)/100);
-        client = { id:'col_'+Date.now()+'_'+i, name:col.name, avatar:col.avatar, phrase:col.phrase, item:{ ...item, isFake:false, condition }, askPrice, realPrice, inspected:false, type:'collector' };
-      }
-    }
-
-    if (!client) {
-      const item = pick(pool);
-      const isFake = Math.random() < 0.30;
-      const condition = rand(20, 100);
-      const realPrice = isFake ? Math.round(item.basePrice*0.12) : Math.round(item.basePrice*condition/100);
-      const askPrice = Math.round(realPrice * rand(55,95)/100);
-      client = { id:'c_'+Date.now()+'_'+i, name:pick(CLIENT_NAMES), avatar:pick(CLIENT_AVATARS), phrase:pick(CLIENT_PHRASES), item:{ ...item, isFake, condition }, askPrice, realPrice, inspected:false, type:'normal' };
-    }
-
-    game.clients.push(client);
+    // Обновляем UI
+    renderMainStatuses();
+    if (!document.getElementById('profileApp').classList.contains('hidden')) renderProfile();
+  } else {
+    renderMainStatuses();
   }
 }
+
+function showStatusToast(st) {
+  const div = document.createElement('div');
+  div.className = 'status-toast';
+  div.innerHTML = `${st.icon} Новый статус: <b>${st.name}</b>`;
+  document.querySelector('.phone').appendChild(div);
+  setTimeout(() => div.remove(), 4200);
+}
+
+// [STATUS] Рендер бейджей в шапке главного экрана
+function renderMainStatuses() {
+  const row = document.getElementById('mainStatusesRow');
+  if (!row) return;
+  if (!game.statuses || game.statuses.length === 0) { row.innerHTML = ''; return; }
+  // Сортируем по order
+  const sorted = [...game.statuses].sort((a,b) => (STATUSES[a.id]?.order || 99) - (STATUSES[b.id]?.order || 99));
+  row.innerHTML = sorted.map(s => {
+    const st = STATUSES[s.id];
+    if (!st) return '';
+    return `<span class="status-badge-item" title="${st.desc}"><span class="sb-emoji">${st.icon}</span>${st.name}</span>`;
+  }).join('');
+}
+
 function renderProfile() {
   const c = document.getElementById('profileContent');
   if (!c) return;
@@ -1275,6 +1289,9 @@ function renderProfile() {
   const timeIcon = currentTimeOfDay === 'night' ? '🌙 Ночь' : '☀️ День';
   const isNewbie = game.isNewbie;
   const daysLeft = game.newbieDaysLeft || 0;
+  // [STATUS] сортируем все статусы по порядку
+  const allStatuses = Object.entries(STATUSES).sort((a,b) => a[1].order - b[1].order);
+  const myIds = (game.statuses || []).map(s => s.id);
 
   let html = `
     <div class="card" style="text-align:center;">
@@ -1283,6 +1300,11 @@ function renderProfile() {
       ${isMainAdmin() ? '<div style="color:#ffd700;font-size:12px;">👑 ГЛАВНЫЙ АДМИН</div>' : ''}
       ${game.isAdmin && !isMainAdmin() ? '<div style="color:#ffd700;font-size:12px;">👑 Админ</div>' : ''}
       <div style="font-size:13px;opacity:0.6;margin-top:8px;">${getCurrentOffice().icon} ${getCurrentOffice().name} • ${timeIcon}</div>
+      <!-- [STATUS] ряд моих статусов -->
+      <div class="statuses-row" style="margin-top:12px;">
+        ${myIds.length === 0 ? '<span style="font-size:11px;opacity:0.5;">Пока нет статусов</span>' : ''}
+        ${myIds.map(id => { const st = STATUSES[id]; if (!st) return ''; return `<span class="status-badge-item" title="${st.desc}"><span class="sb-emoji">${st.icon}</span>${st.name}</span>`; }).join('')}
+      </div>
     </div>
     ${isNewbie ? `
     <div class="newbie-card">
@@ -1301,6 +1323,23 @@ function renderProfile() {
         <div class="stat-box"><div class="sv" style="color:#7fc8f0;">${totalBought}</div><div class="sl">🛒 Куплено</div></div>
         <div class="stat-box"><div class="sv" style="color:#d4a543;">${totalSold}</div><div class="sl">💸 Продано</div></div>
         <div class="stat-box"><div class="sv" style="color:#8a2be2;">${pvpWins}</div><div class="sl">⚔️ PvP побед</div></div>
+      </div>
+    </div>
+    <!-- [STATUS] список всех статусов с прогрессом -->
+    <div class="card">
+      <div style="font-weight:bold;margin-bottom:10px;">🎖️ Статусы (${myIds.length}/${allStatuses.length})</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        ${allStatuses.map(([id, st]) => {
+          const has = myIds.includes(id);
+          return `<div style="display:flex;align-items:center;gap:10px;background:rgba(0,0,0,0.25);border-radius:10px;padding:8px 12px;${has?'border:1px solid rgba(255,215,0,0.3);':'opacity:0.5;'}">
+            <span style="font-size:22px;">${st.icon}</span>
+            <div style="flex:1;text-align:left;">
+              <div style="font-weight:bold;font-size:13px;${has?'color:#ffd700;':''}">${st.name}</div>
+              <div style="font-size:11px;opacity:0.6;">${st.desc}</div>
+            </div>
+            ${has ? '<span style="color:#5cdb8a;font-size:16px;">✅</span>' : '<span style="font-size:11px;opacity:0.5;">🔒</span>'}
+          </div>`;
+        }).join('')}
       </div>
     </div>
     <div class="card">
@@ -1344,6 +1383,8 @@ async function claimDailyReward(id) {
   showToast(`🎁 +${tpl.reward} BYN!`, 'info');
   playGiftAnimation(tpl.reward);
   checkAchievements();
+  // [STATUS] проверяем статусы
+  updatePlayerStatuses(true);
   renderAll(); renderDaily(); updateDailyBadge();
   await saveGame();
 }
@@ -1457,6 +1498,8 @@ async function buyFromClient(idx) {
   if (game.clients.length === 0) generateClients();
   checkAchievements();
   updateDailyProgress();
+  // [STATUS] проверяем статусы
+  updatePlayerStatuses(true);
   renderAll(); renderClients();
   showToast('✅ Куплено','info');
   saveGame();
@@ -1562,6 +1605,8 @@ async function publishAd(idx) {
   incStat('daily_total_earned', finalPrice);
   checkAchievements();
   updateDailyProgress();
+  // [STATUS] проверяем статусы (продажи, деньги)
+  updatePlayerStatuses(true);
   renderAll(); renderAds();
   showToast(`💰 +${finalPrice} BYN`,'info');
   saveGame();
@@ -1739,6 +1784,8 @@ async function pvpBuyoutConfirm(lotId) {
   await refreshPvpLots();
   await reloadMoney();
   checkAchievements();
+  // [STATUS] проверяем статусы (PvP)
+  updatePlayerStatuses(true);
   renderAll(); renderPvp();
   showToast('🎉 Куплено!','info');
 }
@@ -1888,6 +1935,8 @@ function acceptOffer() {
   game.chats = game.chats.filter(x => x.id !== chat.id);
   checkAchievements();
   updateDailyProgress();
+  // [STATUS] проверяем статусы
+  updatePlayerStatuses(true);
   showToast(`💰 +${finalPrice} BYN!`,'info');
   game.currentChatId = null;
   closeApp(); saveGame();
@@ -2540,6 +2589,12 @@ async function refreshMyProfile() {
       game.adminPerms = data.admin_perms || {};
       applyAdminPermsToUI(); updateAdminButtons();
     }
+    // [STATUS] подгружаем статусы при polling
+    if (Array.isArray(data.statuses)) {
+      const oldLen = (game.statuses || []).length;
+      game.statuses = data.statuses;
+      if (game.statuses.length !== oldLen) renderMainStatuses();
+    }
   } catch(e) {}
 }
 
@@ -2817,6 +2872,8 @@ function renderAll() {
   document.getElementById('mainAvatar').textContent = game.playerAvatar;
   document.getElementById('profileAchCount').textContent = Object.keys(game.achievements || {}).filter(k => game.achievements[k]).length;
   updateDailyBadge();
+  // [STATUS] обновляем бейджи в шапке
+  renderMainStatuses();
 }
 
 function playGiftAnimation(amount) {
@@ -2962,6 +3019,8 @@ function startPolling() {
       if (game.isAdmin) await refreshAdminCache();
       await refreshPvpLots();
       if (!document.getElementById('pvpApp').classList.contains('hidden')) renderPvp();
+      // [STATUS] периодически проверяем статусы (раз в 5 сек — ок)
+      await updatePlayerStatuses(true);
     } catch(e) {}
   }, 5000);
 }
@@ -3026,7 +3085,7 @@ async function initGame() {
   setInterval(() => { if (!isAppSuspended) tickWorldEventTimer(); }, 1000);
   setInterval(() => { if (isAppSuspended) return; if (game.clients.length < getClientCount() - 1) { generateClients(); if (!document.getElementById('clientsApp').classList.contains('hidden')) renderClients(); } }, 45000);
   setInterval(() => { if (isAppSuspended) return; const added = processDepositInterest(); if (added > 0) { renderAll(); if (!document.getElementById('bankApp').classList.contains('hidden')) renderBank(); saveGame(); } }, 60000);
-  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v15.7');
+  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v15.9');
 }
 
 document.getElementById('loginNick')?.addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });

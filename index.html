@@ -662,10 +662,6 @@ const STATUSES = {
   legend:     { icon:'💎', name:'Легенда',     desc:'30 дней в игре',                 order:10 }
 };
 
-// Храним статусы игрока в game
-game = game || {};
-game.statuses = []; // массив объектов { id, date }
-
 async function hashPassSHA256(pass) {
   const enc = new TextEncoder().encode(pass);
   const buf = await crypto.subtle.digest('SHA-256', enc);
@@ -839,7 +835,7 @@ let game = {
   pvpLots:[], pvpMyLots:[],
   isNewbie:false, newbieUntil:0, newbieDaysLeft:0,
   worldEvent:null,
-  statuses: [] // [STATUS]
+  statuses: []
 };
 let bank = { deposit:0, credit:0, creditHistory:50, depositLastUpdate:Date.now(), depositPeriodMs:DEPOSIT.PERIOD_MS, depositCountToday:0, depositLastResetDay:new Date().toISOString().slice(0,10) };
 let casino = { wins:0, losses:0 };
@@ -1050,14 +1046,19 @@ function applyLoadedSave(result) {
   bank = s.bank || { deposit:0, credit:0, creditHistory:50, depositLastUpdate:Date.now(), depositPeriodMs:DEPOSIT.PERIOD_MS, depositCountToday:0, depositLastResetDay:new Date().toISOString().slice(0,10) };
   casino = s.casino || { wins:0, losses:0 };
   processDepositInterest();
-  // [STATUS] сразу обновляем статусы
-  updatePlayerStatuses(true);
+}
+
+// [STATUS] Безопасный вызов updatePlayerStatuses с таймаутом
+async function safeUpdateStatuses(showNewToast) {
+  try {
+    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 4000));
+    await Promise.race([updatePlayerStatuses(showNewToast), timeout]);
+  } catch(e) {
+    console.warn('Status update skipped:', e.message);
+  }
 }
 
 async function enterGameScreen() {
-  await checkNewbieStatus();
-  // [STATUS] обновляем статусы при входе
-  await updatePlayerStatuses(true);
   document.getElementById('authScreen').classList.add('hidden');
   document.getElementById('gameScreen').classList.remove('hidden');
   document.getElementById('mainAvatar').textContent = game.playerAvatar;
@@ -1082,8 +1083,11 @@ async function enterGameScreen() {
   renderAll();
   updateCasinoIconState();
   startPolling();
-  await refreshPvpLots();
-  await saveGame();
+  // Фоновые задачи — не блокируют вход
+  refreshPvpLots().catch(()=>{});
+  safeUpdateStatuses(true);
+  checkNewbieStatus().catch(()=>{});
+  saveGame().catch(()=>{});
 }
 
 async function saveGame() {
@@ -1237,22 +1241,16 @@ async function updatePlayerStatuses(showNewToast) {
   if (!game.playerName) return;
   const r = await rpc('update_player_statuses', { p_nick: game.playerName });
   if (!r || !r.ok) return;
-  const oldIds = (game.statuses || []).map(s => s.id);
   game.statuses = Array.isArray(r.statuses) ? r.statuses : [];
-  if (r.changed && Array.isArray(r.newly_added)) {
-    if (showNewToast) {
-      r.newly_added.forEach((id, i) => {
-        const st = STATUSES[id];
-        if (!st) return;
-        setTimeout(() => showStatusToast(st), i * 800);
-      });
-    }
-    // Обновляем UI
-    renderMainStatuses();
-    if (!document.getElementById('profileApp').classList.contains('hidden')) renderProfile();
-  } else {
-    renderMainStatuses();
+  if (r.changed && Array.isArray(r.newly_added) && showNewToast) {
+    r.newly_added.forEach((id, i) => {
+      const st = STATUSES[id];
+      if (!st) return;
+      setTimeout(() => showStatusToast(st), i * 800);
+    });
   }
+  renderMainStatuses();
+  if (!document.getElementById('profileApp').classList.contains('hidden')) renderProfile();
 }
 
 function showStatusToast(st) {
@@ -1268,7 +1266,6 @@ function renderMainStatuses() {
   const row = document.getElementById('mainStatusesRow');
   if (!row) return;
   if (!game.statuses || game.statuses.length === 0) { row.innerHTML = ''; return; }
-  // Сортируем по order
   const sorted = [...game.statuses].sort((a,b) => (STATUSES[a.id]?.order || 99) - (STATUSES[b.id]?.order || 99));
   row.innerHTML = sorted.map(s => {
     const st = STATUSES[s.id];
@@ -1289,7 +1286,6 @@ function renderProfile() {
   const timeIcon = currentTimeOfDay === 'night' ? '🌙 Ночь' : '☀️ День';
   const isNewbie = game.isNewbie;
   const daysLeft = game.newbieDaysLeft || 0;
-  // [STATUS] сортируем все статусы по порядку
   const allStatuses = Object.entries(STATUSES).sort((a,b) => a[1].order - b[1].order);
   const myIds = (game.statuses || []).map(s => s.id);
 
@@ -1300,7 +1296,6 @@ function renderProfile() {
       ${isMainAdmin() ? '<div style="color:#ffd700;font-size:12px;">👑 ГЛАВНЫЙ АДМИН</div>' : ''}
       ${game.isAdmin && !isMainAdmin() ? '<div style="color:#ffd700;font-size:12px;">👑 Админ</div>' : ''}
       <div style="font-size:13px;opacity:0.6;margin-top:8px;">${getCurrentOffice().icon} ${getCurrentOffice().name} • ${timeIcon}</div>
-      <!-- [STATUS] ряд моих статусов -->
       <div class="statuses-row" style="margin-top:12px;">
         ${myIds.length === 0 ? '<span style="font-size:11px;opacity:0.5;">Пока нет статусов</span>' : ''}
         ${myIds.map(id => { const st = STATUSES[id]; if (!st) return ''; return `<span class="status-badge-item" title="${st.desc}"><span class="sb-emoji">${st.icon}</span>${st.name}</span>`; }).join('')}
@@ -1325,7 +1320,6 @@ function renderProfile() {
         <div class="stat-box"><div class="sv" style="color:#8a2be2;">${pvpWins}</div><div class="sl">⚔️ PvP побед</div></div>
       </div>
     </div>
-    <!-- [STATUS] список всех статусов с прогрессом -->
     <div class="card">
       <div style="font-weight:bold;margin-bottom:10px;">🎖️ Статусы (${myIds.length}/${allStatuses.length})</div>
       <div style="display:flex;flex-direction:column;gap:6px;">
@@ -1383,8 +1377,7 @@ async function claimDailyReward(id) {
   showToast(`🎁 +${tpl.reward} BYN!`, 'info');
   playGiftAnimation(tpl.reward);
   checkAchievements();
-  // [STATUS] проверяем статусы
-  updatePlayerStatuses(true);
+  safeUpdateStatuses(true);
   renderAll(); renderDaily(); updateDailyBadge();
   await saveGame();
 }
@@ -1498,8 +1491,7 @@ async function buyFromClient(idx) {
   if (game.clients.length === 0) generateClients();
   checkAchievements();
   updateDailyProgress();
-  // [STATUS] проверяем статусы
-  updatePlayerStatuses(true);
+  safeUpdateStatuses(true);
   renderAll(); renderClients();
   showToast('✅ Куплено','info');
   saveGame();
@@ -1605,8 +1597,7 @@ async function publishAd(idx) {
   incStat('daily_total_earned', finalPrice);
   checkAchievements();
   updateDailyProgress();
-  // [STATUS] проверяем статусы (продажи, деньги)
-  updatePlayerStatuses(true);
+  safeUpdateStatuses(true);
   renderAll(); renderAds();
   showToast(`💰 +${finalPrice} BYN`,'info');
   saveGame();
@@ -1784,8 +1775,7 @@ async function pvpBuyoutConfirm(lotId) {
   await refreshPvpLots();
   await reloadMoney();
   checkAchievements();
-  // [STATUS] проверяем статусы (PvP)
-  updatePlayerStatuses(true);
+  safeUpdateStatuses(true);
   renderAll(); renderPvp();
   showToast('🎉 Куплено!','info');
 }
@@ -1935,8 +1925,7 @@ function acceptOffer() {
   game.chats = game.chats.filter(x => x.id !== chat.id);
   checkAchievements();
   updateDailyProgress();
-  // [STATUS] проверяем статусы
-  updatePlayerStatuses(true);
+  safeUpdateStatuses(true);
   showToast(`💰 +${finalPrice} BYN!`,'info');
   game.currentChatId = null;
   closeApp(); saveGame();
@@ -2589,7 +2578,6 @@ async function refreshMyProfile() {
       game.adminPerms = data.admin_perms || {};
       applyAdminPermsToUI(); updateAdminButtons();
     }
-    // [STATUS] подгружаем статусы при polling
     if (Array.isArray(data.statuses)) {
       const oldLen = (game.statuses || []).length;
       game.statuses = data.statuses;
@@ -2872,7 +2860,6 @@ function renderAll() {
   document.getElementById('mainAvatar').textContent = game.playerAvatar;
   document.getElementById('profileAchCount').textContent = Object.keys(game.achievements || {}).filter(k => game.achievements[k]).length;
   updateDailyBadge();
-  // [STATUS] обновляем бейджи в шапке
   renderMainStatuses();
 }
 
@@ -3019,8 +3006,7 @@ function startPolling() {
       if (game.isAdmin) await refreshAdminCache();
       await refreshPvpLots();
       if (!document.getElementById('pvpApp').classList.contains('hidden')) renderPvp();
-      // [STATUS] периодически проверяем статусы (раз в 5 сек — ок)
-      await updatePlayerStatuses(true);
+      safeUpdateStatuses(false);
     } catch(e) {}
   }, 5000);
 }
@@ -3044,10 +3030,15 @@ function startSplash() {
     p.style.animationDelay = (Math.random()*3)+'s';
     particles.appendChild(p);
   }
-  setTimeout(() => {
-    const s = document.getElementById('splashScreen');
-    if (s) { s.classList.add('hide'); setTimeout(() => s.remove(), 1000); }
-  }, 2500);
+}
+
+// Принудительно скрываем сплэш через 2.5 сек (чтобы игра не висла)
+function autoHideSplash() {
+  const s = document.getElementById('splashScreen');
+  if (s && !s.classList.contains('hide')) {
+    s.classList.add('hide');
+    setTimeout(() => { if (s.parentNode) s.remove(); }, 1000);
+  }
 }
 
 document.addEventListener('visibilitychange', () => {
@@ -3093,6 +3084,8 @@ document.getElementById('loginPass')?.addEventListener('keydown', e => { if (e.k
 
 initGame();
 startSplash();
+// Принудительное скрытие сплэша через 3 сек, чтобы не вис
+setTimeout(autoHideSplash, 3000);
 </script>
 </body>
 </html>

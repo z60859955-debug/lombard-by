@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>OWERINEZZ COMPANY · Ломбард BY v15.9</title>
+<title>OWERINEZZ COMPANY · Ломбард BY v16.0</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -352,7 +352,6 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
 .world-event-toast .we-timer { font-size: 11px; color: #ffd700; margin-top: 6px; font-weight: bold; opacity: 0.9; }
 .world-event-badge { position: absolute; top: 78px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg,#8a2be2,#ff4500); color: white; font-size: 11px; font-weight: bold; padding: 5px 14px; border-radius: 20px; z-index: 600; cursor: pointer; white-space: nowrap; display: none; border: 2px solid rgba(255,215,0,0.6); animation: eventBadgePulse 1.5s ease-in-out infinite; }
 @keyframes eventBadgePulse { 0%,100% { box-shadow: 0 0 0 rgba(255,215,0,0); } 50% { box-shadow: 0 0 20px rgba(255,215,0,0.8); } }
-/* [STATUS] стили для бейджей статусов в профиле */
 .statuses-row { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 10px; }
 .status-badge-item { display: inline-flex; align-items: center; gap: 4px; background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(138,43,226,0.12)); border: 1px solid rgba(255,215,0,0.35); border-radius: 14px; padding: 3px 10px; font-size: 11px; font-weight: bold; color: #ffd700; white-space: nowrap; animation: statusPop 0.5s ease; }
 .status-badge-item .sb-emoji { font-size: 13px; }
@@ -372,7 +371,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
     <div class="splash-sticker">💼</div>
     <div class="splash-title">OWERINEZZ COMPANY</div>
     <div class="splash-line"></div>
-    <div class="splash-subtitle">ЛОМБАРД BY · v15.9</div>
+    <div class="splash-subtitle">ЛОМБАРД BY · v16.0</div>
     <div class="splash-loading"></div>
   </div>
 
@@ -387,7 +386,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
     <div id="authScreen">
       <div class="auth-logo">💰</div>
       <div class="auth-title">Ломбард BY</div>
-      <div class="auth-subtitle">OWERINEZZ COMPANY · v15.9</div>
+      <div class="auth-subtitle">OWERINEZZ COMPANY · v16.0</div>
       <div class="auth-tabs">
         <button class="tab active" id="tabLogin" onclick="switchAuthTab('login')">🔑 Вход</button>
         <button class="tab" id="tabRegister" onclick="switchAuthTab('register')">📝 Регистрация</button>
@@ -462,7 +461,6 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
             </div>
             <button class="logout-btn" onclick="openLogout()">🚪</button>
           </div>
-          <!-- [STATUS] ряд бейджей в шапке главного экрана -->
           <div class="statuses-row" id="mainStatusesRow"></div>
         </div>
         <div class="card">
@@ -625,7 +623,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
 <div id="eventParticles"></div>
 <script>
 // ============================================================
-// OWERINEZZ COMPANY · Ломбард BY v15.9
+// OWERINEZZ COMPANY · Ломбард BY v16.0
 // ============================================================
 
 const SUPABASE_URL = 'https://zuwsvwxglxgzkuyfxbpu.supabase.co';
@@ -648,7 +646,6 @@ window._unfreezeScreenActive = false;
 window._updateWaitingScreenActive = false;
 window._updateWaitingScreenClosed = false;
 
-// [STATUS] Справочник статусов
 const STATUSES = {
   newbie:     { icon:'🌱', name:'Новичок',     desc:'Первые 7 дней в игре',           order:1 },
   first_sale: { icon:'🎯', name:'Первый шаг',  desc:'Сделал первую продажу',          order:2 },
@@ -678,14 +675,14 @@ async function rpc(fn, params) {
 }
 
 const local = {
-  saveUser(u) { try { const a = this._users(); a[u.nick] = u; localStorage.setItem('lb15_users', JSON.stringify(a)); } catch(e) {} },
+  saveUser(u) { try { const a = this._users(); a[u.nick] = u; localStorage.setItem('lb16_users', JSON.stringify(a)); } catch(e) {} },
   getUser(n) { return this._users()[n] || null; },
-  _users() { try { return JSON.parse(localStorage.getItem('lb15_users') || '{}'); } catch(e) { return {}; } },
-  saveGame(n,d) { try { localStorage.setItem('lb15_save_' + n, JSON.stringify(d)); } catch(e) {} },
-  getGame(n) { try { return JSON.parse(localStorage.getItem('lb15_save_' + n)); } catch(e) { return null; } },
-  saveSession(n) { try { localStorage.setItem('lb15_session', n); } catch(e) {} },
-  getSession() { try { return localStorage.getItem('lb15_session'); } catch(e) { return null; } },
-  clearSession() { try { localStorage.removeItem('lb15_session'); } catch(e) {} }
+  _users() { try { return JSON.parse(localStorage.getItem('lb16_users') || '{}'); } catch(e) { return {}; } },
+  saveGame(n,d) { try { localStorage.setItem('lb16_save_' + n, JSON.stringify(d)); } catch(e) {} },
+  getGame(n) { try { return JSON.parse(localStorage.getItem('lb16_save_' + n)); } catch(e) { return null; } },
+  saveSession(n) { try { localStorage.setItem('lb16_session', n); } catch(e) {} },
+  getSession() { try { return localStorage.getItem('lb16_session'); } catch(e) { return null; } },
+  clearSession() { try { localStorage.removeItem('lb16_session'); } catch(e) {} }
 };
 
 const ACHIEVEMENTS = {
@@ -1041,14 +1038,12 @@ function applyLoadedSave(result) {
   game.adminPerms = p.admin_perms || {};
   game.isNewbie = !!p.is_newbie;
   game.newbieUntil = p.newbie_until ? new Date(p.newbie_until).getTime() : 0;
-  // [STATUS] подгружаем статусы
   game.statuses = Array.isArray(p.statuses) ? p.statuses : [];
   bank = s.bank || { deposit:0, credit:0, creditHistory:50, depositLastUpdate:Date.now(), depositPeriodMs:DEPOSIT.PERIOD_MS, depositCountToday:0, depositLastResetDay:new Date().toISOString().slice(0,10) };
   casino = s.casino || { wins:0, losses:0 };
   processDepositInterest();
 }
 
-// [STATUS] Безопасный вызов updatePlayerStatuses с таймаутом
 async function safeUpdateStatuses(showNewToast) {
   try {
     const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 4000));
@@ -1083,7 +1078,6 @@ async function enterGameScreen() {
   renderAll();
   updateCasinoIconState();
   startPolling();
-  // Фоновые задачи — не блокируют вход
   refreshPvpLots().catch(()=>{});
   safeUpdateStatuses(true);
   checkNewbieStatus().catch(()=>{});
@@ -1180,7 +1174,7 @@ function doLogout() {
   if (mainTimers.poll) { clearInterval(mainTimers.poll); mainTimers.poll = null; }
   if (mainTimers.newbie) { clearInterval(mainTimers.newbie); mainTimers.newbie = null; }
   userExitedMaintenance = false;
-  try { localStorage.removeItem('lb14_exited_maint'); } catch(e) {}
+  try { localStorage.removeItem('lb16_exited_maint'); } catch(e) {}
   game.playerName = ''; game.isAdmin = false; passwordHashCache = null;
   showToast('👋 До встречи!','info');
 }
@@ -1236,7 +1230,6 @@ function updateDailyBadge() {
   badge.classList.toggle('hidden', !hasClaimable);
 }
 
-// [STATUS] Запрос обновления статусов на сервере
 async function updatePlayerStatuses(showNewToast) {
   if (!game.playerName) return;
   const r = await rpc('update_player_statuses', { p_nick: game.playerName });
@@ -1261,7 +1254,6 @@ function showStatusToast(st) {
   setTimeout(() => div.remove(), 4200);
 }
 
-// [STATUS] Рендер бейджей в шапке главного экрана
 function renderMainStatuses() {
   const row = document.getElementById('mainStatusesRow');
   if (!row) return;
@@ -2344,11 +2336,11 @@ function showMaintenanceScreen(d) {
   }, 1000);
 }
 function hideMaintenanceScreen() { const s = document.getElementById('maintenanceScreen'); if (s) { s.classList.add('hidden'); s.innerHTML = ''; } if (window._maintTimer) { clearInterval(window._maintTimer); window._maintTimer = null; } }
-function exitMaintenanceToMenu() { userExitedMaintenance = true; try{localStorage.setItem('lb14_exited_maint','1');}catch(e){} hideMaintenanceScreen(); local.clearSession(); document.getElementById('gameScreen').classList.add('hidden'); document.getElementById('authScreen').classList.remove('hidden'); }
+function exitMaintenanceToMenu() { userExitedMaintenance = true; try{localStorage.setItem('lb16_exited_maint','1');}catch(e){} hideMaintenanceScreen(); local.clearSession(); document.getElementById('gameScreen').classList.add('hidden'); document.getElementById('authScreen').classList.remove('hidden'); }
 function shouldShowMaintenance() { if (game.isAdmin || isMainAdmin()) return false; if (!maintenanceState.active) return false; if (userExitedMaintenance) return false; return true; }
 function checkAndApplyMaintenance() {
   if (shouldShowMaintenance()) showMaintenanceScreen(maintenanceState);
-  else { hideMaintenanceScreen(); if (!maintenanceState.active) { userExitedMaintenance = false; try { localStorage.removeItem('lb14_exited_maint'); } catch(e) {} } }
+  else { hideMaintenanceScreen(); if (!maintenanceState.active) { userExitedMaintenance = false; try { localStorage.removeItem('lb16_exited_maint'); } catch(e) {} } }
   if (game.isAdmin && maintenanceState.active) showMaintAdminBadge(); else if (game.isAdmin && !maintenanceState.active) hideMaintAdminBadge();
 }
 function updateMaintenanceFromCloud(data) {
@@ -2357,7 +2349,7 @@ function updateMaintenanceFromCloud(data) {
   if (maint && maint.active && maint.until && new Date(maint.until).getTime() <= now) {
     maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
     userExitedMaintenance = false;
-    try { localStorage.removeItem('lb14_exited_maint'); } catch(e) {}
+    try { localStorage.removeItem('lb16_exited_maint'); } catch(e) {}
     checkAndApplyMaintenance(); updateMaintToggleUI(); return;
   }
   if (maint && maint.active) {
@@ -2387,7 +2379,7 @@ async function toggleMaintenance() {
     if (r && r.ok) {
       maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
       userExitedMaintenance = false;
-      try { localStorage.removeItem('lb14_exited_maint'); } catch(e) {}
+      try { localStorage.removeItem('lb16_exited_maint'); } catch(e) {}
       updateMaintToggleUI(); hideMaintAdminBadge(); hideMaintenanceScreen();
       showToast('🟢 Тех.работы отключены','info');
     } else showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
@@ -3032,7 +3024,6 @@ function startSplash() {
   }
 }
 
-// Принудительно скрываем сплэш через 2.5 сек (чтобы игра не висла)
 function autoHideSplash() {
   const s = document.getElementById('splashScreen');
   if (s && !s.classList.contains('hide')) {
@@ -3056,7 +3047,7 @@ async function initGame() {
   generateAuctionRotation();
   startTimeOfDayTimer();
   startNewbieCheck();
-  try { if (localStorage.getItem('lb14_exited_maint') === '1') userExitedMaintenance = true; } catch(e) {}
+  try { if (localStorage.getItem('lb16_exited_maint') === '1') userExitedMaintenance = true; } catch(e) {}
   try {
     const maint = await fetchMaintenance();
     if (maint?.active) maintenanceState = { active:true, reason:maint.reason, until:maint.until?new Date(maint.until).getTime():0, startedBy:maint.started_by, startedAt:maint.started_at?new Date(maint.started_at).getTime():0 };
@@ -3076,7 +3067,7 @@ async function initGame() {
   setInterval(() => { if (!isAppSuspended) tickWorldEventTimer(); }, 1000);
   setInterval(() => { if (isAppSuspended) return; if (game.clients.length < getClientCount() - 1) { generateClients(); if (!document.getElementById('clientsApp').classList.contains('hidden')) renderClients(); } }, 45000);
   setInterval(() => { if (isAppSuspended) return; const added = processDepositInterest(); if (added > 0) { renderAll(); if (!document.getElementById('bankApp').classList.contains('hidden')) renderBank(); saveGame(); } }, 60000);
-  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v15.9');
+  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v16.0');
 }
 
 document.getElementById('loginNick')?.addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });
@@ -3084,7 +3075,6 @@ document.getElementById('loginPass')?.addEventListener('keydown', e => { if (e.k
 
 initGame();
 startSplash();
-// Принудительное скрытие сплэша через 3 сек, чтобы не вис
 setTimeout(autoHideSplash, 3000);
 </script>
 </body>

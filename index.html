@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>OWERINEZZ COMPANY · Ломбард BY v16.1</title>
+<title>OWERINEZZ COMPANY · Ломбард BY v16.2</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -150,7 +150,6 @@ input, select, textarea { font-size: 16px !important; }
 .tag-bonus  { background: #2a7d5e; color: #fff; }
 .casino-display { display: flex; justify-content: center; gap: 10px; margin: 16px 0; }
 .casino-display .slot { width: 70px; height: 90px; background: linear-gradient(180deg,#0a1220,#050810); border-radius: 12px; border: 3px solid #16202e; display: flex; align-items: center; justify-content: center; font-size: 36px; transition: 0.3s; }
-/* === НОВАЯ АНИМАЦИЯ КУБИКА === */
 .dice-scene { margin: 20px auto; width: 100px; height: 100px; perspective: 600px; }
 .dice-cube { width: 90px; height: 90px; position: relative; margin: 5px auto; transform-style: preserve-3d; transition: transform 0.4s ease; }
 .dice-face { position: absolute; width: 90px; height: 90px; background: linear-gradient(135deg,#fff,#d0d8e8); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #0a0e17; font-weight: bold; backface-visibility: hidden; box-shadow: inset 0 0 12px rgba(0,0,0,0.15), 0 6px 18px rgba(0,0,0,0.4); }
@@ -381,8 +380,6 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
 .status-badge-item.locked { filter: grayscale(1); opacity: 0.35; border-color: rgba(255,255,255,0.1); color: #7a8a9a; }
 .status-toast { position: absolute; top: 100px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #8a2be2, #ffd700); color: #05070c; padding: 10px 20px; border-radius: 20px; font-weight: bold; font-size: 14px; z-index: 950; box-shadow: 0 8px 30px rgba(0,0,0,0.6); animation: statusToastAnim 4s ease forwards; pointer-events: none; white-space: nowrap; }
 @keyframes statusToastAnim { 0% { transform: translate(-50%, -40px) scale(0.7); opacity: 0; } 15% { transform: translate(-50%, 0) scale(1); opacity: 1; } 85% { transform: translate(-50%, 0) scale(1); opacity: 1; } 100% { transform: translate(-50%, -40px) scale(0.7); opacity: 0; } }
-
-/* === УРОВНИ И XP === */
 .level-card { background: linear-gradient(135deg, rgba(138,43,226,0.15), rgba(0,212,255,0.08)); border: 1px solid rgba(138,43,226,0.35); border-radius: 18px; padding: 12px 14px; margin-bottom: 12px; }
 .level-top { display: flex; align-items: center; gap: 12px; }
 .level-badge { font-size: 38px; filter: drop-shadow(0 0 12px rgba(255,215,0,0.6)); }
@@ -396,8 +393,6 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
 @keyframes xpPop { 0% { transform: translate(-50%,-50%) scale(0.4); opacity: 0; } 20% { transform: translate(-50%,-50%) scale(1.15); opacity: 1; } 70% { transform: translate(-50%,-50%) scale(1); opacity: 1; } 100% { transform: translate(-50%,-100%) scale(0.8); opacity: 0; } }
 .levelup-toast { position: absolute; top: 30%; left: 50%; transform: translate(-50%,-50%); background: linear-gradient(135deg,#ffd700,#ff8c00,#ffd700); background-size: 200% 100%; color: #05070c; padding: 18px 32px; border-radius: 24px; font-weight: 900; font-size: 22px; z-index: 1000; pointer-events: none; animation: levelUpAnim 2.6s ease forwards; box-shadow: 0 0 60px rgba(255,215,0,0.9); text-align: center; }
 @keyframes levelUpAnim { 0% { transform: translate(-50%,-50%) scale(0.2) rotate(-15deg); opacity: 0; } 20% { transform: translate(-50%,-50%) scale(1.2) rotate(5deg); opacity: 1; } 40% { transform: translate(-50%,-50%) scale(1) rotate(0deg); } 80% { transform: translate(-50%,-50%) scale(1); opacity: 1; } 100% { transform: translate(-50%,-80%) scale(0.8); opacity: 0; } }
-
-/* === ГЛОБАЛЬНЫЙ ИНФО-БАННЕР === */
 .global-info-banner { position: absolute; left: 20px; right: 20px; bottom: 20px; background: linear-gradient(135deg, #1a6a4a, #2a8a5e); color: #fff; padding: 14px 18px; border-radius: 16px; z-index: 700; font-weight: bold; font-size: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.7); border-left: 5px solid #5cdb8a; animation: bannerSlideUp 0.5s ease; display: flex; align-items: center; gap: 10px; }
 .global-info-banner.update { background: linear-gradient(135deg, #0a3a5a, #00d4ff); border-left-color: #00d4ff; }
 .global-info-banner.maint-end { background: linear-gradient(135deg, #4a3a0a, #d4a543); border-left-color: #ffd700; color: #05070c; }
@@ -418,7 +413,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
     <div class="splash-sticker">💼</div>
     <div class="splash-title">OWERINEZZ COMPANY</div>
     <div class="splash-line"></div>
-    <div class="splash-subtitle">ЛОМБАРД BY · v16.1</div>
+    <div class="splash-subtitle">ЛОМБАРД BY · v16.2</div>
     <div class="splash-loading"></div>
   </div>
 
@@ -433,7 +428,7 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
     <div id="authScreen">
       <div class="auth-logo">💰</div>
       <div class="auth-title">Ломбард BY</div>
-      <div class="auth-subtitle">OWERINEZZ COMPANY · v16.1</div>
+      <div class="auth-subtitle">OWERINEZZ COMPANY · v16.2</div>
       <div class="auth-tabs">
         <button class="tab active" id="tabLogin" onclick="switchAuthTab('login')">🔑 Вход</button>
         <button class="tab" id="tabRegister" onclick="switchAuthTab('register')">📝 Регистрация</button>
@@ -511,7 +506,6 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
           <div class="statuses-row" id="mainStatusesRow"></div>
         </div>
 
-        <!-- [УРОВНИ] Карточка уровня -->
         <div class="level-card" id="levelCard">
           <div class="level-top">
             <div class="level-badge" id="levelBadge">🥉</div>
@@ -679,12 +673,13 @@ body.night-mode .pvp-lot { background: linear-gradient(135deg, #0a1020, #040810)
     <div id="freezeScreen" class="hidden"></div>
     <div id="frozenOverlay" class="frozen-overlay hidden"><div class="frozen-ice-crystals" id="frozenCrystals"></div></div>
     <div id="banScreen" class="hidden"></div>
+    <div id="unbanModal" class="modal-overlay hidden"><div class="modal-box" id="unbanModalBox"></div></div>
   </div>
 </div>
 <div id="eventParticles"></div>
 <script>
 // ============================================================
-// OWERINEZZ COMPANY · Ломбард BY v16.1
+// OWERINEZZ COMPANY · Ломбард BY v16.2
 // ============================================================
 
 const SUPABASE_URL = 'https://zuwsvwxglxgzkuyfxbpu.supabase.co';
@@ -696,8 +691,6 @@ const DEPOSIT = { PERIOD_MS: 25 * 60 * 1000, MULTIPLIER: 1.1, MAX_PERIODS: 3, MA
 const EVENT_EMOJIS = ['🎰','🍋','🍒','🍉','🍇','💎','🎲','⭐','7️⃣','💰'];
 const AMNESTY_PHRASE = 'АМНИСТИЯ ВСЕМ';
 
-// === СИСТЕМА УРОВНЕЙ ===
-// xpNeeded(n) — сколько XP нужно для перехода с уровня n на n+1
 function xpNeeded(level) { return Math.round(100 * Math.pow(1.35, level - 1)); }
 function xpToLevel(xp) {
   let lvl = 1, need = xpNeeded(1), acc = 0;
@@ -723,7 +716,6 @@ function getLevelTitle(level) {
   for (const x of LEVEL_TITLES) if (level >= x.min) t = x;
   return t;
 }
-// XP за действия
 const XP_REWARDS = {
   buy_item: 5,
   sell_item: 8,
@@ -734,10 +726,9 @@ const XP_REWARDS = {
   open_container: 10,
   clean_item: 3,
   fix_item: 5,
-  earn_1000: 1 // дополнительно за 1000 BYN заработка
+  earn_1000: 1
 };
 
-// === СТАТУСЫ ===
 const STATUSES = {
   newbie:     { icon:'🌱', name:'Новичок',     desc:'Первые 7 дней в игре',           order:1 },
   first_sale: { icon:'🎯', name:'Первый шаг',  desc:'Сделал первую продажу',          order:2 },
@@ -761,10 +752,7 @@ window._unbanScreenActive = false;
 window._unfreezeScreenActive = false;
 window._updateWaitingScreenActive = false;
 window._updateWaitingScreenClosed = false;
-
-// Флаг состояния экранов ТО
-let wasMaintenanceActive = false;
-let wasUpdateWaitingActive = false;
+window._unbanModalShown = false;
 
 async function hashPassSHA256(pass) {
   const enc = new TextEncoder().encode(pass);
@@ -782,14 +770,14 @@ async function rpc(fn, params) {
 }
 
 const local = {
-  saveUser(u) { try { const a = this._users(); a[u.nick] = u; localStorage.setItem('lb161_users', JSON.stringify(a)); } catch(e) {} },
+  saveUser(u) { try { const a = this._users(); a[u.nick] = u; localStorage.setItem('lb162_users', JSON.stringify(a)); } catch(e) {} },
   getUser(n) { return this._users()[n] || null; },
-  _users() { try { return JSON.parse(localStorage.getItem('lb161_users') || '{}'); } catch(e) { return {}; } },
-  saveGame(n,d) { try { localStorage.setItem('lb161_save_' + n, JSON.stringify(d)); } catch(e) {} },
-  getGame(n) { try { return JSON.parse(localStorage.getItem('lb161_save_' + n)); } catch(e) { return null; } },
-  saveSession(n) { try { localStorage.setItem('lb161_session', n); } catch(e) {} },
-  getSession() { try { return localStorage.getItem('lb161_session'); } catch(e) { return null; } },
-  clearSession() { try { localStorage.removeItem('lb161_session'); } catch(e) {} }
+  _users() { try { return JSON.parse(localStorage.getItem('lb162_users') || '{}'); } catch(e) { return {}; } },
+  saveGame(n,d) { try { localStorage.setItem('lb162_save_' + n, JSON.stringify(d)); } catch(e) {} },
+  getGame(n) { try { return JSON.parse(localStorage.getItem('lb162_save_' + n)); } catch(e) { return null; } },
+  saveSession(n) { try { localStorage.setItem('lb162_session', n); } catch(e) {} },
+  getSession() { try { return localStorage.getItem('lb162_session'); } catch(e) { return null; } },
+  clearSession() { try { localStorage.removeItem('lb162_session'); } catch(e) {} }
 };
 
 const ACHIEVEMENTS = {
@@ -815,7 +803,6 @@ const DAILY_TEMPLATES = [
   { id:'pvp_bid', icon:'⚔️', title:'Сделай ставку в PvP', target:1, stat:'daily_pvp_bids', reward:800 }
 ];
 
-// === ОФИСЫ С ТРЕБОВАНИЕМ УРОВНЯ ===
 const OFFICES = [
   { id:0, name:'Ларёк у метро',      icon:'🏪', desc:'Стартовое место.',       cost:0,        tier:1, reqLevel:1,  bonuses:{maxStorage:15,clientBonus:0,itemTierMax:2,auctionTierMax:1,discountBargain:0}, perks:['15 слотов','T1-T2'] },
   { id:1, name:'Точка в ТЦ',         icon:'🏬', desc:'Больше клиентов.',       cost:15000,    tier:2, reqLevel:5,  bonuses:{maxStorage:30,clientBonus:1,itemTierMax:3,auctionTierMax:2,discountBargain:3}, perks:['30 слотов','+1 клиент','T1-T3'] },
@@ -836,18 +823,19 @@ const CONTAINER_SVGS = {
   secret:`<svg width="120" height="86" viewBox="0 0 140 100"><rect x="20" y="15" width="100" height="70" rx="4" fill="#0a0218" stroke="#8a2be2" stroke-width="3"/><circle cx="70" cy="50" r="20" fill="none" stroke="#8a2be2" stroke-width="3"/></svg>`
 };
 
+// === ЦЕНЫ НА КОНТЕЙНЕРЫ -1% ===
 const ALL_CONTAINERS = [
-  { name:'Гаражный Бокс', svg:'garage', basePrice:700, tier:1, tag:'Обычный', tagClass:'tag-common', desc:'Старые инструменты.' },
-  { name:'Старый Сарай', svg:'warehouse', basePrice:500, tier:1, tag:'Обычный', tagClass:'tag-common', desc:'Лопаты, вёдра.' },
-  { name:'Морской Контейнер', svg:'shipping', basePrice:2800, tier:2, tag:'Редкий', tagClass:'tag-rare', desc:'Груз из Китая.' },
-  { name:'Почтовая Посылка', svg:'auction', basePrice:1700, tier:2, tag:'Редкий', tagClass:'tag-rare', desc:'Кот в мешке.' },
-  { name:'Ячейка Коллекционера', svg:'vault', basePrice:8500, tier:3, tag:'Эпический', tagClass:'tag-epic', desc:'Антиквариат.' },
-  { name:'Конфискат Таможни', svg:'confiscate', basePrice:14000, tier:3, tag:'Эпический', tagClass:'tag-epic', desc:'Изъятое.' },
-  { name:'Сейф Банкира', svg:'safe', basePrice:28000, tier:3, tag:'Эпический', tagClass:'tag-epic', desc:'Драгоценности.' },
-  { name:'Люксовый Склад', svg:'luxury', basePrice:50000, tier:4, tag:'Легендарный', tagClass:'tag-legend', desc:'Брендовое.' },
-  { name:'Хранилище Олигарха', svg:'vault', basePrice:100000, tier:4, tag:'Легендарный', tagClass:'tag-legend', desc:'Секретные сейфы.' },
-  { name:'Элитный Аукцион', svg:'elite', basePrice:170000, tier:4, tag:'Легендарный', tagClass:'tag-legend', desc:'Для избранных.' },
-  { name:'Секретный Лот', svg:'secret', basePrice:330000, tier:4, tag:'БОНУС', tagClass:'tag-bonus', desc:'Самый редкий.' }
+  { name:'Гаражный Бокс', svg:'garage', basePrice:Math.round(700*0.99), tier:1, tag:'Обычный', tagClass:'tag-common', desc:'Старые инструменты.' },
+  { name:'Старый Сарай', svg:'warehouse', basePrice:Math.round(500*0.99), tier:1, tag:'Обычный', tagClass:'tag-common', desc:'Лопаты, вёдра.' },
+  { name:'Морской Контейнер', svg:'shipping', basePrice:Math.round(2800*0.99), tier:2, tag:'Редкий', tagClass:'tag-rare', desc:'Груз из Китая.' },
+  { name:'Почтовая Посылка', svg:'auction', basePrice:Math.round(1700*0.99), tier:2, tag:'Редкий', tagClass:'tag-rare', desc:'Кот в мешке.' },
+  { name:'Ячейка Коллекционера', svg:'vault', basePrice:Math.round(8500*0.99), tier:3, tag:'Эпический', tagClass:'tag-epic', desc:'Антиквариат.' },
+  { name:'Конфискат Таможни', svg:'confiscate', basePrice:Math.round(14000*0.99), tier:3, tag:'Эпический', tagClass:'tag-epic', desc:'Изъятое.' },
+  { name:'Сейф Банкира', svg:'safe', basePrice:Math.round(28000*0.99), tier:3, tag:'Эпический', tagClass:'tag-epic', desc:'Драгоценности.' },
+  { name:'Люксовый Склад', svg:'luxury', basePrice:Math.round(50000*0.99), tier:4, tag:'Легендарный', tagClass:'tag-legend', desc:'Брендовое.' },
+  { name:'Хранилище Олигарха', svg:'vault', basePrice:Math.round(100000*0.99), tier:4, tag:'Легендарный', tagClass:'tag-legend', desc:'Секретные сейфы.' },
+  { name:'Элитный Аукцион', svg:'elite', basePrice:Math.round(170000*0.99), tier:4, tag:'Легендарный', tagClass:'tag-legend', desc:'Для избранных.' },
+  { name:'Секретный Лот', svg:'secret', basePrice:Math.round(330000*0.99), tier:4, tag:'БОНУС', tagClass:'tag-bonus', desc:'Самый редкий.' }
 ];
 
 const ITEM_TEMPLATES = [
@@ -939,8 +927,8 @@ let game = {
   isNewbie:false, newbieUntil:0, newbieDaysLeft:0,
   worldEvent:null,
   statuses: [],
-  xp: 0,                // [УРОВНИ]
-  level: 1,             // [УРОВНИ]
+  xp: 0,
+  level: 1,
   levelXpInLevel: 0,
   levelXpForNext: 100
 };
@@ -999,9 +987,6 @@ function showToast(msg, type) {
   el._t = setTimeout(() => el.classList.add('hidden'), 3000);
 }
 
-// ============================================================
-// ГЛОБАЛЬНЫЙ ИНФО-БАННЕР (снизу)
-// ============================================================
 function showGlobalBanner(text, type, icon, duration) {
   const old = document.getElementById('globalInfoBanner');
   if (old) old.remove();
@@ -1014,9 +999,6 @@ function showGlobalBanner(text, type, icon, duration) {
   setTimeout(() => { b.classList.add('hide'); setTimeout(() => b.remove(), 600); }, ttl);
 }
 
-// ============================================================
-// СИСТЕМА УРОВНЕЙ
-// ============================================================
 function addXP(amount, reason) {
   if (!amount || amount <= 0) return;
   game.xp = (game.xp || 0) + amount;
@@ -1025,14 +1007,8 @@ function addXP(amount, reason) {
   game.level = info.level;
   game.levelXpInLevel = info.xpInLevel;
   game.levelXpForNext = info.xpForNext;
-
-  // Показать всплывашку XP
   showXPToast(amount);
-
-  // Проверка на повышение уровня
-  if (info.level > oldLevel) {
-    onLevelUp(info.level);
-  }
+  if (info.level > oldLevel) onLevelUp(info.level);
   renderLevelCard();
   saveGame();
 }
@@ -1052,7 +1028,6 @@ function onLevelUp(newLevel) {
   div.innerHTML = `${title.icon} НОВЫЙ УРОВЕНЬ!<br><span style="font-size:16px;">Ур. ${newLevel} — ${title.name}</span>`;
   document.querySelector('.phone').appendChild(div);
   setTimeout(() => div.remove(), 2800);
-  // Проверить доступность новых офисов
   const officeToUnlock = OFFICES.find(o => o.reqLevel === newLevel);
   if (officeToUnlock) {
     setTimeout(() => showGlobalBanner(`🏢 Открыт офис: <b>${officeToUnlock.name}</b>!`, 'update', '🔓', 7000), 3000);
@@ -1081,15 +1056,6 @@ function renderLevelCard() {
   const pct = Math.min(100, (info.xpInLevel / info.xpForNext) * 100);
   fill.style.width = pct + '%';
   hint.textContent = `До следующего уровня: ${info.xpForNext - info.xpInLevel} XP`;
-}
-
-function canBuyOffice(idx) {
-  const office = OFFICES[idx];
-  if (!office) return { ok:false, reason:'Нет офиса' };
-  const lvl = game.level || 1;
-  if (lvl < office.reqLevel) return { ok:false, reason:`Нужен уровень ${office.reqLevel}` };
-  if (game.money < office.cost) return { ok:false, reason:`Нужно ${office.cost} BYN` };
-  return { ok:true };
 }
 
 function getTimeOfDay() {
@@ -1220,6 +1186,8 @@ async function doLogin() {
   checkDailyReset();
   applyTimeOfDay(true);
   enterGameScreen();
+  // Проверка: разбанен ли только что?
+  setTimeout(checkUnbanCompensation, 1500);
 }
 
 function applyLoadedSave(result) {
@@ -1242,7 +1210,6 @@ function applyLoadedSave(result) {
   game.isNewbie = !!p.is_newbie;
   game.newbieUntil = p.newbie_until ? new Date(p.newbie_until).getTime() : 0;
   game.statuses = Array.isArray(p.statuses) ? p.statuses : [];
-  // [УРОВНИ]
   game.xp = Number(s.xp) || 0;
   const lvlInfo = xpToLevel(game.xp);
   game.level = lvlInfo.level;
@@ -1258,6 +1225,58 @@ async function safeUpdateStatuses(showNewToast) {
     const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 4000));
     await Promise.race([updatePlayerStatuses(showNewToast), timeout]);
   } catch(e) { console.warn('Status update skipped:', e.message); }
+}
+
+// ============================================================
+// КОМПЕНСАЦИЯ ЗА РАЗБАН/РАЗМОРОЗКУ (модальное окно)
+// ============================================================
+async function checkUnbanCompensation() {
+  if (!game.playerName || window._unbanModalShown) return;
+  const r = await rpc('claim_unban_compensation', { p_nick: game.playerName });
+  if (!r || !r.ok || r.nothing) return;
+  window._unbanModalShown = true;
+  showUnbanModal(r);
+}
+
+function showUnbanModal(r) {
+  const modal = document.getElementById('unbanModal');
+  const box = document.getElementById('unbanModalBox');
+  if (!modal || !box) return;
+  const isBan = r.type === 'unban';
+  const icon = isBan ? '🔓' : '🔥';
+  const title = isBan ? 'ВЫ РАЗБАНЕНЫ!' : 'ВЫ РАЗМОРОЖЕНЫ!';
+  const color = isBan ? '#5cdb8a' : '#ffd700';
+  const comp = Number(r.compensation) || 0;
+  let compHtml = '';
+  if (comp >= 1) {
+    compHtml = `<div style="margin-top:14px;padding:12px;background:linear-gradient(135deg,rgba(92,219,138,0.15),rgba(0,212,255,0.1));border:2px solid rgba(92,219,138,0.5);border-radius:14px;">
+      <div style="font-size:11px;opacity:0.7;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;">💰 Компенсация</div>
+      <div style="font-size:26px;font-weight:900;color:#5cdb8a;">+${formatMoney(comp)} BYN</div>
+      <div style="font-size:11px;opacity:0.7;margin-top:4px;">Зачислено на баланс</div>
+    </div>`;
+  } else {
+    compHtml = `<div style="margin-top:14px;padding:12px;background:rgba(255,255,255,0.04);border-radius:14px;font-size:13px;opacity:0.7;">
+      Компенсация не назначена
+    </div>`;
+  }
+  box.innerHTML = `
+    <div style="font-size:72px;margin-bottom:12px;filter:drop-shadow(0 0 20px ${color});">${icon}</div>
+    <div class="modal-title" style="color:${color};font-size:22px;">${title}</div>
+    <div style="margin-top:14px;padding:12px;background:rgba(0,0,0,0.4);border-radius:14px;text-align:left;">
+      <div style="font-size:11px;opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;">📝 Причина</div>
+      <div style="font-size:14px;line-height:1.4;">${escapeHtml(r.reason || '—')}</div>
+    </div>
+    ${compHtml}
+    <button class="btn btn-gold btn-block" style="margin-top:16px;" onclick="closeUnbanModalAndRefresh()">🙌 Спасибо!</button>
+  `;
+  modal.classList.remove('hidden');
+}
+
+async function closeUnbanModalAndRefresh() {
+  document.getElementById('unbanModal').classList.add('hidden');
+  await reloadMoney();
+  renderAll();
+  saveGame();
 }
 
 async function enterGameScreen() {
@@ -1333,6 +1352,7 @@ async function tryAutoLogin() {
     else if (lu.password) passwordHashCache = lu.password;
     applyTimeOfDay(true);
     enterGameScreen();
+    setTimeout(checkUnbanCompensation, 1500);
     return true;
   }
   const user = loadResult.profile;
@@ -1368,6 +1388,7 @@ async function tryAutoLogin() {
   checkDailyReset();
   applyTimeOfDay(true);
   enterGameScreen();
+  setTimeout(checkUnbanCompensation, 1500);
   return true;
 }
 
@@ -1383,7 +1404,8 @@ function doLogout() {
   if (mainTimers.poll) { clearInterval(mainTimers.poll); mainTimers.poll = null; }
   if (mainTimers.newbie) { clearInterval(mainTimers.newbie); mainTimers.newbie = null; }
   userExitedMaintenance = false;
-  try { localStorage.removeItem('lb161_exited_maint'); } catch(e) {}
+  window._unbanModalShown = false;
+  try { localStorage.removeItem('lb162_exited_maint'); } catch(e) {}
   game.playerName = ''; game.isAdmin = false; passwordHashCache = null;
   showToast('👋 До встречи!','info');
 }
@@ -1991,7 +2013,17 @@ async function pvpBuyout(lotId) {
 async function pvpBuyoutConfirm(lotId) {
   closeGenericModal();
   const result = await rpc('pvp_buyout', { p_nick:game.playerName, p_hash:passwordHashCache, p_lot_id:lotId });
-  if (!result || !result.ok) { showToast('❌ '+(result?.error||''),'error'); return; }
+  if (!result || !result.ok) {
+    const errMsg = result?.error || '';
+    if (errMsg.includes('Auth') || errMsg.includes('auth') || errMsg.includes('hash')) {
+      showToast('❌ Ошибка авторизации. Перезайдите в аккаунт.', 'error');
+      local.clearSession();
+      passwordHashCache = null;
+    } else {
+      showToast('❌ ' + (errMsg || 'Ошибка покупки'), 'error');
+    }
+    return;
+  }
   incStat('pvp_wins', 1);
   incStat('daily_pvp_wins', 1);
   addXP(XP_REWARDS.pvp_win, 'pvp_win');
@@ -2350,7 +2382,7 @@ function repayCredit() {
 }
 
 // ============================================================
-// КАЗИНО (С НОВОЙ АНИМАЦИЕЙ КУБИКА)
+// КАЗИНО
 // ============================================================
 function renderCasino() {
   const c = document.getElementById('casinoContent');
@@ -2427,7 +2459,6 @@ async function spinSlots() {
   }, 900);
 }
 
-// === НОВАЯ ФУНКЦИЯ rollDice С АНИМАЦИЕЙ ВРАЩЕНИЯ ===
 async function rollDice(number) {
   if (blockIfMaintenance() || isFrozen() || !isEventActive()) return;
   const bet = parseInt(document.getElementById('diceBet').value);
@@ -2437,11 +2468,9 @@ async function rollDice(number) {
   const badge = document.getElementById('diceResultBadge');
   badge.classList.remove('show');
   badge.textContent = '';
-  // Запускаем анимацию вращения
   cube.classList.remove('rolling');
   void cube.offsetWidth;
   cube.classList.add('rolling');
-  // Запрос на сервер параллельно с анимацией
   const result = await rpc('casino_spin', { p_nick:game.playerName, p_hash:passwordHashCache, p_bet:bet, p_game:'dice', p_choice:number });
   if (!result || !result.ok) {
     setTimeout(() => cube.classList.remove('rolling'), 800);
@@ -2450,10 +2479,8 @@ async function rollDice(number) {
   }
   const dice = result.result.dice;
   const win = Number(result.win);
-  // После анимации (0.8s) — устанавливаем грань и показываем бейдж
   setTimeout(() => {
     cube.classList.remove('rolling');
-    // Устанавливаем куб так, чтобы сверху была выпавшая грань
     const rotations = {
       1: { x: 0,   y: 0   },
       2: { x: -90, y: 0   },
@@ -2464,13 +2491,11 @@ async function rollDice(number) {
     };
     const r = rotations[dice] || rotations[1];
     cube.style.transform = `rotateX(${r.x}deg) rotateY(${r.y}deg)`;
-    // Показываем результат
     badge.textContent = `🎲 Выпало: ${dice}`;
     badge.classList.add('show');
     game.money = game.money - bet + win;
     if (win > 0) { showToast(`🎲 +${win}!`,'info'); playGiftAnimation(win); } else showToast(`🎲 -${bet}`,'error');
     renderAll();
-    // Сброс трансформации через 3 сек
     setTimeout(() => {
       cube.style.transform = '';
       badge.classList.remove('show');
@@ -2610,12 +2635,11 @@ function closeAuction() {
 }
 
 // ============================================================
-// ТЕХ.РАБОТЫ + ОЖИДАНИЕ (со стабильным таймером и анимацией)
+// ТЕХ.РАБОТЫ + ОЖИДАНИЕ
 // ============================================================
 async function fetchMaintenance() { try { const {data,error} = await db.from('maintenance').select('*').eq('id',1).single(); return error?null:data; } catch(e){ return null; } }
 async function fetchUpdateWaiting() { try { const {data,error} = await db.from('update_waiting').select('*').eq('id',1).single(); return error?null:data; } catch(e){ return null; } }
 
-// Стабильный таймер без пересоздания DOM
 let _maintTimerInterval = null;
 let _uwTimerInterval = null;
 
@@ -2629,12 +2653,36 @@ function formatTimer(msLeft) {
   return `${m}:${String(s).padStart(2,'0')}`;
 }
 
+function returnToGameAfterBlock() {
+  hideMaintenanceScreen();
+  hideUpdateWaitingScreen();
+  hideBanScreen();
+  hideFreezeScreen();
+  hideFrozenOverlay();
+  userExitedMaintenance = false;
+  window._updateWaitingScreenActive = false;
+  window._updateWaitingScreenClosed = false;
+  try { localStorage.removeItem('lb162_exited_maint'); } catch(e) {}
+  const auth = document.getElementById('authScreen');
+  const gameScr = document.getElementById('gameScreen');
+  if (gameScr) gameScr.classList.remove('hidden');
+  if (auth) auth.classList.add('hidden');
+  if (typeof renderAll === 'function') renderAll();
+  if (typeof saveGame === 'function') saveGame().catch(()=>{});
+}
+
 function showMaintenanceScreen(d) {
   const s = document.getElementById('maintenanceScreen');
   if (!s) return;
+  if (!s.classList.contains('hidden') && s.dataset.shown === '1') {
+    const timerEl = document.getElementById('maintTimerText');
+    if (timerEl && d.until && d.until > Date.now()) {
+      timerEl.textContent = formatTimer(d.until - Date.now());
+    }
+    return;
+  }
   const emojis = ['🔧','⚙️','🛠️','🔩','⛏️'];
   let parts = '';
-  // Фиксированные позиции и задержки — чтобы анимация НЕ сбрасывалась
   for (let i = 0; i < 20; i++) {
     const left = (i * 5) % 100;
     const dur = 5 + (i % 4);
@@ -2650,49 +2698,52 @@ function showMaintenanceScreen(d) {
   }
   s.innerHTML = `<div class="maint-particles">${parts}</div><div class="maint-content"><div class="maint-icon-wrap"><div class="maint-ring"></div><div class="maint-icon">🔧</div></div><div class="maint-title">ТЕХ. РАБОТЫ</div><div class="maint-box"><div class="maint-label">📝 ПРИЧИНА</div><div class="maint-value reason">${escapeHtml(d.reason || 'Обновление')}</div><div style="border-top:1px solid rgba(255,255,255,0.1);margin:14px 0;"></div>${timerHtml}</div><button class="maint-exit-btn" onclick="exitMaintenanceToMenu()">🚪 Выйти в меню</button></div>`;
   s.classList.remove('hidden');
+  s.dataset.shown = '1';
   startMaintenanceTimer();
 }
 
 function startMaintenanceTimer() {
   if (_maintTimerInterval) clearInterval(_maintTimerInterval);
   _maintTimerInterval = setInterval(() => {
+    if (!maintenanceState.active) { endMaintenanceAuto(); return; }
     const el = document.getElementById('maintTimerText');
     if (!el) return;
     if (!maintenanceState.until) return;
     const msLeft = maintenanceState.until - Date.now();
     el.textContent = formatTimer(msLeft);
-    if (msLeft <= 0 && maintenanceState.active) {
-      // Время вышло
-      endMaintenanceAuto();
-    }
+    if (msLeft <= 0) endMaintenanceAuto();
   }, 1000);
 }
 
 function endMaintenanceAuto() {
-  if (!maintenanceState.active) return;
-  maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
-  hideMaintenanceScreen();
-  userExitedMaintenance = false;
-  try { localStorage.removeItem('lb161_exited_maint'); } catch(e) {}
-  showGlobalBanner('🟢 Тех.работы закончились! Можно играть!', 'maint-end', '🟢', 8000);
-  // Если игрок был на экране ТО — вернуть в игру
-  if (game.playerName && document.getElementById('gameScreen')) {
-    document.getElementById('gameScreen').classList.remove('hidden');
-    document.getElementById('authScreen').classList.add('hidden');
-    renderAll();
+  if (!maintenanceState.active) {
+    if (document.getElementById('maintenanceScreen') && !document.getElementById('maintenanceScreen').classList.contains('hidden')) {
+      hideMaintenanceScreen();
+      returnToGameAfterBlock();
+    }
+    return;
   }
+  maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
   updateMaintToggleUI();
+  hideMaintenanceScreen();
+  showGlobalBanner('🟢 Тех.работы закончились! Можно играть!', 'maint-end', '🟢', 8000);
+  returnToGameAfterBlock();
+  if (game.isAdmin) hideMaintAdminBadge();
 }
 
 function hideMaintenanceScreen() {
   const s = document.getElementById('maintenanceScreen');
-  if (s) { s.classList.add('hidden'); s.innerHTML = ''; }
+  if (s) {
+    s.classList.add('hidden');
+    s.innerHTML = '';
+    s.dataset.shown = '0';
+  }
   if (_maintTimerInterval) { clearInterval(_maintTimerInterval); _maintTimerInterval = null; }
 }
 
 function exitMaintenanceToMenu() {
   userExitedMaintenance = true;
-  try { localStorage.setItem('lb161_exited_maint','1'); } catch(e) {}
+  try { localStorage.setItem('lb162_exited_maint','1'); } catch(e) {}
   hideMaintenanceScreen();
   local.clearSession();
   document.getElementById('gameScreen').classList.add('hidden');
@@ -2708,13 +2759,21 @@ function shouldShowMaintenance() {
 
 function checkAndApplyMaintenance() {
   if (shouldShowMaintenance()) {
-    if (document.getElementById('maintenanceScreen').classList.contains('hidden')) showMaintenanceScreen(maintenanceState);
+    const s = document.getElementById('maintenanceScreen');
+    if (s && s.classList.contains('hidden')) showMaintenanceScreen(maintenanceState);
+    else if (s) {
+      const timerEl = document.getElementById('maintTimerText');
+      if (timerEl && maintenanceState.until) timerEl.textContent = formatTimer(maintenanceState.until - Date.now());
+    }
   } else {
+    const s = document.getElementById('maintenanceScreen');
+    const wasVisible = s && !s.classList.contains('hidden');
     hideMaintenanceScreen();
     if (!maintenanceState.active) {
       userExitedMaintenance = false;
-      try { localStorage.removeItem('lb161_exited_maint'); } catch(e) {}
+      try { localStorage.removeItem('lb162_exited_maint'); } catch(e) {}
     }
+    if (wasVisible && !maintenanceState.active && game.playerName) returnToGameAfterBlock();
   }
   if (game.isAdmin && maintenanceState.active) showMaintAdminBadge();
   else if (game.isAdmin && !maintenanceState.active) hideMaintAdminBadge();
@@ -2724,26 +2783,40 @@ function updateMaintenanceFromCloud(data) {
   const maint = data.maintenance;
   const now = Date.now();
   const wasActive = maintenanceState.active;
-  if (maint && maint.active && maint.until && new Date(maint.until).getTime() <= now) {
-    if (wasActive) {
-      // Только что закончились — показать баннер
-      showGlobalBanner('🟢 Тех.работы закончились! Можно играть!', 'maint-end', '🟢', 8000);
-    }
-    maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
-    userExitedMaintenance = false;
-    try { localStorage.removeItem('lb161_exited_maint'); } catch(e) {}
-    checkAndApplyMaintenance(); updateMaintToggleUI(); return;
-  }
+  let newState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
   if (maint && maint.active) {
-    maintenanceState = { active:true, reason:maint.reason||'', until:maint.until?new Date(maint.until).getTime():0, startedBy:maint.started_by||'', startedAt:maint.started_at?new Date(maint.started_at).getTime():0 };
-  } else {
-    if (wasActive) {
-      showGlobalBanner('🟢 Тех.работы закончились! Можно играть!', 'maint-end', '🟢', 8000);
+    newState = {
+      active:true,
+      reason: maint.reason || '',
+      until: maint.until ? new Date(maint.until).getTime() : 0,
+      startedBy: maint.started_by || '',
+      startedAt: maint.started_at ? new Date(maint.started_at).getTime() : 0
+    };
+  }
+  if (newState.active && newState.until && newState.until <= now) newState.active = false;
+  maintenanceState = newState;
+  if (wasActive && !maintenanceState.active) {
+    hideMaintenanceScreen();
+    showGlobalBanner('🟢 Тех.работы закончились! Можно играть!', 'maint-end', '🟢', 8000);
+    updateMaintToggleUI();
+    if (game.playerName) returnToGameAfterBlock();
+    return;
+  }
+  if (maintenanceState.active) {
+    if (shouldShowMaintenance()) {
+      const s = document.getElementById('maintenanceScreen');
+      if (!s || s.classList.contains('hidden')) showMaintenanceScreen(maintenanceState);
+      else {
+        const timerEl = document.getElementById('maintTimerText');
+        if (timerEl && maintenanceState.until) timerEl.textContent = formatTimer(maintenanceState.until - Date.now());
+      }
     }
-    maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
+  } else {
+    hideMaintenanceScreen();
   }
   updateMaintToggleUI();
-  checkAndApplyMaintenance();
+  if (game.isAdmin && maintenanceState.active) showMaintAdminBadge();
+  else if (game.isAdmin && !maintenanceState.active) hideMaintAdminBadge();
 }
 
 function updateMaintToggleUI() {
@@ -2767,10 +2840,13 @@ async function toggleMaintenance() {
     if (r && r.ok) {
       maintenanceState = { active:false, reason:'', until:0, startedBy:'', startedAt:0 };
       userExitedMaintenance = false;
-      try { localStorage.removeItem('lb161_exited_maint'); } catch(e) {}
-      updateMaintToggleUI(); hideMaintAdminBadge(); hideMaintenanceScreen();
+      try { localStorage.removeItem('lb162_exited_maint'); } catch(e) {}
+      updateMaintToggleUI();
+      hideMaintAdminBadge();
+      hideMaintenanceScreen();
       showToast('🟢 Тех.работы отключены','info');
       showGlobalBanner('🟢 Тех.работы закончились! Можно играть!', 'maint-end', '🟢', 8000);
+      returnToGameAfterBlock();
     } else showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
   } else openMaintenanceStartModal();
 }
@@ -2791,10 +2867,15 @@ async function confirmStartMaintenance() {
   } else showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
 }
 
-// ===== ОЖИДАНИЕ ОБНОВЛЕНИЯ =====
+// ============ ОЖИДАНИЕ ОБНОВЛЕНИЯ ============
 function showUpdateWaitingScreen(d) {
   const s = document.getElementById('updateWaitingScreen');
   if (!s) return;
+  if (!s.classList.contains('hidden') && s.dataset.shown === '1') {
+    const timerEl = document.getElementById('updateWaitingTimerText');
+    if (timerEl && d.until && d.until > Date.now()) timerEl.textContent = formatTimer(d.until - Date.now());
+    return;
+  }
   const emojis = ['⏳','🔄','✨','🎁','🚀','💫'];
   let parts = '';
   for (let i = 0; i < 20; i++) {
@@ -2810,42 +2891,48 @@ function showUpdateWaitingScreen(d) {
   }
   s.innerHTML = `<div class="maint-particles">${parts}</div><div class="maint-content"><div class="maint-icon-wrap"><div class="maint-ring" style="border-color:rgba(0,212,255,0.5);"></div><div class="maint-icon">⏳</div></div><div class="maint-title" style="background:linear-gradient(90deg,#00d4ff,#8a2be2,#00d4ff);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">ОЖИДАНИЕ ОБНОВЛЕНИЯ</div><div class="maint-box" style="border-color:rgba(0,212,255,0.5);"><div class="maint-label">📢 ЧТО ПРОИСХОДИТ</div><div class="maint-value" style="color:#5bc0eb;">Скоро выйдет новое обновление игры. Пожалуйста, подождите.</div><div style="border-top:1px solid rgba(255,255,255,0.1);margin:14px 0;"></div>${timerHtml}</div><button class="maint-exit-btn" style="border-color:rgba(0,212,255,0.5);background:rgba(0,212,255,0.15);color:#7dd4f0;" onclick="exitUpdateWaitingToMenu()">🚪 Выйти в меню</button></div>`;
   s.classList.remove('hidden');
+  s.dataset.shown = '1';
   startUpdateWaitingTimer();
 }
 
 function startUpdateWaitingTimer() {
   if (_uwTimerInterval) clearInterval(_uwTimerInterval);
   _uwTimerInterval = setInterval(() => {
-    if (game.isAdmin || isMainAdmin()) { hideUpdateWaitingScreen(); return; }
+    if (game.isAdmin || isMainAdmin()) { endUpdateWaitingAuto(); return; }
+    if (!updateWaitingState.active) { endUpdateWaitingAuto(); return; }
     const el = document.getElementById('updateWaitingTimerText');
     if (!el) return;
     if (!updateWaitingState.until) return;
     const msLeft = updateWaitingState.until - Date.now();
     el.textContent = formatTimer(msLeft);
-    if (msLeft <= 0) {
-      endUpdateWaitingAuto();
-    }
+    if (msLeft <= 0) endUpdateWaitingAuto();
   }, 1000);
 }
 
 function endUpdateWaitingAuto() {
-  if (!updateWaitingState.active) return;
+  if (!updateWaitingState.active) {
+    if (document.getElementById('updateWaitingScreen') && !document.getElementById('updateWaitingScreen').classList.contains('hidden')) {
+      hideUpdateWaitingScreen();
+      returnToGameAfterBlock();
+    }
+    return;
+  }
   updateWaitingState = { active:false, until:0, startedBy:'', startedAt:0 };
   window._updateWaitingScreenActive = false;
   window._updateWaitingScreenClosed = false;
+  updateUpdateWaitingToggleUI();
   hideUpdateWaitingScreen();
   showGlobalBanner('🎉 Новое обновление вышло! Заходи и играй!', 'update', '🎉', 9000);
-  if (game.playerName && document.getElementById('gameScreen')) {
-    document.getElementById('gameScreen').classList.remove('hidden');
-    document.getElementById('authScreen').classList.add('hidden');
-    renderAll();
-  }
-  updateUpdateWaitingToggleUI();
+  returnToGameAfterBlock();
 }
 
 function hideUpdateWaitingScreen() {
   const s = document.getElementById('updateWaitingScreen');
-  if (s) { s.classList.add('hidden'); s.innerHTML = ''; }
+  if (s) {
+    s.classList.add('hidden');
+    s.innerHTML = '';
+    s.dataset.shown = '0';
+  }
   if (_uwTimerInterval) { clearInterval(_uwTimerInterval); _uwTimerInterval = null; }
 }
 
@@ -2870,8 +2957,18 @@ function checkAndApplyUpdateWaiting() {
     return;
   }
   if (updateWaitingState.active && !window._updateWaitingScreenActive && !window._updateWaitingScreenClosed) {
-    if (document.getElementById('updateWaitingScreen').classList.contains('hidden')) showUpdateWaitingScreen(updateWaitingState);
-  } else hideUpdateWaitingScreen();
+    const s = document.getElementById('updateWaitingScreen');
+    if (s && s.classList.contains('hidden')) showUpdateWaitingScreen(updateWaitingState);
+    else if (s) {
+      const timerEl = document.getElementById('updateWaitingTimerText');
+      if (timerEl && updateWaitingState.until) timerEl.textContent = formatTimer(updateWaitingState.until - Date.now());
+    }
+  } else {
+    const s = document.getElementById('updateWaitingScreen');
+    const wasVisible = s && !s.classList.contains('hidden');
+    hideUpdateWaitingScreen();
+    if (wasVisible && !updateWaitingState.active && game.playerName) returnToGameAfterBlock();
+  }
   if (game.isAdmin && updateWaitingState.active) showUpdateWaitingBadge();
   else if (game.isAdmin && !updateWaitingState.active) hideUpdateWaitingBadge();
 }
@@ -2880,26 +2977,39 @@ function updateUpdateWaitingFromCloud(data) {
   const uw = data.update_waiting;
   const now = Date.now();
   const wasActive = updateWaitingState.active;
-  if (uw && uw.active && uw.until && new Date(uw.until).getTime() <= now) {
-    if (wasActive) {
-      showGlobalBanner('🎉 Новое обновление вышло! Заходи и играй!', 'update', '🎉', 9000);
-    }
-    updateWaitingState = { active:false, until:0, startedBy:'', startedAt:0 };
-    window._updateWaitingScreenActive = false;
-    window._updateWaitingScreenClosed = false;
-    updateUpdateWaitingToggleUI(); checkAndApplyUpdateWaiting(); return;
-  }
+  let newState = { active:false, until:0, startedBy:'', startedAt:0 };
   if (uw && uw.active) {
-    updateWaitingState = { active:true, until:uw.until?new Date(uw.until).getTime():0, startedBy:uw.started_by||'', startedAt:uw.started_at?new Date(uw.started_at).getTime():0 };
-  } else {
-    if (wasActive) {
-      showGlobalBanner('🎉 Новое обновление вышло! Заходи и играй!', 'update', '🎉', 9000);
-    }
-    updateWaitingState = { active:false, until:0, startedBy:'', startedAt:0 };
-    window._updateWaitingScreenActive = false;
-    window._updateWaitingScreenClosed = false;
+    newState = {
+      active:true,
+      until: uw.until ? new Date(uw.until).getTime() : 0,
+      startedBy: uw.started_by || '',
+      startedAt: uw.started_at ? new Date(uw.started_at).getTime() : 0
+    };
   }
-  updateUpdateWaitingToggleUI(); checkAndApplyUpdateWaiting();
+  if (newState.active && newState.until && newState.until <= now) newState.active = false;
+  updateWaitingState = newState;
+  if (wasActive && !updateWaitingState.active) {
+    hideUpdateWaitingScreen();
+    showGlobalBanner('🎉 Новое обновление вышло! Заходи и играй!', 'update', '🎉', 9000);
+    updateUpdateWaitingToggleUI();
+    if (game.playerName) returnToGameAfterBlock();
+    return;
+  }
+  if (updateWaitingState.active) {
+    if (!game.isAdmin && !isMainAdmin() && !window._updateWaitingScreenActive && !window._updateWaitingScreenClosed) {
+      const s = document.getElementById('updateWaitingScreen');
+      if (!s || s.classList.contains('hidden')) showUpdateWaitingScreen(updateWaitingState);
+      else {
+        const timerEl = document.getElementById('updateWaitingTimerText');
+        if (timerEl && updateWaitingState.until) timerEl.textContent = formatTimer(updateWaitingState.until - Date.now());
+      }
+    }
+  } else {
+    hideUpdateWaitingScreen();
+  }
+  updateUpdateWaitingToggleUI();
+  if (game.isAdmin && updateWaitingState.active) showUpdateWaitingBadge();
+  else if (game.isAdmin && !updateWaitingState.active) hideUpdateWaitingBadge();
 }
 
 function updateUpdateWaitingToggleUI() {
@@ -2924,9 +3034,12 @@ async function toggleUpdateWaiting() {
       updateWaitingState = { active:false, until:0, startedBy:'', startedAt:0 };
       window._updateWaitingScreenActive = false;
       window._updateWaitingScreenClosed = false;
-      updateUpdateWaitingToggleUI(); hideUpdateWaitingBadge(); hideUpdateWaitingScreen();
+      updateUpdateWaitingToggleUI();
+      hideUpdateWaitingBadge();
+      hideUpdateWaitingScreen();
       showToast('🟢 Ожидание отключено','info');
       showGlobalBanner('🎉 Новое обновление вышло! Заходи и играй!', 'update', '🎉', 9000);
+      returnToGameAfterBlock();
     } else showToast('❌ ' + (r?.error || 'Ошибка'), 'error');
     return;
   }
@@ -2985,8 +3098,8 @@ async function refreshMyProfile() {
     }
     if (!data.banned && myBanStatus === 'banned') {
       myBanStatus = 'none'; game.banned = false; hideBanScreen();
-      const comp = Number(data.unban_compensation) || 0;
-      if (comp > 0 && !shownUnbanCompensation.shown) { game.money += comp; shownUnbanCompensation = { amount:comp, shown:true }; }
+      // Проверка компенсации за разбан
+      setTimeout(checkUnbanCompensation, 800);
     }
     const frozenUntil = data.frozen_until ? new Date(data.frozen_until).getTime() : 0;
     const isNowFrozen = frozenUntil > Date.now();
@@ -2995,7 +3108,11 @@ async function refreshMyProfile() {
       showFrozenOverlay(); showFreezeScreen({ reason:data.freeze_reason, until:frozenUntil, by:data.frozen_by });
       return;
     }
-    if (!isNowFrozen && myBanStatus === 'frozen') { myBanStatus = 'none'; game.frozen = false; hideFrozenOverlay(); hideFreezeScreen(); }
+    if (!isNowFrozen && myBanStatus === 'frozen') {
+      myBanStatus = 'none'; game.frozen = false; hideFrozenOverlay(); hideFreezeScreen();
+      // Проверка компенсации за разморозку
+      setTimeout(checkUnbanCompensation, 800);
+    }
     if (data.is_admin || data.nick === ADMIN_CREDS.nickname) {
       if (!game.isAdmin) { game.isAdmin = true; document.getElementById('adminPanel').classList.remove('hidden'); }
       game.adminPerms = data.admin_perms || {};
@@ -3132,12 +3249,12 @@ async function confirmAdminAction(nick, type) {
 }
 function openUnbanConfirm(nick) {
   if (!hasPerm('manageBans')) return;
-  document.getElementById('adminActionModalBox').innerHTML = `<button class="modal-close" onclick="closeAdminActionModal()">✕</button><div style="font-size:64px;margin-bottom:12px;">🔓</div><div class="modal-title" style="color:#5cdb8a;font-size:20px;">РАЗБАНИТЬ ИГРОКА?</div><div class="modal-desc" style="margin:12px 0;font-size:15px;">Вы точно хотите разбанить<br><b style="color:#5cdb8a;">${escapeHtml(nick)}</b>?</div><div style="text-align:left;margin:16px 0;"><label style="font-size:12px;opacity:0.7;">📝 Причина разбана:</label><textarea id="unbanReason" maxlength="200" placeholder="Например: разбан по ошибке..." style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:13px;min-height:60px;font-family:inherit;"></textarea></div><div style="text-align:left;margin-bottom:12px;"><label style="font-size:12px;opacity:0.7;">💰 Компенсация (BYN):</label><input type="number" id="unbanCompensation" value="0" min="0" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:16px;"></div><div class="modal-actions"><button class="btn btn-blue" onclick="closeAdminActionModal()">❌ Отмена</button><button class="btn btn-green" onclick="adminUnbanUser('${nick}')">✅ РАЗБАНИТЬ</button></div>`;
+  document.getElementById('adminActionModalBox').innerHTML = `<button class="modal-close" onclick="closeAdminActionModal()">✕</button><div style="font-size:64px;margin-bottom:12px;">🔓</div><div class="modal-title" style="color:#5cdb8a;font-size:20px;">РАЗБАНИТЬ ИГРОКА?</div><div class="modal-desc" style="margin:12px 0;font-size:15px;">Вы точно хотите разбанить<br><b style="color:#5cdb8a;">${escapeHtml(nick)}</b>?</div><div style="text-align:left;margin:16px 0;"><label style="font-size:12px;opacity:0.7;">📝 Причина разбана:</label><textarea id="unbanReason" maxlength="200" placeholder="Например: разбан по ошибке..." style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:13px;min-height:60px;font-family:inherit;"></textarea></div><div style="text-align:left;margin-bottom:12px;"><label style="font-size:12px;opacity:0.7;">💰 Компенсация (BYN, мин. 1 если хотите выдать):</label><input type="number" id="unbanCompensation" value="1" min="0" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:16px;"></div><div class="modal-actions"><button class="btn btn-blue" onclick="closeAdminActionModal()">❌ Отмена</button><button class="btn btn-green" onclick="adminUnbanUser('${nick}')">✅ РАЗБАНИТЬ</button></div>`;
   document.getElementById('adminActionModal').classList.remove('hidden');
 }
 function openUnfreezeConfirm(nick) {
   if (!hasPerm('manageBans')) return;
-  document.getElementById('adminActionModalBox').innerHTML = `<button class="modal-close" onclick="closeAdminActionModal()">✕</button><div style="font-size:64px;margin-bottom:12px;">🔥</div><div class="modal-title" style="color:#ffd700;font-size:20px;">РАЗМОРОЗИТЬ ИГРОКА?</div><div class="modal-desc" style="margin:12px 0;font-size:15px;">Вы точно хотите разморозить<br><b style="color:#ffd700;">${escapeHtml(nick)}</b>?</div><div style="text-align:left;margin:16px 0;"><label style="font-size:12px;opacity:0.7;">📝 Причина разморозки:</label><textarea id="unfreezeReason" maxlength="200" placeholder="Например: снято по ошибке..." style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:13px;min-height:60px;font-family:inherit;"></textarea></div><div style="text-align:left;margin-bottom:12px;"><label style="font-size:12px;opacity:0.7;">💰 Компенсация (BYN):</label><input type="number" id="unfreezeCompensation" value="0" min="0" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:16px;"></div><div class="modal-actions"><button class="btn btn-blue" onclick="closeAdminActionModal()">❌ Отмена</button><button class="btn btn-gold" onclick="adminUnfreezeUser('${nick}')">🔥 РАЗМОРОЗИТЬ</button></div>`;
+  document.getElementById('adminActionModalBox').innerHTML = `<button class="modal-close" onclick="closeAdminActionModal()">✕</button><div style="font-size:64px;margin-bottom:12px;">🔥</div><div class="modal-title" style="color:#ffd700;font-size:20px;">РАЗМОРОЗИТЬ ИГРОКА?</div><div class="modal-desc" style="margin:12px 0;font-size:15px;">Вы точно хотите разморозить<br><b style="color:#ffd700;">${escapeHtml(nick)}</b>?</div><div style="text-align:left;margin:16px 0;"><label style="font-size:12px;opacity:0.7;">📝 Причина разморозки:</label><textarea id="unfreezeReason" maxlength="200" placeholder="Например: снято по ошибке..." style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:13px;min-height:60px;font-family:inherit;"></textarea></div><div style="text-align:left;margin-bottom:12px;"><label style="font-size:12px;opacity:0.7;">💰 Компенсация (BYN, мин. 1 если хотите выдать):</label><input type="number" id="unfreezeCompensation" value="1" min="0" style="width:100%;padding:10px;border-radius:10px;border:1px solid #2a3a4a;background:#060a12;color:white;margin-top:4px;font-size:16px;"></div><div class="modal-actions"><button class="btn btn-blue" onclick="closeAdminActionModal()">❌ Отмена</button><button class="btn btn-gold" onclick="adminUnfreezeUser('${nick}')">🔥 РАЗМОРОЗИТЬ</button></div>`;
   document.getElementById('adminActionModal').classList.remove('hidden');
 }
 async function adminUnbanUser(nick) {
@@ -3479,7 +3596,7 @@ async function initGame() {
   generateAuctionRotation();
   startTimeOfDayTimer();
   startNewbieCheck();
-  try { if (localStorage.getItem('lb161_exited_maint') === '1') userExitedMaintenance = true; } catch(e) {}
+  try { if (localStorage.getItem('lb162_exited_maint') === '1') userExitedMaintenance = true; } catch(e) {}
   try {
     const maint = await fetchMaintenance();
     if (maint?.active) maintenanceState = { active:true, reason:maint.reason, until:maint.until?new Date(maint.until).getTime():0, startedBy:maint.started_by, startedAt:maint.started_at?new Date(maint.started_at).getTime():0 };
@@ -3499,7 +3616,7 @@ async function initGame() {
   setInterval(() => { if (!isAppSuspended) tickWorldEventTimer(); }, 1000);
   setInterval(() => { if (isAppSuspended) return; if (game.clients.length < getClientCount() - 1) { generateClients(); if (!document.getElementById('clientsApp').classList.contains('hidden')) renderClients(); } }, 45000);
   setInterval(() => { if (isAppSuspended) return; const added = processDepositInterest(); if (added > 0) { renderAll(); if (!document.getElementById('bankApp').classList.contains('hidden')) renderBank(); saveGame(); } }, 60000);
-  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v16.1');
+  console.log('✅ OWERINEZZ COMPANY · Ломбард BY v16.2');
 }
 
 document.getElementById('loginNick')?.addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });
